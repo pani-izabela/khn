@@ -6,7 +6,8 @@
          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.0.xsd
-         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+         http://www.springframework.org/schema/mvc
+         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:default-servlet-handler/>
     <context:component-scan base-package="application" />
@@ -14,7 +15,6 @@
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
-            <!--<value>/WEB-INF/pages/</value>-->
             <value>/WEB-INF/pages/</value>
         </property>
         <property name="suffix">
