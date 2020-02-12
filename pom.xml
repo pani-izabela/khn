@@ -13,6 +13,7 @@
         <java.version>1.8</java.version>
         <org.springframework.version>5.2.3.RELEASE</org.springframework.version>
         <jstl.version>4.0.1</jstl.version>
+        <jaction.xml.version>2.10.2</jaction.xml.version>
     </properties>
 
     <dependencies>
@@ -86,6 +87,16 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
             <version>1.4.199</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jaction.xml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jaction.xml.version}</version>
         </dependency>
     </dependencies>
 
