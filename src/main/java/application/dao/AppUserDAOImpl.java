@@ -2,6 +2,7 @@ package application.dao;
 
 import application.model.AppUser;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,11 @@ public class AppUserDAOImpl implements AppUserDAO {
     public List<AppUser> findAllQuery() {
         return em.createNamedQuery(AppUser.GET_APPUSERS, AppUser.class)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public AppUser addAppUser(AppUser appUser) {
+        return em.merge(appUser);
     }
 }

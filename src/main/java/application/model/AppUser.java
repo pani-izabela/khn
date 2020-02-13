@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NamedQueries({
         @NamedQuery(name = AppUser.GET_APPUSER_BY_ID, query = AppUser.QUERY_GET_APPUSER_BY_ID),
@@ -25,10 +26,15 @@ public class AppUser {
     public static final String QUERY_GET_APPUSERS = "select au from AppUser au";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @NotNull
     private String firstname;
+    @NotNull
     private String lastname;
+    @NotNull
     private String email;
+    @NotNull
     private String pass;
 }
