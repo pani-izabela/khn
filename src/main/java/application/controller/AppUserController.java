@@ -28,6 +28,11 @@ public class AppUserController {
         return appUserService.findAllQuery();
     }
 
+    @GetMapping(value = "/getAppUser")
+    public AppUser getAppUser(@RequestParam int id){
+        return appUserDAO.findById(id);
+    }
+
     @PostMapping(value = "/addAppUser")
     public AppUser addAppUser(@RequestBody AppUser appUser){
         return appUserDAO.addAppUser(appUser);

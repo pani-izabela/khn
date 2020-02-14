@@ -30,8 +30,18 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    //@Transactional(readOnly = false)
     public AppUser addAppUser(AppUser appUser) {
         return em.merge(appUser);
     }
+
+    @Override
+    public AppUser findById(int id) {
+        return em.find(AppUser.class, id);
+    }
+
+//    @Override
+//    public AppUser deleteById(int id) {
+//        return em.remove(AppUser.class, id);
+//    }
 }
