@@ -11,5 +11,5 @@ public interface AppUserDAO {
     List<AppUser> findAllQuery();
     AppUser addAppUser(AppUser appUser);
     AppUser findById(int id);
-//    AppUser deleteById(int id);
+    void deleteById(int id);
 }

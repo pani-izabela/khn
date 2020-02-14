@@ -28,7 +28,7 @@ public class AppUser {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private int id;
     @NotNull
     private String firstname;
     @NotNull
