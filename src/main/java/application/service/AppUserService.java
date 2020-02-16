@@ -8,4 +8,5 @@ import java.util.List;
 public interface AppUserService {
     AppUser findByIdQuery(int id);
     List<AppUser> findAllQuery();
+    AppUser addAppUser(AppUser appUser);
 }

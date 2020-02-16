@@ -10,4 +10,9 @@ public class MainController {
     public String index() {
         return "index";
     }
+
+    @GetMapping(value = "/password-reset")
+    public String passwordReset() {
+        return "password-reset";
+    }
 }

@@ -33,10 +33,10 @@ public class AppUserController {
         return appUserDAO.findById(id);
     }
 
-    @PostMapping(value = "/addAppUser")
+    /*@PostMapping(value = "/addAppUser")
     public AppUser addAppUser(@RequestBody AppUser appUser){
         return appUserDAO.addAppUser(appUser);
-    }
+    }*/
 
     @DeleteMapping(value = "/deleteAppUser")
     public void deleteAppUser(@RequestParam int id){

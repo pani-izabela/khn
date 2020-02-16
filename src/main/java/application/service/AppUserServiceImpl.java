@@ -26,4 +26,9 @@ public class AppUserServiceImpl implements AppUserService {
     public List<AppUser> findAllQuery() {
         return appUserDAO.findAllQuery();
     }
+
+    @Override
+    public AppUser addAppUser(AppUser appUser) {
+        return appUserDAO.addAppUser(appUser);
+    }
 }
