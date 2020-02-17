@@ -3,6 +3,8 @@ package application.controller;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.service.AppUserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 public class AppUserController {
+    private static Log LOGGER = LogFactory.getLog(AppUserController.class.getName());
 
     @Autowired
     private AppUserService appUserService;
@@ -25,6 +28,7 @@ public class AppUserController {
 
     @GetMapping(value = "/getAppUsers")
     public List<AppUser> getAppUsers() {
+        LOGGER.info("DUPA");
         return appUserService.findAllQuery();
     }
 
