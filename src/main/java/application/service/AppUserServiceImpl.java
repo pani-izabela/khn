@@ -3,9 +3,7 @@ package application.service;
 import application.controller.AppUserController;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,7 +11,8 @@ import java.util.List;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
-    private static Log LOGGER = LogFactory.getLog(AppUserServiceImpl.class.getName());
+    //final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
+    final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class);
 
     private AppUserDAO appUserDAO;
 
@@ -23,7 +22,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser findByIdQuery(int id) {
-        LOGGER.info("FSDFSDFSDFSFSF" + id);
         return appUserDAO.findByIdQuery(id);
     }
 
@@ -35,6 +33,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser addAppUser(AppUser appUser) {
+        LOGGER.info("DUPA: ");
         return appUserDAO.addAppUser(appUser);
     }
 }
