@@ -16,18 +16,25 @@ function prepareRegisterData() {
 }
 
 function register(data) {
-    $.ajax({
-        url: "http://localhost:8080" + '/customer/addAppUser',
-        method: "POST",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(data),
-        success: function (res) {
-            window.location.href = "login"
-            alert('Rejestracja udała się!');
-        },
-        error: function (res) {
-            alert('Nie udało się zarejestrować');
-        }
-    })
+    var user;
+    if ((window.location.href).includes('customer')){
+        user = 'customer'
+    }
+    else if((window.location.href).includes('seller')){
+        user = 'seller'
+    }
+        $.ajax({
+            url: "http://localhost:8080" + '/' + user + '/addAppUser',
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (res) {
+                window.location.href = "login";
+                alert('Rejestracja udała się!');
+            },
+            error: function (res) {
+                alert('Nie udało się zarejestrować');
+            }
+        })
 }

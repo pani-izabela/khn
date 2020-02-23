@@ -13,7 +13,7 @@ function prepareLoginData() {
     })
 }
 
-
+//nie podoba mi się, że ten adres tu tak na sztywno jest zaszyty, jak to ominąć?
 function login(data) {
     $.ajax({
         url: "http://localhost:8080" + '/customer/loginUser',
