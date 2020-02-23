@@ -32,8 +32,36 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public AppUser findById(int id) {
+        return appUserDAO.findById(id);
+    }
+
+    @Override
     public AppUser addAppUser(AppUser appUser) {
         LOGGER.info("DUPA: ");
         return appUserDAO.addAppUser(appUser);
+    }
+
+    @Override
+    public boolean findByEmailAndPass(String email, String pass) {
+        boolean islogged = false;
+        AppUser appUser = appUserDAO.findByEmailAndPassQuery(email, pass);
+        if(appUser.getEmail().contains(email) && appUser.getPass().contains(pass))
+            islogged = true;
+        else
+            islogged = false;
+        return islogged;
+    }
+
+    @Override
+    public AppUser findAppUserByEmailAndPass(String email, String pass) {
+        AppUser appUser = appUserDAO.findByEmailAndPassQuery(email, pass);
+        return appUser;
+    }
+
+    @Override
+    public AppUser checkAppUserByEmail(String email) {
+        AppUser appUser = appUserDAO.findByEmail(email);
+        return appUser;
     }
 }

@@ -23,7 +23,9 @@ public class AppUserDAOImpl implements AppUserDAO {
                 .getSingleResult();
     }
 
+
     @Override
+    @Transactional
     public List<AppUser> findAllQuery() {
         return em.createNamedQuery(AppUser.GET_APPUSERS, AppUser.class)
                 .getResultList();
@@ -35,8 +37,9 @@ public class AppUserDAOImpl implements AppUserDAO {
         return em.merge(appUser);
     }
 
-    @Transactional
+
     @Override
+    @Transactional
     public AppUser findById(int id) {
         return em.find(AppUser.class, id);
     }
@@ -46,5 +49,22 @@ public class AppUserDAOImpl implements AppUserDAO {
         AppUser appUser = em.find(AppUser.class, id);
         if(appUser!=null)
             em.remove(appUser);
+    }
+
+
+    @Override
+    @Transactional
+    public AppUser findByEmailAndPassQuery(String email, String pass) {
+        return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
+                .setParameter("email",email)
+                .setParameter("pass",pass)
+                .getSingleResult();
+    }
+
+    @Override
+    public AppUser findByEmail(String email) {
+        return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL, AppUser.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 }

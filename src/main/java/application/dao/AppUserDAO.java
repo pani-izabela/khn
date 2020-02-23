@@ -12,4 +12,7 @@ public interface AppUserDAO {
     AppUser addAppUser(AppUser appUser);
     AppUser findById(int id);
     void deleteById(int id);
+    AppUser findByEmailAndPassQuery(String email, String pass);
+    AppUser findByEmail(String email);
+
 }

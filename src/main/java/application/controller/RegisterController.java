@@ -2,10 +2,14 @@ package application.controller;
 
 import application.dao.AppUserDAO;
 import application.model.AppUser;
+import application.model.Role;
 import application.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -25,8 +29,22 @@ public class RegisterController {
         return "seller/register";
     }
 
-    @PostMapping(value = "/addAppUser")
+    @PostMapping(value = "/customer/addAppUser")
     public @ResponseBody AppUser addAppUser(@RequestBody AppUser appUser){
+        /*if(appUserService.checkAppUserByEmail(appUser.getEmail())!=null){
+            List<Role> roles = new ArrayList<>();
+            Role roleCustomer = new Role();
+            roleCustomer.setId(1);
+            roleCustomer.setName("customer");
+            roles.add(roleCustomer);
+            appUser.setRoles(roles);
+        }*/
+        List<Role> roles = new ArrayList<>();
+        Role roleCustomer = new Role();
+        roleCustomer.setId(1);
+        roleCustomer.setName("customer");
+        roles.add(roleCustomer);
+        appUser.setRoles(roles);
         return appUserService.addAppUser(appUser);
     }
 
