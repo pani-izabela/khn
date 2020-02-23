@@ -60,8 +60,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUser checkAppUserByEmail(String email) {
-        AppUser appUser = appUserDAO.findByEmail(email);
-        return appUser;
+    public boolean checkAppUserByEmail(String email) {
+        boolean appUserInDB = true;
+        if(appUserDAO.findByEmail(email) == null)
+            appUserInDB = false;
+        //AppUser appUser = appUserDAO.findByEmail(email);
+        return appUserInDB;
     }
 }

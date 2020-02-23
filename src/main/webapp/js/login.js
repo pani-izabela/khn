@@ -9,7 +9,6 @@ function prepareLoginData() {
             email: $('#email').val(),
             pass: $('#pwd').val()
         };
-        //prepareUserData(loginData);
         login(loginData);
     })
 }
@@ -23,18 +22,13 @@ function login(data) {
         dataType: "json",
         data: JSON.stringify(data),
         success: function (res){
-            console.log(res);
             if(res.id!==null) {
-                console.log('Użytkownik o id: ' + res.id + ' zalogował się')
+                console.log('Użytkownik o id: ' + res.id + ' zalogował się');
                 alert('Udało się zalogować');
             }
-            /*if(res==true)
-                console.log('Użytkownik o id: ' + localStorage.getItem('userLoggedId') + ' zalogował się')
-            //window.location.href = "usersList"
-            alert('Udało się zalogować');*/
         },
         error: function (res) {
-            if(res==false)
+            if(res.id==null)
                 alert('Nie udało się zalogować');
         }
     })

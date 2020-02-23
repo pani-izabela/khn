@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import java.util.List;
@@ -55,16 +56,29 @@ public class AppUserDAOImpl implements AppUserDAO {
     @Override
     @Transactional
     public AppUser findByEmailAndPassQuery(String email, String pass) {
-        return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
-                .setParameter("email",email)
-                .setParameter("pass",pass)
-                .getSingleResult();
+        AppUser appUser;
+        try{
+            appUser = em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
+                    .setParameter("email",email)
+                    .setParameter("pass",pass)
+                    .getSingleResult();
+        } catch (NoResultException e){
+            appUser = null;
+        }
+        return appUser;
     }
 
     @Override
     public AppUser findByEmail(String email) {
-        return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL, AppUser.class)
-                .setParameter("email", email)
-                .getSingleResult();
+        AppUser appUser;
+        try{
+            appUser = em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL, AppUser.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch(NoResultException e){
+            appUser = null;
+        }
+
+        return appUser;
     }
 }

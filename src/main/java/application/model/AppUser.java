@@ -44,6 +44,7 @@ public class AppUser {
     @NotNull
     private String lastname;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private String pass;
