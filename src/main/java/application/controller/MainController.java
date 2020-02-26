@@ -15,4 +15,14 @@ public class MainController {
     public String passwordReset() {
         return "password-reset";
     }
+
+    @GetMapping(value = "/customer/menu")
+    public String customerMenu() {
+        return "customer/menu";
+    }
+
+    @GetMapping(value = "/seller/menu")
+    public String sellerMenu() {
+        return "seller/menu";
+    }
 }

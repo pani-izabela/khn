@@ -3,10 +3,12 @@ package application.service;
 import application.controller.AppUserController;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
+import application.model.Role;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,8 +39,17 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUser addAppUser(AppUser appUser) {
+    public AppUser addAppUser(AppUser appUser, String role) {
         LOGGER.info("DUPA: ");
+        List<Role> roles = new ArrayList<>();
+        Role roleCustomer = new Role();
+        if(role.equals("customer"))
+            roleCustomer.setId(1);
+        else if(role.equals("seller"))
+            roleCustomer.setId(2);
+        roleCustomer.setName(role);
+        roles.add(roleCustomer);
+        appUser.setRoles(roles);
         return appUserDAO.addAppUser(appUser);
     }
 

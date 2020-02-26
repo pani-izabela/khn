@@ -40,24 +40,11 @@ public class RegisterController {
             appUser.setRoles(roles);
         }*/
         //boolean xxx = appUserService.checkAppUserByEmail(appUser.getEmail());
-        List<Role> roles = new ArrayList<>();
-        Role roleCustomer = new Role();
-        roleCustomer.setId(1);
-        roleCustomer.setName("customer");
-        roles.add(roleCustomer);
-        appUser.setRoles(roles);
-        return appUserService.addAppUser(appUser);
+        return appUserService.addAppUser(appUser, "customer");
     }
     @PostMapping(value = "/seller/addAppUser")
     public @ResponseBody AppUser addAppUserSeller(@RequestBody AppUser appUser){
-
-        List<Role> roles = new ArrayList<>();
-        Role roleCustomer = new Role();
-        roleCustomer.setId(2);
-        roleCustomer.setName("seller");
-        roles.add(roleCustomer);
-        appUser.setRoles(roles);
-        return appUserService.addAppUser(appUser);
+        return appUserService.addAppUser(appUser, "seller");
     }
 
 }
