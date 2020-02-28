@@ -5,10 +5,17 @@ $(document).ready(function () {
 
 function prepareLoginData() {
     $('#loginbtn').click(function () {
-        let loginData = {
-            email: $('#email').val(),
-            pass: $('#pwd').val()
-        };
+        let emailField = $('#email').val();
+        let passField = $('#pwd').val();
+        let loginData;
+        if(emailField.trim().length===0 || passField.trim().length===0)
+            alert("Brakuje loginu lub hasła")
+        else{
+            loginData = {
+                email: emailField,
+                pass: passField
+            };
+        }
         login(loginData);
     })
 }
