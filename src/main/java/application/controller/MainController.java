@@ -11,10 +11,10 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(value = "/password-reset")
+    /*@GetMapping(value = "/password-reset")
     public String passwordReset() {
-        return "password-reset";
-    }
+        return "passwordChange";
+    }*/
 
     @GetMapping(value = "/customer/menu")
     public String customerMenu() {
