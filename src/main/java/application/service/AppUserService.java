@@ -13,4 +13,5 @@ public interface AppUserService {
     boolean findByEmailAndPass(String email, String pass);
     AppUser findAppUserByEmailAndPass(String email, String pass);
     boolean checkAppUserByEmail(String email);
+    AppUser updatePass(AppUser appUser, String newPass);
 }

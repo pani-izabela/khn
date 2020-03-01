@@ -81,4 +81,18 @@ public class AppUserDAOImpl implements AppUserDAO {
 
         return appUser;
     }
+
+    @Override
+    @Transactional
+    public AppUser updatePass(AppUser appUser, String newPass) {
+        AppUser appUserToReturn;
+        try{
+            appUser.setPass(newPass);
+            appUserToReturn = em.merge(appUser);
+
+        } catch(NoResultException e){
+            appUserToReturn = null;
+        }
+        return appUserToReturn;
+    }
 }

@@ -78,4 +78,9 @@ public class AppUserServiceImpl implements AppUserService {
         //AppUser appUser = appUserDAO.findByEmail(email);
         return appUserInDB;
     }
+
+    @Override
+    public AppUser updatePass(AppUser appUser, String newPass) {
+        return appUserDAO.updatePass(appUser, newPass);
+    }
 }

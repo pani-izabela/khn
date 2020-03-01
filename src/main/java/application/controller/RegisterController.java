@@ -16,8 +16,6 @@ public class RegisterController {
 
     @Autowired
     private AppUserService appUserService;
-    @Autowired
-    private AppUserDAO appUserDAO;
 
     @GetMapping(value = "/customer/register")
     public String registerCustomer() {
@@ -31,15 +29,6 @@ public class RegisterController {
 
     @PostMapping(value = "/customer/addAppUser")
     public @ResponseBody AppUser addAppUser(@RequestBody AppUser appUser){
-        /*if(appUserService.checkAppUserByEmail(appUser.getEmail())!=null){
-            List<Role> roles = new ArrayList<>();
-            Role roleCustomer = new Role();
-            roleCustomer.setId(1);
-            roleCustomer.setName("customer");
-            roles.add(roleCustomer);
-            appUser.setRoles(roles);
-        }*/
-        //boolean xxx = appUserService.checkAppUserByEmail(appUser.getEmail());
         return appUserService.addAppUser(appUser, "customer");
     }
     @PostMapping(value = "/seller/addAppUser")

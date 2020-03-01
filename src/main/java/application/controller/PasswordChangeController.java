@@ -1,13 +1,13 @@
 package application.controller;
 
 import application.model.AppUser;
+import application.model.ChangePasswordData;
 import application.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+@Controller
 public class PasswordChangeController {
     @Autowired
     private AppUserService appUserService;
@@ -17,8 +17,17 @@ public class PasswordChangeController {
         return "passwordChange";
     }
 
-    /*@PostMapping(value = "/userChangePassword")
-    public @ResponseBody AppUser userChangePassword(@RequestBody AppUser appUser){
-        return appUserService.
-    }*/
+    @PutMapping(value = "/userChangePassword")
+    public @ResponseBody AppUser userChangePassword(@RequestBody ChangePasswordData changePasswordData){
+        String email = changePasswordData.getEmail();
+        String oldPass = changePasswordData.getOldPass();
+        String newPass = changePasswordData.getNewPass();
+        AppUser appUserFromDb = appUserService.findAppUserByEmailAndPass(email, oldPass);
+        AppUser appUserToReturn = new AppUser();
+        if(appUserFromDb!=null && (newPass.equals(oldPass)==false)){
+            appUserToReturn = appUserService.updatePass(appUserFromDb, newPass);
+        }
+
+        return appUserToReturn;
+    }
 }

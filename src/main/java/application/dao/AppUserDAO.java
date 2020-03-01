@@ -14,5 +14,6 @@ public interface AppUserDAO {
     void deleteById(int id);
     AppUser findByEmailAndPassQuery(String email, String pass);
     AppUser findByEmail(String email);
+    AppUser updatePass(AppUser appUser, String newPass);
 
 }
