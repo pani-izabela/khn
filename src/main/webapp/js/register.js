@@ -5,11 +5,20 @@ $(document).ready(function () {
 
 function prepareRegisterData() {
     $('#registerBtn').click(function () {
-        let registerData = {
-            firstname: $('#firstname').val(),
-            lastname: $('#lastname').val(),
-            email: $('#email').val(),
-            pass: $('#pwd').val()
+        let firstnameField = $('#firstname').val();
+        let lastnameField = $('#lastname').val();
+        let emailField = $('#email').val();
+        let passField = $('#pwd').val();
+        let registerData;
+        if(emailField.trim().length===0 || passField.trim().length===0 || firstnameField.trim().length===0 || lastnameField.trim().length===0)
+            alert('Uzupełnij brakujące pola');
+        else {
+            registerData = {
+                firstname: firstnameField,
+                lastname: lastnameField,
+                email: emailField,
+                pass: passField
+            }
         };
         register(registerData);
     })

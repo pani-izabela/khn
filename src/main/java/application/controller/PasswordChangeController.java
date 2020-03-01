@@ -23,10 +23,12 @@ public class PasswordChangeController {
         String oldPass = changePasswordData.getOldPass();
         String newPass = changePasswordData.getNewPass();
         AppUser appUserFromDb = appUserService.findAppUserByEmailAndPass(email, oldPass);
-        AppUser appUserToReturn = new AppUser();
+        AppUser appUserToReturn;
         if(appUserFromDb!=null && (newPass.equals(oldPass)==false)){
             appUserToReturn = appUserService.updatePass(appUserFromDb, newPass);
         }
+        else
+            appUserToReturn = null;
         return appUserToReturn;
     }
 }

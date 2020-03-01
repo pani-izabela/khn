@@ -43,11 +43,14 @@ public class AppUserServiceImpl implements AppUserService {
         LOGGER.info("DUPA: ");
         List<Role> roles = new ArrayList<>();
         Role roleCustomer = new Role();
-        if(role.equals("customer"))
+        if(role.equals("customer")){//i jeśli użytkownik nie ma już roli seller - dopisać)
             roleCustomer.setId(1);
-        else if(role.equals("seller"))
+            roleCustomer.setName(role);
+        }
+        else if(role.equals("seller")){
             roleCustomer.setId(2);
-        roleCustomer.setName(role);
+            roleCustomer.setName(role);
+        }
         roles.add(roleCustomer);
         appUser.setRoles(roles);
         return appUserDAO.addAppUser(appUser);
