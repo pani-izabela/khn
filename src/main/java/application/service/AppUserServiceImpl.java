@@ -43,7 +43,21 @@ public class AppUserServiceImpl implements AppUserService {
         LOGGER.info("DUPA: ");
         List<Role> roles = new ArrayList<>();
         Role roleCustomer = new Role();
-        if(role.equals("customer")){//i jeśli użytkownik nie ma już roli seller - dopisać)
+        AppUser appUserToReturn = null;
+
+        boolean appUserHaveSellerRole = false;
+        AppUser appUserFromDB = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
+        if(appUserFromDB!=null && appUserFromDB.getRoles().size()>0){
+            List<Role> usersRole = appUserFromDB.getRoles();
+            for (Role role1 : usersRole) {
+                int usersRoleId = role1.getId();
+                if(usersRoleId==1){
+                    appUserHaveSellerRole = true;
+                }
+            }
+        }
+
+        if(role.equals("customer") && appUserHaveSellerRole==false){
             roleCustomer.setId(1);
             roleCustomer.setName(role);
         }
@@ -53,7 +67,11 @@ public class AppUserServiceImpl implements AppUserService {
         }
         roles.add(roleCustomer);
         appUser.setRoles(roles);
-        return appUserDAO.addAppUser(appUser);
+        if(appUserFromDB==null)
+            appUserToReturn = appUserDAO.addAppUser(appUser);
+        //if(appUserFromDB!=null && role.equals("customer")==false && appUserHaveSellerRole==false)
+
+        return appUserToReturn;
     }
 
     @Override
@@ -71,8 +89,13 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
         AppUser appUserToReturn = new AppUser();
-        if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
-            appUserToReturn = appUserFromDB;
+        try {
+            if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
+                appUserToReturn = appUserFromDB;
+        }
+        catch (Exception e){
+            appUserToReturn = null;
+        }
         return appUserToReturn;
     }
 
