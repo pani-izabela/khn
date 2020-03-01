@@ -37,44 +37,14 @@ public class LoginController {
     public @ResponseBody AppUser loginCustomerUser(@RequestBody AppUser appUser){
         String email = appUser.getEmail();
         String pass = appUser.getPass();
-
-        AppUser appUserFromDb = appUserService.findAppUserByEmailAndPass(email, pass);
-        AppUser appUserToReturn = new AppUser();
-
-        if(appUserFromDb!=null){
-            int usersRoleId = 0;
-
-            List<Role> userRoles = appUserFromDb.getRoles();
-            for (Role role : userRoles) {
-                usersRoleId = role.getId();
-            }
-
-            if ((usersRoleId == 1) || (usersRoleId == 3))
-                appUserToReturn = appUserFromDb;
-        }
-        return appUserToReturn;
+        return appUserService.loginUserFromCustomerPage(email, pass);
     }
 
     @PostMapping(value = "/seller/loginUser")
     public @ResponseBody AppUser loginSellerUser(@RequestBody AppUser appUser){
         String email = appUser.getEmail();
         String pass = appUser.getPass();
-
-        AppUser appUserFromDb = appUserService.findAppUserByEmailAndPass(email, pass);
-        AppUser appUserToReturn = null;
-
-        if(appUserFromDb!=null){
-            int usersRoleId = 0;
-
-            List<Role> userRoles = appUserFromDb.getRoles();
-            for (Role role : userRoles) {
-                usersRoleId = role.getId();
-            }
-
-            if ((usersRoleId == 2) || (usersRoleId == 3))
-                appUserToReturn = appUserFromDb;
-        }
-        return appUserToReturn;
+        return appUserService.loginUserFromSellerPage(email, pass);
     }
 
 }

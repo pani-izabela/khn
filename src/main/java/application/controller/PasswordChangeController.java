@@ -27,7 +27,6 @@ public class PasswordChangeController {
         if(appUserFromDb!=null && (newPass.equals(oldPass)==false)){
             appUserToReturn = appUserService.updatePass(appUserFromDb, newPass);
         }
-
         return appUserToReturn;
     }
 }

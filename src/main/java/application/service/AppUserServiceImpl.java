@@ -66,8 +66,11 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser findAppUserByEmailAndPass(String email, String pass) {
-        AppUser appUser = appUserDAO.findByEmailAndPassQuery(email, pass);
-        return appUser;
+        AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
+        AppUser appUserToReturn = new AppUser();
+        if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
+            appUserToReturn = appUserFromDB;
+        return appUserToReturn;
     }
 
     @Override
@@ -75,7 +78,6 @@ public class AppUserServiceImpl implements AppUserService {
         boolean appUserInDB = true;
         if(appUserDAO.findByEmail(email) == null)
             appUserInDB = false;
-        //AppUser appUser = appUserDAO.findByEmail(email);
         return appUserInDB;
     }
 
@@ -83,4 +85,47 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser updatePass(AppUser appUser, String newPass) {
         return appUserDAO.updatePass(appUser, newPass);
     }
+
+    @Override
+    public AppUser loginUserFromSellerPage(String email, String pass) {
+        AppUser appUserFromDb = findAppUserByEmailAndPass(email, pass);
+        AppUser appUserToReturn = new AppUser();
+
+        if(appUserFromDb!=null){
+            int usersRoleId = 0;
+
+            List<Role> userRoles = appUserFromDb.getRoles();
+            for (Role role : userRoles) {
+                usersRoleId = role.getId();
+            }
+
+            if ((usersRoleId == 2) || (usersRoleId == 3))
+                appUserToReturn = appUserFromDb;
+            else
+                appUserToReturn = null;
+        }
+        return appUserToReturn;
+    }
+
+    @Override
+    public AppUser loginUserFromCustomerPage(String email, String pass) {
+        AppUser appUserFromDb = findAppUserByEmailAndPass(email, pass);
+        AppUser appUserToReturn = new AppUser();
+
+        if(appUserFromDb!=null){
+            int usersRoleId = 0;
+
+            List<Role> userRoles = appUserFromDb.getRoles();
+            for (Role role : userRoles) {
+                usersRoleId = role.getId();
+            }
+
+            if ((usersRoleId == 1) || (usersRoleId == 3))
+                appUserToReturn = appUserFromDb;
+            else
+                appUserToReturn = null;
+        }
+        return appUserToReturn;
+    }
+
 }
