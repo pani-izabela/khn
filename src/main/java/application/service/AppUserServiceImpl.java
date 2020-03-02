@@ -7,6 +7,7 @@ import application.model.Role;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,15 +76,19 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public boolean findByEmailAndPass(String email, String pass) {
-        boolean islogged = false;
-        AppUser appUser = appUserDAO.findByEmailAndPassQuery(email, pass);
-        if(appUser.getEmail().contains(email) && appUser.getPass().contains(pass))
-            islogged = true;
-        else
-            islogged = false;
-        return islogged;
+    public boolean checkAppUserByEmail(String email) {
+        boolean appUserInDB = true;
+        if(appUserDAO.findByEmail(email) == null)
+            appUserInDB = false;
+        return appUserInDB;
     }
+
+    @Override
+    public AppUser updatePass(AppUser appUser, String newPass) {
+        return appUserDAO.updatePass(appUser, newPass);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override
     public AppUser findAppUserByEmailAndPass(String email, String pass) {
@@ -99,57 +104,50 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserToReturn;
     }
 
-    @Override
-    public boolean checkAppUserByEmail(String email) {
-        boolean appUserInDB = true;
-        if(appUserDAO.findByEmail(email) == null)
-            appUserInDB = false;
-        return appUserInDB;
+    private List<Integer> getUserRoles(AppUser appUser){
+        List<Role> userRoles = appUser.getRoles();
+        List<Integer> userRolesIdList = new ArrayList<>();
+        for (Role role : userRoles) {
+            userRolesIdList.add(role.getId());
+        }
+        return userRolesIdList;
     }
 
     @Override
-    public AppUser updatePass(AppUser appUser, String newPass) {
-        return appUserDAO.updatePass(appUser, newPass);
-    }
-
-    @Override
-    public AppUser loginUserFromSellerPage(String email, String pass) {
-        AppUser appUserFromDb = findAppUserByEmailAndPass(email, pass);
+    public AppUser loginUserFromSellerPage(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
-
-        if(appUserFromDb!=null){
-            int usersRoleId = 0;
-
-            List<Role> userRoles = appUserFromDb.getRoles();
-            for (Role role : userRoles) {
-                usersRoleId = role.getId();
+        try{
+            AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
+            List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
+            for(Integer roleId : userRolesIdList){
+                if(roleId==2 || roleId==3)
+                    appUserToReturn = appUserFromDb;
+                else
+                    return null;
             }
-
-            if ((usersRoleId == 2) || (usersRoleId == 3))
-                appUserToReturn = appUserFromDb;
-            else
-                appUserToReturn = null;
+        }
+        catch(NoResultException e){
+            return null;
         }
         return appUserToReturn;
     }
 
     @Override
-    public AppUser loginUserFromCustomerPage(String email, String pass) {
-        AppUser appUserFromDb = findAppUserByEmailAndPass(email, pass);
+    public AppUser loginUserFromCustomerPage(AppUser appUser) {
+        //nie wiem, czy dobrze robię, że go tu inicjuję;
         AppUser appUserToReturn = new AppUser();
-
-        if(appUserFromDb!=null){
-            int usersRoleId = 0;
-
-            List<Role> userRoles = appUserFromDb.getRoles();
-            for (Role role : userRoles) {
-                usersRoleId = role.getId();
+        try{
+            AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
+            List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
+            for(Integer roleId : userRolesIdList){
+                if(roleId==1 || roleId==3)
+                    appUserToReturn = appUserFromDb;
+                else
+                    return null;
             }
-
-            if ((usersRoleId == 1) || (usersRoleId == 3))
-                appUserToReturn = appUserFromDb;
-            else
-                appUserToReturn = null;
+        }
+        catch(NoResultException e){
+            return null;
         }
         return appUserToReturn;
     }

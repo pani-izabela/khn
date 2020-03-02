@@ -1,21 +1,18 @@
 package application.controller;
 
-import application.dao.AppUserDAO;
 import application.model.AppUser;
-import application.model.Role;
 import application.service.AppUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class RegisterController {
 
-    @Autowired
     private AppUserService appUserService;
+
+    public RegisterController(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
 
     @GetMapping(value = "/customer/register")
     public String registerCustomer() {

@@ -18,10 +18,12 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private AppUserService appUserService;
-    @Autowired
-    private AppUserDAO appUserDAO;
+    private final AppUserService appUserService;
+
+    public LoginController(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
+
 
     @GetMapping(value = "/customer/login")
     public String loginCustomer() {
@@ -35,16 +37,12 @@ public class LoginController {
 
     @PostMapping(value = "/customer/loginUser")
     public @ResponseBody AppUser loginCustomerUser(@RequestBody AppUser appUser){
-        String email = appUser.getEmail();
-        String pass = appUser.getPass();
-        return appUserService.loginUserFromCustomerPage(email, pass);
+        return appUserService.loginUserFromCustomerPage(appUser);
     }
 
     @PostMapping(value = "/seller/loginUser")
     public @ResponseBody AppUser loginSellerUser(@RequestBody AppUser appUser){
-        String email = appUser.getEmail();
-        String pass = appUser.getPass();
-        return appUserService.loginUserFromSellerPage(email, pass);
+        return appUserService.loginUserFromSellerPage(appUser);
     }
 
 }
