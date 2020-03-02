@@ -40,6 +40,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @NotNull
+    //camelCase :D
     private String firstname;
     @NotNull
     private String lastname;

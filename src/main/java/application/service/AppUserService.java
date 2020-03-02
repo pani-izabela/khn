@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface AppUserService {
+    //tutaj kilka nieużywanych metod, które można wywalić :)
     AppUser findByIdQuery(int id);
     List<AppUser> findAllQuery();
     AppUser findById(int id);

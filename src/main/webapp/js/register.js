@@ -10,6 +10,8 @@ function prepareRegisterData() {
         let emailField = $('#email').val();
         let passField = $('#pwd').val();
         let registerData;
+
+        // mozna by pomyslec o jakiejs oddzielnej metodzie, ktora przygotuje haslo - preparePassword?
         if(emailField.trim().length===0 || passField.trim().length===0 || firstnameField.trim().length===0 || lastnameField.trim().length===0)
             alert('Uzupełnij brakujące pola');
         else {

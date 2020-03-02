@@ -13,6 +13,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 @Retention(RUNTIME)
 @Target({FIELD, METHOD})
+// Ogólnie to nie trzeba takich czarów robić :D
+// Można sprawdzić tylko czy taki email istnieje w bazie
 public @interface UniqueEmail {
     public String message() default "There is already user with this email!";
 

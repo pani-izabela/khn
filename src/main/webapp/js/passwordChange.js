@@ -2,12 +2,15 @@ $(document).ready(function () {
     prepareData();
 });
 
+
+//odnosnie pkt Implementacja funkcjonalności zmiany hasła - uporzadkujmy backend a pozniej jak nadal nie bedzie dzialac cos na froncie to pomoge :)
 function prepareData() {
     $('#passwordChange').click(function () {
         let emailField = $('#email').val();
         let oldPassField = $('#oldPass').val();
         let newPassField = $('#newPass').val();
         let data;
+        // tutaj tez mozna by pomyslec o jakiejs metodzie, ktora przygotuje dane
         if(emailField.trim().length===0 || oldPassField.trim().length===0 || newPassField.trim().length===0)
             alert("Pola nie zostały prawidłowo wypełnione")
         else{

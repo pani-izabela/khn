@@ -18,6 +18,8 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @Controller
 public class LoginController {
 
+
+    // przez konstruktor :)
     @Autowired
     private AppUserService appUserService;
     @Autowired
@@ -35,6 +37,7 @@ public class LoginController {
 
     @PostMapping(value = "/customer/loginUser")
     public @ResponseBody AppUser loginCustomerUser(@RequestBody AppUser appUser){
+        // do serwisu przeslalabym calego AppUser i dopiero tam pobierala wartosci, ktorych potrzebujemy
         String email = appUser.getEmail();
         String pass = appUser.getPass();
         return appUserService.loginUserFromCustomerPage(email, pass);
@@ -42,6 +45,7 @@ public class LoginController {
 
     @PostMapping(value = "/seller/loginUser")
     public @ResponseBody AppUser loginSellerUser(@RequestBody AppUser appUser){
+        // do serwisu przeslalabym calego AppUser i dopiero tam pobierala wartosci, ktorych potrzebujemy
         String email = appUser.getEmail();
         String pass = appUser.getPass();
         return appUserService.loginUserFromSellerPage(email, pass);

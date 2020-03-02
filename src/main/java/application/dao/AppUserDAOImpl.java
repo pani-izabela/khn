@@ -16,7 +16,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 
-
+//     @Transactional i w pozostałych ;)
     @Override
     public AppUser findByIdQuery(int id) {
         return em.createNamedQuery(AppUser.GET_APPUSER_BY_ID, AppUser.class)
@@ -57,17 +57,36 @@ public class AppUserDAOImpl implements AppUserDAO {
     @Transactional
     public AppUser findByEmailAndPassQuery(String email, String pass) {
         AppUser appUser;
-        try{
+        try {
             appUser = em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
-                    .setParameter("email",email)
-                    .setParameter("pass",pass)
+                    .setParameter("email", email)
+                    .setParameter("pass", pass)
                     .getSingleResult();
-        } catch (NoResultException e){
+        } catch (NoResultException e) {
             appUser = null;
         }
         return appUser;
     }
 
+
+    // Odnośnie Twojego pytania nr 2 -  czy dobrze jest sprawdzac te nulle -> Tak, zabezpieczasz w ten sposob swoją aplikację przed NullPointer-ami ;)
+    // Możesz sobie poczytać o czymś takim jak Optional
+    //
+
+    // Takie metody można upraszać w następujący sposób:
+//        try {
+//            return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
+//                    .setParameter("email", email)
+//                    .setParameter("pass", pass)
+//                    .getSingleResult();
+//
+//        }
+//        catch (NoResultException e){
+//            return null;
+//        }
+//    }
+
+    //jak wyżej - Transactional + uproszczenie
     @Override
     public AppUser findByEmail(String email) {
         AppUser appUser;
@@ -84,6 +103,7 @@ public class AppUserDAOImpl implements AppUserDAO {
 
     @Override
     @Transactional
+    //mozna uproscic jak wyzej
     public AppUser updatePass(AppUser appUser, String newPass) {
         AppUser appUserToReturn;
         try{

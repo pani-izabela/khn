@@ -38,6 +38,11 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserDAO.findById(id);
     }
 
+    //Rozdzielilabym to na oddzielna metode dla customera i sellera
+    // Dodatkowo zrobilabym prywatna metode do dodawania odpowiedniej roli
+    // Jesli potrzebne bedzie jeszcze skorzystanie z pobrania roli uzytkownikow to skorzystac z prywatnej metody, ktora zostala opisana przy  komentarzu dla loginUserFromSellerPage
+    // aczkolwiek podczas rejestracji raczej nie musiomy sprawdzac rol, tylko nadac :)
+
     @Override
     public AppUser addAppUser(AppUser appUser, String role) {
         LOGGER.info("DUPA: ");
@@ -74,6 +79,9 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserToReturn;
     }
 
+
+
+    // ta metodka nie jest uzywana
     @Override
     public boolean findByEmailAndPass(String email, String pass) {
         boolean islogged = false;
@@ -85,6 +93,8 @@ public class AppUserServiceImpl implements AppUserService {
         return islogged;
     }
 
+    // tak jak napisalam w kontrolerze do zmiany hasla, mozna by to uporzadkowac
+    //
     @Override
     public AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
@@ -99,6 +109,7 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserToReturn;
     }
 
+    // ta tez moze byc prywatna i zabrana z UniqueEmailValidator
     @Override
     public boolean checkAppUserByEmail(String email) {
         boolean appUserInDB = true;
@@ -108,9 +119,27 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    //to jako prywatna metoda
     public AppUser updatePass(AppUser appUser, String newPass) {
         return appUserDAO.updatePass(appUser, newPass);
     }
+
+
+
+    /* Odpowierdz na pytanie nr 1
+    Możesz miec takie metody :)
+
+    Tylko ja bym to zrobila troszke inaczej
+
+    W kontrolerze uderzam na prywatna metode do logowania
+    Metoda do logowania posiada prywatna metode, ktora sprawdza czy user istnieje i kolejna prywatna metode, ktora sprawdza role uzytkownikow
+    Zaleznie od wyniku tej metody pusci uzytkownika by sie zalogowal lub nie
+
+    Jesli mamy jakas metode w serwisie, ktora jest wykorzystywana tylko w nim to robimy ja prywatna (czesto to sa metody, ktorw wykorzystujemy kilka razy w tym serwisie)
+    Tak wiec te dwie metody ponizej bym porozbijala tak jak napisalam wyzej
+
+    */
+
 
     @Override
     public AppUser loginUserFromSellerPage(String email, String pass) {

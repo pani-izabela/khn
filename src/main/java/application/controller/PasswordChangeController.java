@@ -19,6 +19,10 @@ public class PasswordChangeController {
 
     @PutMapping(value = "/userChangePassword")
     public @ResponseBody AppUser userChangePassword(@RequestBody ChangePasswordData changePasswordData){
+        //Tak samo jak w kontrolerze do logowania, wyniesc to wszystko ponizej do serwisu
+        // Przykladowo jedna metoda w serwisie do zmiany hasla, ktora bedzie posiadac prywatna metode do sprawdzenia czy user istnieje w bazie oraz kolejna prywatna metode do zmiany hasla
+        // Dodatkowo tutaj nie musi nam zopstac zwrocony uzytkownik, mozesz poczytac  np o ResponseEntity albo zwrocic boolean :)
+
         String email = changePasswordData.getEmail();
         String oldPass = changePasswordData.getOldPass();
         String newPass = changePasswordData.getNewPass();

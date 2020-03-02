@@ -21,6 +21,7 @@ function prepareLoginData() {
 }
 
 //nie podoba mi się, że ten adres tu tak na sztywno jest zaszyty, jak to ominąć?
+//mozna by pomyslec o zrobieniu jakiegos pliku z propetries i tam trzymac wszystkie adresy
 function login(data) {
     var user;
     if ((window.location.href).includes('customer')){
