@@ -1,3 +1,4 @@
+/*
 package application.validation;
 
 import application.service.AppUserService;
@@ -16,3 +17,4 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
         return value != null && !appUserService.checkAppUserByEmail(value);
     }
 }
+*/

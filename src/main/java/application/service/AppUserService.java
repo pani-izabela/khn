@@ -9,11 +9,9 @@ import java.util.List;
 public interface AppUserService {
     //AppUser findByIdQuery(int id);
     //AppUser findById(int id);
-    //AppUser addAppUser(AppUser appUser, String role);
+    //boolean checkAppUserByEmail(String email);
+
     List<AppUser> findAllQuery();
-    AppUser findAppUserByEmailAndPass(String email, String pass);
-    boolean checkAppUserByEmail(String email);
-    AppUser updatePass(AppUser appUser, String newPass);
 
     AppUser registerCustomerUser(AppUser appUser);
     AppUser registerSellerUser(AppUser appUser);

@@ -1,3 +1,4 @@
+/*
 package application.validation;
 
 import java.lang.annotation.Retention;
@@ -20,3 +21,4 @@ public @interface UniqueEmail {
 
     public Class<? extends Payload>[] payload() default{};
 }
+*/

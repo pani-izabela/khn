@@ -20,28 +20,48 @@ public class AppUserDAOImpl implements AppUserDAO {
     @Override
     @Transactional
     public AppUser findByIdQuery(int id) {
-        return em.createNamedQuery(AppUser.GET_APPUSER_BY_ID, AppUser.class)
-                .setParameter("id", id)
-                .getSingleResult();
-    }
-
-    @Override
-    @Transactional
-    public List<AppUser> findAllQuery() {
-        return em.createNamedQuery(AppUser.GET_APPUSERS, AppUser.class)
-                .getResultList();
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public AppUser addAppUser(AppUser appUser) {
-        return em.merge(appUser);
+        try{
+            return em.createNamedQuery(AppUser.GET_APPUSER_BY_ID, AppUser.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override
     @Transactional
     public AppUser findById(int id) {
-        return em.find(AppUser.class, id);
+        try{
+            return em.find(AppUser.class, id);
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<AppUser> findAllQuery() {
+        try {
+            return em.createNamedQuery(AppUser.GET_APPUSERS, AppUser.class)
+                    .getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public AppUser addAppUser(AppUser appUser) {
+        try{
+            return em.merge(appUser);
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override
@@ -55,44 +75,39 @@ public class AppUserDAOImpl implements AppUserDAO {
     @Override
     @Transactional
     public AppUser findByEmailAndPassQuery(String email, String pass) {
-        AppUser appUser;
         try{
-            appUser = em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
+            return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
                     .setParameter("email",email)
                     .setParameter("pass",pass)
                     .getSingleResult();
         } catch (NoResultException e){
-            appUser = null;
+            return null;
         }
-        return appUser;
     }
 
     @Override
     @Transactional
     public AppUser findByEmail(String email) {
-        AppUser appUser;
+    //public AppUser findByEmail(String jaszczurka) {
         try{
-            appUser = em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL, AppUser.class)
+            return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL, AppUser.class)
                     .setParameter("email", email)
+                    //.setParameter("wielblad", jaszczurka)
                     .getSingleResult();
         } catch(NoResultException e){
-            appUser = null;
+            return null;
         }
-
-        return appUser;
     }
 
     @Override
     @Transactional
     public AppUser updatePass(AppUser appUser, String newPass) {
-        AppUser appUserToReturn;
         try{
             appUser.setPass(newPass);
-            appUserToReturn = em.merge(appUser);
+            return em.merge(appUser);
 
         } catch(NoResultException e){
-            appUserToReturn = null;
+            return null;
         }
-        return appUserToReturn;
     }
 }

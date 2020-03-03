@@ -1,24 +1,25 @@
 package application.controller;
 
 import application.model.AppUser;
-import application.model.ChangePasswordData;
 import application.service.AppUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PasswordChangeController {
-    @Autowired
-    private AppUserService appUserService;
+    private final AppUserService appUserService;
+
+    public PasswordChangeController(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
 
     @GetMapping(value = "/passwordChange")
     public String passwordReset() {
         return "passwordChange";
     }
 
-    @PutMapping(value = "/userChangePassword")
-    public @ResponseBody AppUser userChangePassword(@RequestBody ChangePasswordData changePasswordData){
-        return appUserService.changePassword(changePasswordData.getEmail(), changePasswordData.getOldPass(), changePasswordData.getNewPass());
+    @PostMapping(value = "/userChangePassword")
+    public @ResponseBody AppUser userChangePassword(String emailField, String oldPassField, String newPassField){
+        return appUserService.changePassword(emailField, oldPassField, newPassField);
     }
 }

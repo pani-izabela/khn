@@ -32,16 +32,7 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public List<AppUser> findAllQuery() {return appUserDAO.findAllQuery();}
 
-
-
-    @Override
-    public boolean checkAppUserByEmail(String email) {
-        boolean appUserInDB = true;
-        if(appUserDAO.findByEmail(email) == null)
-            appUserInDB = false;
-        return appUserInDB;
-    }
-
+    //-------------------------------rejestracja-----------------------------------------
     @Override
     public AppUser registerCustomerUser(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
@@ -77,27 +68,7 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserToReturn;
     }
 
-    @Override
-    public AppUser updatePass(AppUser appUser, String newPass) {
-        return appUserDAO.updatePass(appUser, newPass);
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override
-    public AppUser findAppUserByEmailAndPass(String email, String pass) {
-        AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
-        AppUser appUserToReturn = new AppUser();
-        try {
-            if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
-                appUserToReturn = appUserFromDB;
-        }
-        catch (Exception e){
-            appUserToReturn = null;
-        }
-        return appUserToReturn;
-    }
-
+    //-----------------------------logowanie----------------------------------------------
     @Override
     public AppUser loginUserFromSellerPage(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
@@ -137,6 +108,7 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserToReturn;
     }
 
+    //--------------------------zmiana hasła-----------------------------------------
     @Override
     public AppUser changePassword(String email, String oldPass, String newPass) {
         AppUser appUserToReturn = new AppUser();
@@ -153,7 +125,6 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------
-
     private AppUser findAppUserByEmail(AppUser appUser){
         return appUserDAO.findByEmail(appUser.getEmail());
     }
@@ -176,6 +147,28 @@ public class AppUserServiceImpl implements AppUserService {
         return roles;
     }
 
+    private AppUser updatePass(AppUser appUser, String newPass) {
+        return appUserDAO.updatePass(appUser, newPass);
+    }
 
+    private AppUser findAppUserByEmailAndPass(String email, String pass) {
+        AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
+        AppUser appUserToReturn = new AppUser();
+        try {
+            if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
+                appUserToReturn = appUserFromDB;
+        }
+        catch (NoResultException e){
+            appUserToReturn = null;
+        }
+        return appUserToReturn;
+    }
+
+    private boolean checkAppUserByEmail(String email) {
+        boolean appUserInDB = true;
+        if(appUserDAO.findByEmail(email) == null)
+            appUserInDB = false;
+        return appUserInDB;
+    }
 
 }

@@ -34,6 +34,7 @@ public class AppUser {
 
     public static final String GET_APPUSER_BY_EMAIL = "AppUser.get_appuser_by_email";
     public static final String QUERY_GET_APPUSER_BY_EMAIL = "select au from AppUser au where au.email = :email";
+    //public static final String QUERY_GET_APPUSER_BY_EMAIL = "select au from AppUser au where au.email = :wielblad";
 
     @Id
     @NotNull
