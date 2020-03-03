@@ -39,7 +39,7 @@ function login(data) {
             if(res.id!==null) {
                 console.log('Użytkownik o id: ' + res.id + ' zalogował się');
                 window.location.href = "menu";
-                alert('Udało się zalogować');
+                //alert('Udało się zalogować');
             }
         },
         error: function (res) {

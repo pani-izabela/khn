@@ -40,7 +40,7 @@ function register(data) {
             data: JSON.stringify(data),
             success: function (res) {
                 window.location.href = "login";
-                alert('Rejestracja udała się!');
+                //alert('Rejestracja udała się!');
             },
             error: function (res) {
                 alert('Nie udało się zarejestrować');

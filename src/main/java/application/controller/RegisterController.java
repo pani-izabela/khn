@@ -26,11 +26,11 @@ public class RegisterController {
 
     @PostMapping(value = "/customer/addAppUser")
     public @ResponseBody AppUser addAppUser(@RequestBody AppUser appUser){
-        return appUserService.addAppUser(appUser, "customer");
+        return appUserService.registerCustomerUser(appUser);
     }
     @PostMapping(value = "/seller/addAppUser")
     public @ResponseBody AppUser addAppUserSeller(@RequestBody AppUser appUser){
-        return appUserService.addAppUser(appUser, "seller");
+        return appUserService.registerSellerUser(appUser);
     }
 
 }

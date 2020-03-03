@@ -18,12 +18,12 @@ public class AppUserDAOImpl implements AppUserDAO {
 
 
     @Override
+    @Transactional
     public AppUser findByIdQuery(int id) {
         return em.createNamedQuery(AppUser.GET_APPUSER_BY_ID, AppUser.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
-
 
     @Override
     @Transactional
@@ -38,7 +38,6 @@ public class AppUserDAOImpl implements AppUserDAO {
         return em.merge(appUser);
     }
 
-
     @Override
     @Transactional
     public AppUser findById(int id) {
@@ -46,12 +45,12 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         AppUser appUser = em.find(AppUser.class, id);
         if(appUser!=null)
             em.remove(appUser);
     }
-
 
     @Override
     @Transactional
@@ -69,6 +68,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
+    @Transactional
     public AppUser findByEmail(String email) {
         AppUser appUser;
         try{
