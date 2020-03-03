@@ -26,11 +26,13 @@ public class AppUserServiceImpl implements AppUserService {
     /*@Override
     public AppUser findByIdQuery(int id) {return appUserDAO.findByIdQuery(id);}
 
+     @Override
+    public AppUser findById(int id) {return appUserDAO.findById(id);}*/
+
     @Override
     public List<AppUser> findAllQuery() {return appUserDAO.findAllQuery();}
 
-    @Override
-    public AppUser findById(int id) {return appUserDAO.findById(id);}*/
+
 
     @Override
     public boolean checkAppUserByEmail(String email) {
@@ -130,6 +132,21 @@ public class AppUserServiceImpl implements AppUserService {
             }
         }
         catch(NoResultException e){
+            return null;
+        }
+        return appUserToReturn;
+    }
+
+    @Override
+    public AppUser changePassword(String email, String oldPass, String newPass) {
+        AppUser appUserToReturn = new AppUser();
+        try {
+            AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
+            if (appUserFromDb != null && (!newPass.equals(oldPass))) {
+                appUserToReturn = updatePass(appUserFromDb, newPass);
+            }
+        }
+        catch (NoResultException e){
             return null;
         }
         return appUserToReturn;

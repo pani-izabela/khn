@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface AppUserService {
     //AppUser findByIdQuery(int id);
-    //List<AppUser> findAllQuery();
     //AppUser findById(int id);
     //AppUser addAppUser(AppUser appUser, String role);
+    List<AppUser> findAllQuery();
     AppUser findAppUserByEmailAndPass(String email, String pass);
     boolean checkAppUserByEmail(String email);
     AppUser updatePass(AppUser appUser, String newPass);
@@ -20,4 +20,6 @@ public interface AppUserService {
 
     AppUser loginUserFromSellerPage(AppUser appUser);
     AppUser loginUserFromCustomerPage(AppUser appUser);
+
+    AppUser changePassword(String email, String oldPass, String newPass);
 }

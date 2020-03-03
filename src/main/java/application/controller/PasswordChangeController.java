@@ -19,16 +19,6 @@ public class PasswordChangeController {
 
     @PutMapping(value = "/userChangePassword")
     public @ResponseBody AppUser userChangePassword(@RequestBody ChangePasswordData changePasswordData){
-        String email = changePasswordData.getEmail();
-        String oldPass = changePasswordData.getOldPass();
-        String newPass = changePasswordData.getNewPass();
-        AppUser appUserFromDb = appUserService.findAppUserByEmailAndPass(email, oldPass);
-        AppUser appUserToReturn;
-        if(appUserFromDb!=null && (newPass.equals(oldPass)==false)){
-            appUserToReturn = appUserService.updatePass(appUserFromDb, newPass);
-        }
-        else
-            appUserToReturn = null;
-        return appUserToReturn;
+        return appUserService.changePassword(changePasswordData.getEmail(), changePasswordData.getOldPass(), changePasswordData.getNewPass());
     }
 }

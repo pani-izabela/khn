@@ -17,11 +17,13 @@ function prepareData() {
                 newPass: newPassField
             };
         }
+        console.log("DANE1:", data);
         changePass(data);
     })
 }
 
 function changePass(data) {
+    console.log("DAAANE:", data);
     $.ajax({
         url: "http://localhost:8080" + '/userChangePassword',
         method: "PUT",
