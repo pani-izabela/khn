@@ -7,11 +7,14 @@ function prepareData() {
         let emailField = $('#email').val();
         let oldPassField = $('#oldPass').val();
         let newPassField = $('#newPass').val();
-        if(emailField.trim().length===0 || oldPassField.trim().length===0 || newPassField.trim().length===0)
-            alert("Pola nie zostały prawidłowo wypełnione");
-
+        checkFields(emailField, oldPassField, newPassField);
         changePass(emailField, oldPassField, newPassField );
     })
+}
+
+function checkFields(emailField, oldPassField, newPassField) {
+    if(emailField.trim().length===0 || oldPassField.trim().length===0 || newPassField.trim().length===0)
+        alert("Pola nie zostały prawidłowo wypełnione");
 }
 
 function changePass(emailField, oldPassField, newPassField) {
