@@ -1,14 +1,11 @@
 package application.service;
 
-import application.controller.AppUserController;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.model.Role;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.NoResultException;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,18 +27,18 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser findById(int id) {return appUserDAO.findById(id);}*/
 
     @Override
-    public List<AppUser> findAllQuery() {return appUserDAO.findAllQuery();}
+    public List<AppUser> findAllQuery() {
+        return appUserDAO.findAllQuery();
+    }
 
     //-------------------------------rejestracja-----------------------------------------
     @Override
     public AppUser registerCustomerUser(AppUser appUser) {
-        AppUser appUserToReturn = new AppUser();
-        try {
-            if (!checkAppUserByEmail(appUser.getEmail())) {
-                appUser.setRoles(addRoleForUser(1, "customer"));
-                appUserToReturn = appUserDAO.addAppUser(appUser);
-            }
-        } catch (NoResultException e) {
+        AppUser appUserToReturn;
+        if (!checkAppUserByEmail(appUser.getEmail())) {
+            appUser.setRoles(addRoleForUser(1, "customer"));
+            appUserToReturn = appUserDAO.addAppUser(appUser);
+        } else {
             return null;
         }
         return appUserToReturn;
@@ -50,20 +47,15 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser registerSellerUser(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
-        try {
-            if (!checkAppUserByEmail(appUser.getEmail())) {
-                appUser.setRoles(addRoleForUser(2, "seller"));
-                appUserToReturn = appUserDAO.addAppUser(appUser);
+        if (!checkAppUserByEmail(appUser.getEmail())) {
+            appUser.setRoles(addRoleForUser(2, "seller"));
+            appUserToReturn = appUserDAO.addAppUser(appUser);
+        } else {//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
+            List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
+            for (Integer roleId : userRolesIdList) {
+                if (roleId == 1)
+                    return null;
             }
-            else{//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
-                List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
-                for(Integer roleId : userRolesIdList){
-                    if(roleId==1)
-                        return null;
-                }
-            }
-        } catch (NoResultException e) {
-            return null;
         }
         return appUserToReturn;
     }
@@ -72,18 +64,13 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser loginUserFromSellerPage(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
-        try{
-            AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-            List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
-            for(Integer roleId : userRolesIdList){
-                if(roleId==2 || roleId==3)
-                    appUserToReturn = appUserFromDb;
-                else
-                    return null;
-            }
-        }
-        catch(NoResultException e){
-            return null;
+        AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
+        List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 2 || roleId == 3)
+                appUserToReturn = appUserFromDb;
+            else
+                return null;
         }
         return appUserToReturn;
     }
@@ -92,18 +79,13 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser loginUserFromCustomerPage(AppUser appUser) {
         //nie wiem, czy dobrze robię, że go tu inicjuję, a może lepiej nullem zainicjować;
         AppUser appUserToReturn = new AppUser();
-        try{
-            AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-            List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
-            for(Integer roleId : userRolesIdList){
-                if(roleId==1 || roleId==3)
-                    appUserToReturn = appUserFromDb;
-                else
-                    return null;
-            }
-        }
-        catch(NoResultException e){
-            return null;
+        AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
+        List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 1 || roleId == 3)
+                appUserToReturn = appUserFromDb;
+            else
+                return null;
         }
         return appUserToReturn;
     }
@@ -112,24 +94,19 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser changePassword(String email, String oldPass, String newPass) {
         AppUser appUserToReturn = new AppUser();
-        try {
-            AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
-            if (appUserFromDb != null && (!newPass.equals(oldPass))) {
-                appUserToReturn = updatePass(appUserFromDb, newPass);
-            }
-        }
-        catch (NoResultException e){
-            return null;
+        AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
+        if (appUserFromDb != null && (!newPass.equals(oldPass))) {
+            appUserToReturn = updatePass(appUserFromDb, newPass);
         }
         return appUserToReturn;
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------
-    private AppUser findAppUserByEmail(AppUser appUser){
+    private AppUser findAppUserByEmail(AppUser appUser) {
         return appUserDAO.findByEmail(appUser.getEmail());
     }
 
-    private List<Integer> getUserRoles(AppUser appUser){
+    private List<Integer> getUserRoles(AppUser appUser) {
         List<Role> userRoles = appUser.getRoles();
         List<Integer> userRolesIdList = new ArrayList<>();
         for (Role role : userRoles) {
@@ -138,7 +115,7 @@ public class AppUserServiceImpl implements AppUserService {
         return userRolesIdList;
     }
 
-    private List<Role> addRoleForUser(int roleId, String roleName){
+    private List<Role> addRoleForUser(int roleId, String roleName) {
         List<Role> roles = new ArrayList<>();
         Role roleSeller = new Role();
         roleSeller.setId(roleId);
@@ -154,19 +131,14 @@ public class AppUserServiceImpl implements AppUserService {
     private AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
         AppUser appUserToReturn = new AppUser();
-        try {
-            if(appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
-                appUserToReturn = appUserFromDB;
-        }
-        catch (NoResultException e){
-            appUserToReturn = null;
-        }
+        if (appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
+            appUserToReturn = appUserFromDB;
         return appUserToReturn;
     }
 
     private boolean checkAppUserByEmail(String email) {
         boolean appUserInDB = true;
-        if(appUserDAO.findByEmail(email) == null)
+        if (appUserDAO.findByEmail(email) == null)
             appUserInDB = false;
         return appUserInDB;
     }
