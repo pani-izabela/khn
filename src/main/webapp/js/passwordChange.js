@@ -14,7 +14,7 @@ function prepareData() {
 
 function checkFields(emailField, oldPassField, newPassField) {
     if(emailField.trim().length===0 || oldPassField.trim().length===0 || newPassField.trim().length===0)
-        alert("Pola nie zostały prawidłowo wypełnione");
+         alert("Pola nie zostały prawidłowo wypełnione");
 }
 
 function changePass(emailField, oldPassField, newPassField) {
@@ -27,14 +27,10 @@ function changePass(emailField, oldPassField, newPassField) {
             "newPassField" : newPassField
         },
         success: function (res){
-            if(res.id!==null) {
-                alert('Hasło zostało zmienione');
-            }
+            alert(res);
         },
         error: function (res) {
-            if(res.id===null){
-                alert('Nie udało się zmienić hasła');
-            }
+            alert(res.responseText)
         }
     })
 }

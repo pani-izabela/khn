@@ -2,6 +2,8 @@ package application.controller;
 
 import application.model.AppUser;
 import application.service.AppUserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,12 @@ public class PasswordChangeController {
         return "passwordChange";
     }
 
-    @PostMapping(value = "/userChangePassword")
+    /*@PostMapping(value = "/userChangePassword")
     public @ResponseBody AppUser userChangePassword(String emailField, String oldPassField, String newPassField){
+        return appUserService.changePassword(emailField, oldPassField, newPassField);
+    }*/
+    @PostMapping(value = "/userChangePassword")
+    public @ResponseBody ResponseEntity<String> userChangePassword(String emailField, String oldPassField, String newPassField){
         return appUserService.changePassword(emailField, oldPassField, newPassField);
     }
 }

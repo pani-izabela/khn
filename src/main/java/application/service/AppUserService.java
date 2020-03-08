@@ -1,8 +1,7 @@
 package application.service;
 
 import application.model.AppUser;
-import application.model.Role;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -19,5 +18,5 @@ public interface AppUserService {
     AppUser loginUserFromSellerPage(AppUser appUser);
     AppUser loginUserFromCustomerPage(AppUser appUser);
 
-    AppUser changePassword(String email, String oldPass, String newPass);
+    ResponseEntity<String> changePassword(String email, String oldPass, String newPass);
 }

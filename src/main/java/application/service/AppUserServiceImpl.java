@@ -4,6 +4,8 @@ import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.model.Role;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -91,7 +93,7 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     //--------------------------zmiana hasła-----------------------------------------
-    @Override
+    /*@Override
     public AppUser changePassword(String email, String oldPass, String newPass) {
         AppUser appUserToReturn = new AppUser();
         AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
@@ -99,6 +101,22 @@ public class AppUserServiceImpl implements AppUserService {
             appUserToReturn = updatePass(appUserFromDb, newPass);
         }
         return appUserToReturn;
+    }*/
+
+    @Override
+    public ResponseEntity<String> changePassword(String email, String oldPass, String newPass) {
+        AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
+        if(appUserFromDb==null){
+            return new ResponseEntity<>("Nie udało się zmienić hasła. Sprawdź email i hasło", HttpStatus.BAD_REQUEST);
+        }
+        if(appUserFromDb != null && (!newPass.equals(oldPass))) {
+            updatePass(appUserFromDb, newPass);
+            return new ResponseEntity<>("Twoje hasło zostało zmienione", HttpStatus.OK);
+        }
+        else if(appUserFromDb != null && (newPass.equals(oldPass)))
+            return new ResponseEntity<>("Stare i nowe hasło jest identyczne. Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>("Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------
@@ -130,6 +148,8 @@ public class AppUserServiceImpl implements AppUserService {
 
     private AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
+        if(appUserFromDB==null)
+            return null;
         AppUser appUserToReturn = new AppUser();
         if (appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
             appUserToReturn = appUserFromDB;
