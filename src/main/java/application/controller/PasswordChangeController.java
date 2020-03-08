@@ -20,10 +20,6 @@ public class PasswordChangeController {
         return "passwordChange";
     }
 
-    /*@PostMapping(value = "/userChangePassword")
-    public @ResponseBody AppUser userChangePassword(String emailField, String oldPassField, String newPassField){
-        return appUserService.changePassword(emailField, oldPassField, newPassField);
-    }*/
     @PostMapping(value = "/userChangePassword")
     public @ResponseBody ResponseEntity<String> userChangePassword(String emailField, String oldPassField, String newPassField){
         return appUserService.changePassword(emailField, oldPassField, newPassField);

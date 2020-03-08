@@ -3,7 +3,10 @@ package application.service;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.model.Role;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+//import org.slf4j.event.Level;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,8 @@ import java.util.List;
 @Service
 public class AppUserServiceImpl implements AppUserService {
     //final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
-    final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class);
+    //final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class);
+    protected final Logger log = Logger.getLogger(getClass().getName());
 
     private AppUserDAO appUserDAO;
 
@@ -36,6 +40,7 @@ public class AppUserServiceImpl implements AppUserService {
     //-------------------------------rejestracja-----------------------------------------
     @Override
     public AppUser registerCustomerUser(AppUser appUser) {
+        log.log(Level.INFO, "DUPA: " + appUser.getEmail());
         AppUser appUserToReturn;
         if (!checkAppUserByEmail(appUser.getEmail())) {
             appUser.setRoles(addRoleForUser(1, "customer"));
@@ -93,15 +98,6 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     //--------------------------zmiana hasła-----------------------------------------
-    /*@Override
-    public AppUser changePassword(String email, String oldPass, String newPass) {
-        AppUser appUserToReturn = new AppUser();
-        AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
-        if (appUserFromDb != null && (!newPass.equals(oldPass))) {
-            appUserToReturn = updatePass(appUserFromDb, newPass);
-        }
-        return appUserToReturn;
-    }*/
 
     @Override
     public ResponseEntity<String> changePassword(String email, String oldPass, String newPass) {
