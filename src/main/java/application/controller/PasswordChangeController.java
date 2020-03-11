@@ -5,7 +5,9 @@ import application.service.AppUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PasswordChangeController {
@@ -22,6 +24,9 @@ public class PasswordChangeController {
 
     @PostMapping(value = "/userChangePassword")
     public @ResponseBody ResponseEntity<String> userChangePassword(String emailField, String oldPassField, String newPassField){
-        return appUserService.changePassword(emailField, oldPassField, newPassField);
+        if(appUserService.changePassword(emailField, oldPassField, newPassField)!=null)
+            return new ResponseEntity<>("Hasło zostało zmienione", HttpStatus.OK);
+
+        return new ResponseEntity<>("Nie udało się zmienić hasła, sprawdź poprawność danych", HttpStatus.NOT_FOUND);
     }
 }

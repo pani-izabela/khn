@@ -1,5 +1,6 @@
 package application.service;
 
+import application.components.Enums;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.model.Role;
@@ -22,6 +23,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     private AppUserDAO appUserDAO;
 
+
     public AppUserServiceImpl(AppUserDAO appUserDAO) {
         this.appUserDAO = appUserDAO;
     }
@@ -40,22 +42,23 @@ public class AppUserServiceImpl implements AppUserService {
     //-------------------------------rejestracja-----------------------------------------
     @Override
     public AppUser registerCustomerUser(AppUser appUser) {
-        log.log(Level.INFO, "DUPA: " + appUser.getEmail());
+        log.log(Level.INFO, "Zarejestrował sie uzytkownik o emailu: " + appUser.getEmail());
         AppUser appUserToReturn;
         if (!checkAppUserByEmail(appUser.getEmail())) {
-            appUser.setRoles(addRoleForUser(1, "customer"));
+            appUser.setRoles(addRoleForUser(1, Enums.CUSTOMER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
         } else {
             return null;
         }
         return appUserToReturn;
+
     }
 
     @Override
     public AppUser registerSellerUser(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
         if (!checkAppUserByEmail(appUser.getEmail())) {
-            appUser.setRoles(addRoleForUser(2, "seller"));
+            appUser.setRoles(addRoleForUser(2, Enums.SELLER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
         } else {//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
             List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
@@ -99,7 +102,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     //--------------------------zmiana hasła-----------------------------------------
 
-    @Override
+    /*@Override
     public ResponseEntity<String> changePassword(String email, String oldPass, String newPass) {
         AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
         if(appUserFromDb==null){
@@ -113,6 +116,16 @@ public class AppUserServiceImpl implements AppUserService {
             return new ResponseEntity<>("Stare i nowe hasło jest identyczne. Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
         else
             return new ResponseEntity<>("Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
+    }*/
+
+    @Override
+    public AppUser changePassword(String email, String oldPass, String newPass) {
+        AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
+        if(appUserFromDb != null && (!newPass.equals(oldPass)) && (!newPass.isEmpty())) {
+            return updatePass(appUserFromDb, newPass);
+        }
+        else
+            return null;
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------
