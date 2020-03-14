@@ -65,7 +65,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional // readOnly w wiekszosci metod
     public void deleteById(int id) {
         AppUser appUser = em.find(AppUser.class, id);
         if(appUser!=null)

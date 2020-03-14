@@ -22,6 +22,8 @@ public class PasswordChangeController {
         return "passwordChange";
     }
 
+
+    //elegancko posprzatane [ w sumie jak i w  loginController] :)
     @PostMapping(value = "/userChangePassword")
     public @ResponseBody ResponseEntity<String> userChangePassword(String emailField, String oldPassField, String newPassField){
         if(appUserService.changePassword(emailField, oldPassField, newPassField)!=null)

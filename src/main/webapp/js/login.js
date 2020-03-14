@@ -22,6 +22,7 @@ function prepareLoginData() {
 
 //nie podoba mi się, że ten adres tu tak na sztywno jest zaszyty, jak to ominąć?
 function login(data) {
+    // moze to co jest przed wywolaniem ajax jeszcze przenisc do oddzielnej metody? np setRole
     var user;
     if ((window.location.href).includes('customer')){
         user = 'customer'

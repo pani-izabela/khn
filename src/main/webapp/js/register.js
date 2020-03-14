@@ -10,6 +10,7 @@ function prepareRegisterData() {
         let emailField = $('#email').val();
         let passField = $('#pwd').val();
         let registerData;
+        // ten if else tez mozna do oddzielnej metody :)
         if(emailField.trim().length===0 || passField.trim().length===0 || firstnameField.trim().length===0 || lastnameField.trim().length===0)
             alert('Uzupełnij brakujące pola');
         else {
@@ -25,6 +26,7 @@ function prepareRegisterData() {
 }
 
 function register(data) {
+    // tak jak dla login, tylko skoro robi to samo co login to wystarczy jedna metode i sie odwolac do niej tutaj ponownie
     var user;
     if ((window.location.href).includes('customer')){
         user = 'customer'

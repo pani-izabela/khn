@@ -8,8 +8,7 @@ import application.model.Role;
 //import org.slf4j.event.Level;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,17 +60,26 @@ public class AppUserServiceImpl implements AppUserService {
             appUser.setRoles(addRoleForUser(2, Enums.SELLER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
         } else {//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
-            List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
-            for (Integer roleId : userRolesIdList) {
-                if (roleId == 1)
-                    return null;
-            }
+            //tutaj mozna jeszcze uproscic np  poprzez metode isCustomer
+            if (isCustomer(appUser)) return null;
         }
         return appUserToReturn;
+    }
+// zostawiam pod metoda publiczna zeby bylo widoczne
+    private boolean isCustomer(AppUser appUser) {
+        List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 1)
+                return true;
+        }
+        return false;
     }
 
     //-----------------------------logowanie----------------------------------------------
     @Override
+    //ta metodke jeszcze mozna uproscic :)
+    // Sprawedzamy czy user istnieje w bazie, pobieramy jego role - moze osobne prywatne metody do przygotowania uzytkonika i sprawdzenia jego roli?
+    // Dodatkowo w tym metodach do logowania nie musimy zwracac usera, moze to byc np Response Entity, boolean lub String
     public AppUser loginUserFromSellerPage(AppUser appUser) {
         AppUser appUserToReturn = new AppUser();
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
@@ -88,6 +96,9 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser loginUserFromCustomerPage(AppUser appUser) {
         //nie wiem, czy dobrze robię, że go tu inicjuję, a może lepiej nullem zainicjować;
+
+        //Tutaj tak jak wyzej mozemy porozbijac jeszcze ta metode
+        // Oraz mozemy zwrocic ResponseEntity, boolean albo String
         AppUser appUserToReturn = new AppUser();
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
         List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
@@ -118,6 +129,7 @@ public class AppUserServiceImpl implements AppUserService {
             return new ResponseEntity<>("Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
     }*/
 
+    // O wiele ciekawiej niz to co wyzej :D
     @Override
     public AppUser changePassword(String email, String oldPass, String newPass) {
         AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
@@ -155,6 +167,8 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserDAO.updatePass(appUser, newPass);
     }
 
+//    wszystkie metody prywatne nad ta i pod wygladaja dobrze, tylko moze jeszcze cos sie da ciut inaczej zrobic z ta? :)
+    // Dodatkowo jesli robimy if to lepiej zawsze dolozyc {} - wbardziej skomplikowanych aplikacjach moze to nam troche namieszac
     private AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
         if(appUserFromDB==null)

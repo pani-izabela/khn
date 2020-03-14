@@ -2,6 +2,8 @@ $(document).ready(function () {
     prepareData();
 });
 
+
+// Elegancko tutaj "posprzatalas" :)
 function prepareData() {
     $('#passwordChange').click(function () {
         let emailField = $('#email').val();
