@@ -24,4 +24,9 @@ public class MainController {
     public String sellerMenu() {
         return "seller/menu";
     }
+
+    @GetMapping(value="/footer")
+    public String footer(){
+        return "footer";
+    }
 }

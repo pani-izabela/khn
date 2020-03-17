@@ -102,21 +102,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     //--------------------------zmiana hasła-----------------------------------------
 
-    /*@Override
-    public ResponseEntity<String> changePassword(String email, String oldPass, String newPass) {
-        AppUser appUserFromDb = findAppUserByEmailAndPass(email, oldPass);
-        if(appUserFromDb==null){
-            return new ResponseEntity<>("Nie udało się zmienić hasła. Sprawdź email i hasło", HttpStatus.BAD_REQUEST);
-        }
-        if(appUserFromDb != null && (!newPass.equals(oldPass))) {
-            updatePass(appUserFromDb, newPass);
-            return new ResponseEntity<>("Twoje hasło zostało zmienione", HttpStatus.OK);
-        }
-        else if(appUserFromDb != null && (newPass.equals(oldPass)))
-            return new ResponseEntity<>("Stare i nowe hasło jest identyczne. Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>("Nie udało się zmienić hasła", HttpStatus.BAD_REQUEST);
-    }*/
 
     @Override
     public AppUser changePassword(String email, String oldPass, String newPass) {
