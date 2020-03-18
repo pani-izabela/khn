@@ -29,4 +29,13 @@ public class MainController {
     public String footer(){
         return "footer";
     }
+
+    @GetMapping(value="/customer/header")
+    public String headerCustomer(){
+        return "customer/header";
+    }
+    @GetMapping(value="/seller/header")
+    public String headerSeller(){
+        return "seller/header";
+    }
 }
