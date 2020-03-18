@@ -4,6 +4,13 @@
     text-align: center;
     width: 100%;
 }
+#header-navbar{
+    background-color: #28a745;
+}
+.img-thumbnail{
+    width: 60px;
+    height: 50px;
+}
 .footer {
     position: fixed;
     left: 0;
