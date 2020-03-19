@@ -5,12 +5,13 @@ $(document).ready(function(){
    $("#sidebarOnCustomerPage").load("/customer/sidebar.html");
    $("#sidebarOnSellerPage").load("/seller/sidebar.html");
 
-   $('#sidebarCollapse').on('click', function () {
+   /*$('#sidebarCollapse').on('click', function () {
       $('#sidebar').toggleClass('active');
-   });
+   });*/
    showEmailLoggedUser();
 });
 
+/*
 function showEmailLoggedUser() {
    function createBodyElement(name) {
       let input = document.createElement("SPAN");
@@ -19,4 +20,4 @@ function showEmailLoggedUser() {
    }
    const a = document.querySelector('#placeForEmail');
    a.appendChild(createBodyElement(localStorage.getItem('loggedUserEmail')));
-}
+}*/
