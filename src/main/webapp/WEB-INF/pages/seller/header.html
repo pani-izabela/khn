@@ -1,8 +1,26 @@
-<header id="header" class="header">
-    <nav id="header-navbar" class="navbar navbar-dark">
+<nav id="header-navbar" class="navbar navbar-dark">
+    <div class="container-fluid">
+        <div class="headerElements">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Menu</span>
+            </button>
+        </div>
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
                 <img src="/resources/KHN-logo.png" class="img-thumbnail">Sellers</a>
         </div>
-    </nav>
-</header>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user">Witaj xxx@ww.pl</span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in">Wyloguj</span></a></li>
+        </ul>
+    </div>
+</nav>
+<!--<script type="text/javascript" src="../js/main.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>

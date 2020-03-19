@@ -44,4 +44,9 @@ public class MainController {
     public String sidebarCustomer(){
         return "customer/sidebar";
     }
+
+    @GetMapping(value="/seller/sidebar")
+    public String sidebarSeller(){
+        return "seller/sidebar";
+    }
 }
