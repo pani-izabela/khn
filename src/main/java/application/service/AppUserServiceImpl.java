@@ -61,11 +61,7 @@ public class AppUserServiceImpl implements AppUserService {
             appUser.setRoles(addRoleForUser(2, Enums.SELLER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
         } else {//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
-            List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
-            for (Integer roleId : userRolesIdList) {
-                if (roleId == 1)
-                    return null;
-            }
+            if(isCustomer(appUser)) return null;
         }
         return appUserToReturn;
     }
@@ -142,12 +138,18 @@ public class AppUserServiceImpl implements AppUserService {
 
     private AppUser findAppUserByEmailAndPass(String email, String pass) {
         AppUser appUserFromDB = appUserDAO.findByEmailAndPassQuery(email, pass);
-        if(appUserFromDB==null)
+        if (appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass)){
+            return appUserFromDB;
+        }
+        else {
+            return null;
+        }
+        /*if(appUserFromDB==null)
             return null;
         AppUser appUserToReturn = new AppUser();
         if (appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
             appUserToReturn = appUserFromDB;
-        return appUserToReturn;
+        return appUserToReturn;*/
     }
 
     private boolean checkAppUserByEmail(String email) {
@@ -155,6 +157,15 @@ public class AppUserServiceImpl implements AppUserService {
         if (appUserDAO.findByEmail(email) == null)
             appUserInDB = false;
         return appUserInDB;
+    }
+
+    private boolean isCustomer(AppUser appUser){
+        List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 1)
+                return true;
+        }
+        return false;
     }
 
 }

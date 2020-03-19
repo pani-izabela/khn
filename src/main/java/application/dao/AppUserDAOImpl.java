@@ -18,7 +18,7 @@ public class AppUserDAOImpl implements AppUserDAO {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public AppUser findByIdQuery(int id) {
         try{
             return em.createNamedQuery(AppUser.GET_APPUSER_BY_ID, AppUser.class)
@@ -31,7 +31,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public AppUser findById(int id) {
         try{
             return em.find(AppUser.class, id);
@@ -42,7 +42,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<AppUser> findAllQuery() {
         try {
             return em.createNamedQuery(AppUser.GET_APPUSERS, AppUser.class)
@@ -54,7 +54,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public AppUser addAppUser(AppUser appUser) {
         try{
             return em.merge(appUser);
@@ -73,7 +73,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public AppUser findByEmailAndPassQuery(String email, String pass) {
         try{
             return em.createNamedQuery(AppUser.GET_APPUSER_BY_EMAIL_AND_PASS, AppUser.class)
@@ -86,7 +86,7 @@ public class AppUserDAOImpl implements AppUserDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public AppUser findByEmail(String email) {
     //public AppUser findByEmail(String jaszczurka) {
         try{

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     prepareLoginData();
 });
 
@@ -20,15 +19,8 @@ function prepareLoginData() {
     })
 }
 
-//nie podoba mi się, że ten adres tu tak na sztywno jest zaszyty, jak to ominąć?
 function login(data) {
-    var user;
-    if ((window.location.href).includes('customer')){
-        user = 'customer'
-    }
-    else if((window.location.href).includes('seller')){
-        user = 'seller'
-    }
+    let user = setRole();
     $.ajax({
         url: "http://localhost:8080" + '/' + user + '/loginUser',
         method: "POST",
@@ -49,4 +41,13 @@ function login(data) {
                 alert('Nie udało się zalogować');
         }
     })
+}
+
+function setRole() {
+    if ((window.location.href).includes('customer')){
+        return 'customer'
+    }
+    else if((window.location.href).includes('seller')){
+        return 'seller'
+    }
 }
