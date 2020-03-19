@@ -11,16 +11,27 @@
                 <img src="/resources/KHN-logo.png" class="img-thumbnail">Customers</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user">Witaj xxx@ww.pl</span></a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in">Wyloguj</span></a></li>
+            <li>Witaj <a id="placeForEmail" href="#"></a></li>
         </ul>
     </div>
 </nav>
-<!--<script type="text/javascript" src="../js/main.js"></script>-->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+        showEmailLoggedUser();
     });
+
+    function showEmailLoggedUser() {
+        function createBodyElement(name) {
+            let input = document.createElement("SPAN");
+            input.textContent = name;
+            input.setAttribute('class', 'nav')
+            return input;
+        }
+        const a = document.querySelector('#placeForEmail');
+        a.appendChild(createBodyElement(localStorage.getItem('loggedUserEmail')));
+    }
 </script>
+

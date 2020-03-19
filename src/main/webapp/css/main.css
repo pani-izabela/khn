@@ -16,7 +16,7 @@
     width: 60px;
     height: 50px;
 }
-.glyphicon{
+.nav {
     color: white;
 }
 
@@ -46,6 +46,9 @@
     padding: 20px;
     background: darkgreen;
 }
+#sidebar p{
+    font-size: 1.3em;
+}
 #sidebar ul.components{
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
@@ -60,12 +63,15 @@
     display: block;
     color: white;
 }
+#logout{
+    font-weight: bolder;
+}
 #sidebar ul li a:hover{
     color: darkgreen;
     background: white;
 }
 #sidebar ul li.active > a, a[aria-expanded="true"]{
-    color: #fff;
+    color: white;
     background: darkgreen;
 }
 ul ul a{

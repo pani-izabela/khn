@@ -38,6 +38,7 @@ function login(data) {
         success: function (res){
             if(res.id!==null) {
                 console.log('Użytkownik o id: ' + res.id + ' zalogował się');
+                localStorage.setItem('loggedUserEmail', res.email);
                 window.location.href = "menu";
                 //alert('Udało się zalogować');
             }
