@@ -1,22 +1,106 @@
-
-.navbar-header {
+/*nagłówek*/
+#header-navbar{
+    background-color: #28a745;
+    box-shadow: #0f6674;
+}
+.navbar-brand{
     float: left;
     text-align: center;
     width: 100%;
+    color: white;
 }
-#header-navbar{
-    background-color: #28a745;
+.headerElements{
+    display: inline;
 }
 .img-thumbnail{
     width: 60px;
     height: 50px;
 }
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
+
+/*content*/
+#content{
     width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/*sidebar*/
+.wrapper{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+#sidebar{
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background: #28a745;
+    color: white;
+    transition: all 0.3s;
+}
+#sidebar .sidebar-header{
+    padding: 20px;
+    background: darkgreen;
+}
+#sidebar ul.components{
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+#sidebar ul p{
+    color: white;
+    padding: 10px;
+}
+#sidebar ul li a{
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: white;
+}
+#sidebar ul li a:hover{
+    color: darkgreen;
+    background: white;
+}
+#sidebar ul li.active > a, a[aria-expanded="true"]{
+    color: #fff;
+    background: darkgreen;
+}
+ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: darkgreen;
+    color: white;
+}
+#sidebar.active{
+    margin-left: -250px;
+}
+a[data-toggle="collapse"]{
+    position: relative;
+}
+.dropdown-toggle::after{
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+@media(max-width: 768px){
+    #sidebar{
+        margin-left: -250px;
+    }
+    #sidebar.active{
+        margin-left: 0;
+    }
+}
+/*stopka*/
+.footer {
     background-color: green;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    float: left;
     color: white;
     text-align: center;
+    transition: all 0.3s;
 }
+

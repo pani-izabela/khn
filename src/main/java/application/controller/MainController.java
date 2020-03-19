@@ -34,8 +34,14 @@ public class MainController {
     public String headerCustomer(){
         return "customer/header";
     }
+
     @GetMapping(value="/seller/header")
     public String headerSeller(){
         return "seller/header";
+    }
+
+    @GetMapping(value="/customer/sidebar")
+    public String sidebarCustomer(){
+        return "customer/sidebar";
     }
 }
