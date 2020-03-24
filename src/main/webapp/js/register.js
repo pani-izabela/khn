@@ -25,7 +25,7 @@ function prepareRegisterData() {
 }
 
 function register(data) {
-    let user = setRole();
+    var user = setRole();
         $.ajax({
             url: "http://localhost:8080" + '/' + user + '/addAppUser',
             method: "POST",
@@ -40,7 +40,7 @@ function register(data) {
             }
         })
 }
-
+/*
 function setRole() {
     if ((window.location.href).includes('customer')){
         return 'customer'
@@ -48,4 +48,4 @@ function setRole() {
     else if((window.location.href).includes('seller')){
         return 'seller'
     }
-}
+}*/

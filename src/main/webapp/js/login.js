@@ -20,7 +20,7 @@ function prepareLoginData() {
 }
 
 function login(data) {
-    let user = setRole();
+    var user = setRole();
     $.ajax({
         url: "http://localhost:8080" + '/' + user + '/loginUser',
         method: "POST",
@@ -43,11 +43,11 @@ function login(data) {
     })
 }
 
-function setRole() {
+/*function setRole() {
     if ((window.location.href).includes('customer')){
         return 'customer'
     }
     else if((window.location.href).includes('seller')){
         return 'seller'
     }
-}
+}*/

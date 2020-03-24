@@ -25,6 +25,11 @@ public class MainController {
         return "seller/menu";
     }
 
+    @GetMapping(value = "/admin/menu")
+    public String adminMenu() {
+        return "admin/menu";
+    }
+
     @GetMapping(value="/footer")
     public String footer(){
         return "footer";
@@ -48,5 +53,15 @@ public class MainController {
     @GetMapping(value="/seller/sidebar")
     public String sidebarSeller(){
         return "seller/sidebar";
+    }
+
+    @GetMapping(value="/admin/header")
+    public String headerAdmin(){
+        return "admin/header";
+    }
+
+    @GetMapping(value="/admin/sidebar")
+    public String sidebarAdmin(){
+        return "admin/sidebar";
     }
 }

@@ -34,6 +34,7 @@ public class AppUserServiceImpl implements AppUserService {
      @Override
     public AppUser findById(int id) {return appUserDAO.findById(id);}*/
 
+
     @Override
     public List<AppUser> findAllQuery() {
         return appUserDAO.findAllQuery();
