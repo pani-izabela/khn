@@ -20,6 +20,21 @@ function setRole() {
    }
 }
 
+function checkRole(data) {
+   var role;
+   var rolesArray = data["roles"];
+   for (let value of Object.values(rolesArray)) {
+      console.log(value.id);
+      role = value.id;
+      if(role===1 || role ===2){
+         return "usualUser"
+      }
+      else if(role===3){
+         return "admin"
+      }
+   }
+}
+
 function logout() {
    $('#logout').on('click', function () {
       window.location.href = "login";

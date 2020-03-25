@@ -11,6 +11,7 @@ public interface AppUserService {
     //boolean checkAppUserByEmail(String email);
 
     List<AppUser> findAllQuery();
+    void deleteAppUser(int id);
 
     AppUser registerCustomerUser(AppUser appUser);
     AppUser registerSellerUser(AppUser appUser);

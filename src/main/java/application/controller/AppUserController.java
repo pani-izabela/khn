@@ -46,6 +46,6 @@ public class AppUserController {
 
     @DeleteMapping(value = "/deleteAppUser")
     public @ResponseBody void deleteAppUser(@RequestBody @RequestParam int id){
-        appUserDAO.deleteById(id);
+        appUserService.deleteAppUser(id);
     }
 }

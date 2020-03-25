@@ -31,8 +31,14 @@ function login(data) {
             if(res.id!==null) {
                 console.log('Użytkownik o id: ' + res.id + ' zalogował się');
                 localStorage.setItem('loggedUserEmail', res.email);
-                window.location.href = "menu";
-                //alert('Udało się zalogować');
+                localStorage.setItem('loggedUserId', res.id);
+                var role = checkRole(res);
+                if(role==="admin"){
+                    window.location = "http://localhost:8080/admin/menu";
+                }
+                else {
+                    window.location.href = "menu";
+                }
             }
         },
         error: function (res) {
@@ -42,12 +48,3 @@ function login(data) {
         }
     })
 }
-
-/*function setRole() {
-    if ((window.location.href).includes('customer')){
-        return 'customer'
-    }
-    else if((window.location.href).includes('seller')){
-        return 'seller'
-    }
-}*/

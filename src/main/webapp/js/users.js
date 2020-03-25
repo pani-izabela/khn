@@ -35,7 +35,13 @@ function deleteUser() {
             url: "http://localhost:8080" + "/deleteAppUser?" + $.param({id: user_Id}),
             method: 'DELETE',
             success: function () {
-                row.closest("tr").remove();
+                if(user_Id === localStorage.getItem('loggedUserId')){
+                    alert('Nie udało się usunąć użytkownika o id ' + user_Id + ' , spróbuj ponownie.')
+                }
+                else {
+                    row.closest("tr").remove();
+                }
+
             },
             error: function () {
                 alert('Nie udało się usunąć użytkownika o id ' + user_Id + ' , spróbuj ponownie.')

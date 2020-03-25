@@ -110,6 +110,15 @@ public class AppUserServiceImpl implements AppUserService {
             return null;
     }
 
+    //----------------------------------------usuwanie użytkownika przez admina --------------
+
+    @Override
+    public void deleteAppUser(int id){
+            /*AppUser appUser = appUserDAO.findById(id);
+            getUserRoles(appUser);*/
+            appUserDAO.deleteById(id);
+    }
+
     //--------------------------------------- metody prywatne ---------------------------------------
     private AppUser findAppUserByEmail(AppUser appUser) {
         return appUserDAO.findByEmail(appUser.getEmail());
