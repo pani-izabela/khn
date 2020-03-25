@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista użytkowników</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/users.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <!--Sidebar-->
+    <div id="sidebarOnAdminPage"></div>
+
+    <!--Page Content-->
+    <div id="content">
+        <div id="headerOnAdminPage">
+        </div>
+
+        <div class="container">
+            <br>
+            <h1>Lista użytkowników</h1>
+            <button type="button" id="button" class="btn btn-success">Pobierz listę użytkowników</button>
+            <br>
+            <table id="tableUsersList" class="table table-striped">
+                <thead>
+                <tr >
+                    <th scope="col">id</th>
+                    <th scope="col">imię</th>
+                    <th scope="col">nazwisko</th>
+                    <th scope="col">email</th>
+                    <th scope="col">action</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <br>
+        </div>
+
+        <div id="footerOnPage">
+        </div>
+    </div>
+</div>
+</body>
+</html>

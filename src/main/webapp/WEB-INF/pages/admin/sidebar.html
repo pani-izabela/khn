@@ -20,18 +20,11 @@
             </ul>
         </li>
         <li>
-            <a href="#">Tylko dla admina</a>
+            <a id="usersList" href="http://localhost:8080/admin/users">Lista użytkowników</a>
         </li>
         <li>
-            <a id="logout" href="#">Wyloguj</a>
+            <a id="logout" href="http://localhost:8080/index">Wyloguj</a>
         </li>
     </ul>
 </nav>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#logout').on('click', function () {
-            window.location.href = "login";
-        });
-    });
-</script>

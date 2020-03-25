@@ -8,6 +8,7 @@ $(document).ready(function(){
    $("#sidebarOnAdminPage").load("/admin/sidebar.html");
 
    showEmailLoggedUser();
+   logout();
 });
 
 function setRole() {
@@ -17,5 +18,11 @@ function setRole() {
    else if((window.location.href).includes('seller')){
       return 'seller'
    }
+}
+
+function logout() {
+   $('#logout').on('click', function () {
+      window.location.href = "login";
+   });
 }
 
