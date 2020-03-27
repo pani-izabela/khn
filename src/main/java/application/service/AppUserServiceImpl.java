@@ -70,31 +70,20 @@ public class AppUserServiceImpl implements AppUserService {
     //-----------------------------logowanie----------------------------------------------
     @Override
     public AppUser loginUserFromSellerPage(AppUser appUser) {
-        AppUser appUserToReturn = new AppUser();
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-        List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
-        for (Integer roleId : userRolesIdList) {
-            if (roleId == 2 || roleId == 3)
-                appUserToReturn = appUserFromDb;
-            else
-                return null;
-        }
-        return appUserToReturn;
+        if(isSeller(appUserFromDb) || isAdmin(appUser))
+            return appUserFromDb;
+        else
+            return null;
     }
 
     @Override
     public AppUser loginUserFromCustomerPage(AppUser appUser) {
-        //nie wiem, czy dobrze robię, że go tu inicjuję, a może lepiej nullem zainicjować;
-        AppUser appUserToReturn = new AppUser();
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-        List<Integer> userRolesIdList = getUserRoles(appUserFromDb);
-        for (Integer roleId : userRolesIdList) {
-            if (roleId == 1 || roleId == 3)
-                appUserToReturn = appUserFromDb;
-            else
-                return null;
-        }
-        return appUserToReturn;
+        if(isCustomer(appUserFromDb) || isAdmin(appUserFromDb))
+            return appUserFromDb;
+        else
+            return null;
     }
 
     //--------------------------zmiana hasła-----------------------------------------
@@ -114,9 +103,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public void deleteAppUser(int id){
-            /*AppUser appUser = appUserDAO.findById(id);
-            getUserRoles(appUser);*/
-            appUserDAO.deleteById(id);
+        appUserDAO.deleteById(id);
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------
@@ -154,12 +141,6 @@ public class AppUserServiceImpl implements AppUserService {
         else {
             return null;
         }
-        /*if(appUserFromDB==null)
-            return null;
-        AppUser appUserToReturn = new AppUser();
-        if (appUserFromDB.getEmail().contains(email) && appUserFromDB.getPass().contains(pass))
-            appUserToReturn = appUserFromDB;
-        return appUserToReturn;*/
     }
 
     private boolean checkAppUserByEmail(String email) {
@@ -173,6 +154,24 @@ public class AppUserServiceImpl implements AppUserService {
         List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
         for (Integer roleId : userRolesIdList) {
             if (roleId == 1)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isSeller(AppUser appUser){
+        List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 2)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isAdmin(AppUser appUser){
+        List<Integer> userRolesIdList = getUserRoles(findAppUserByEmail(appUser));
+        for (Integer roleId : userRolesIdList) {
+            if (roleId == 3)
                 return true;
         }
         return false;
