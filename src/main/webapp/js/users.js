@@ -27,23 +27,18 @@ function getUsersList() {
 function deleteUser() {
 
     $('.deleteBtn').click(function () {
-        var buttonId = $(this).attr('id');
-        var user_Id = buttonId;
+        var user_Id = $(this).attr('id');
+        var loggedUserId = localStorage.getItem('loggedUserId');
         var row = $(this);
-        if(user_Id != localStorage.getItem('loggedUserId')) {
-            $.ajax({
-                url: "http://localhost:8080" + "/deleteAppUser?" + $.param({id: user_Id}),
-                method: 'DELETE',
-                success: function () {
-                    row.closest("tr").remove();
-                },
-                error: function () {
-                    alert('Nie udało się usunąć użytkownika o id ' + user_Id + ' , spróbuj ponownie.')
-                }
-            });
-        }
-        else{
-            alert('Nie możesz usunąć siebie!')
-        }
+        $.ajax({
+            url: "http://localhost:8080" + "/deleteAppUser?" + $.param({id: user_Id}) + "&" + $.param({loggedUserId: loggedUserId}),
+            method: 'DELETE',
+            success: function () {
+                row.closest("tr").remove();
+            },
+            error: function () {
+                alert('Nie udało się usunąć użytkownika o id ' + user_Id + '.')
+            }
+        });
     })
 }

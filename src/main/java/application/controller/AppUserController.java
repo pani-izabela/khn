@@ -3,6 +3,8 @@ package application.controller;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.service.AppUserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +47,13 @@ public class AppUserController {
     }*/
 
     @DeleteMapping(value = "/deleteAppUser")
-    public @ResponseBody void deleteAppUser(@RequestBody @RequestParam int id){
-        appUserService.deleteAppUser(id);
+    public @ResponseBody ResponseEntity<String> deleteAppUser(@RequestBody @RequestParam int id, @RequestParam int loggedUserId){
+        if(loggedUserId!=id) {
+            appUserService.deleteAppUser(id, loggedUserId);
+            return new ResponseEntity<>("Użytkownik został usunięty", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>("Brak uprawnień do wykonania akcji", HttpStatus.NOT_FOUND);
+        }
     }
 }

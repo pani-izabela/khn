@@ -102,7 +102,8 @@ public class AppUserServiceImpl implements AppUserService {
     //----------------------------------------usuwanie użytkownika przez admina --------------
 
     @Override
-    public void deleteAppUser(int id){
+    public void deleteAppUser(int id, int loggedUserId){
+
         appUserDAO.deleteById(id);
     }
 
