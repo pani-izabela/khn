@@ -41,11 +41,6 @@ public class AppUserController {
         return appUserDAO.findById(id);
     }
 
-    /*@PostMapping(value = "/addAppUser")
-    public AppUser addAppUser(@RequestBody AppUser appUser){
-        return appUserDAO.addAppUser(appUser);
-    }*/
-
     @DeleteMapping(value = "/deleteAppUser")
     public @ResponseBody ResponseEntity<String> deleteAppUser(@RequestBody @RequestParam int id, @RequestParam int loggedUserId){
         if(loggedUserId!=id) {
