@@ -3,6 +3,7 @@ package application.controller;
 import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.service.AppUserService;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RestController
+@Api(value = "KHN user API controller")
 @Controller
 public class AppUserController {
 
@@ -31,6 +32,7 @@ public class AppUserController {
         return "admin/users";
     }
 
+    @ApiOperation(value = "Get all users")
     @GetMapping(value = "/getAppUsers")
     public @ResponseBody List<AppUser> getAppUsers() {
         return appUserService.findAllQuery();
@@ -41,6 +43,8 @@ public class AppUserController {
         return appUserDAO.findById(id);
     }
 
+    @ApiOperation(value = "Delete user by id")
+    @ApiImplicitParam(name="id", value = "User id", required = true)
     @DeleteMapping(value = "/deleteAppUser")
     public @ResponseBody ResponseEntity<String> deleteAppUser(@RequestBody @RequestParam int id, @RequestParam int loggedUserId){
         if(loggedUserId!=id) {
