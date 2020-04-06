@@ -22,22 +22,40 @@ function setRole() {
 
 function checkRole(data) {
    var role;
+   var isAdmin, isSeller, isCustomer;
    var rolesArray = data["roles"];
    for (let value of Object.values(rolesArray)) {
       console.log(value.id);
       role = value.id;
-      if(role===1 || role ===2){
-         return "usualUser"
-      }
-      else if(role===3){
-         return "admin"
-      }
+      if (role === 1)
+         isCustomer = true;
+      else if (role === 2)
+         isSeller = true;
+      else if (role === 3)
+         isAdmin = true;
+   }
+   if (isAdmin === true) {
+      return "admin";
+   } else {
+      if (isSeller === true && isCustomer === true)
+         return "customer+seller";
+      else if (isSeller === true)
+         return "seller";
+      else if (isCustomer === true)
+         return "customer";
    }
 }
 
-function logout() {
-   $('#logout').on('click', function () {
-      window.location.href = "login";
+function logout(page) {
+   $.ajax({
+      url: "http://localhost:8080/performLogout",
+      type: "GET",
+      contentType: "application/json",
    });
+   if (page === 'admin')
+      window.location = "http://localhost:8080/index";
+   else {
+      window.location = "login";
+   }
 }
 

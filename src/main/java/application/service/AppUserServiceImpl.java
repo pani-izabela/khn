@@ -52,7 +52,6 @@ public class AppUserServiceImpl implements AppUserService {
             return null;
         }
         return appUserToReturn;
-
     }
 
     @Override

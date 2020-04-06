@@ -12,6 +12,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <context:component-scan base-package="application"/>
     <tx:annotation-driven transaction-manager="resourcesTransactionManager"/>
 
+    <import resource="classpath:spring-security.xml" />
+
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>

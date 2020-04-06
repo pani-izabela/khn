@@ -23,15 +23,7 @@
             <a href="#">Tylko dla sprzedających</a>
         </li>
         <li>
-            <a id="logout" href="#">Wyloguj</a>
+            <a id="logout" href="#" onclick="logout('seller')">Wyloguj</a>
         </li>
     </ul>
 </nav>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#logout').on('click', function () {
-            window.location.href = "login";
-        });
-    });
-</script>

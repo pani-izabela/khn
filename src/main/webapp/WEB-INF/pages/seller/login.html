@@ -11,6 +11,7 @@
 <body>
 <div class="container w-50 p-3">
     <h2>Logowanie dla sprzedających</h2>
+    <form name="loginform" id="loginSellerForm" action="/performLogin" method="POST">
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Podaj email" name="email">
@@ -20,10 +21,9 @@
             <input type="password" class="form-control" id="pwd" placeholder="Podaj hasło" name="pswd">
         </div>
         <!--<%&#45;&#45;<button type="submit" class="btn btn-primary">Submit</button>&#45;&#45;%>-->
-
         <a href="/seller/register"><button  type="button" class="btn btn-success" id="registerbtn">Zarejestruj</button></a>
-        <button type="button" class="btn btn-success" id="loginbtn">Zaloguj</button>
-    <br>
+        <input type="button" id="loginbtn" class="btn btn-success" onclick="prepareLoginData()" value="Zaloguj">
+    </form>
     <br>
     <a href="/passwordChange"><button type="submit" class="btn btn-outline-success" id="passwordChange">Zmień hasło</button></a>
 </div>
