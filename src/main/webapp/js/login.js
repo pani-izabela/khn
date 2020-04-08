@@ -95,10 +95,15 @@ function loginSecured(data) {
             localStorage.setItem('loggedUserEmail', emailField);
             localStorage.setItem('loggedUserId', userId);
             if (role === 'admin') {
+                console.log('bezpośrednio po logowaniu admin ', localStorage.getItem('userIsAdmin'));
                 window.location.href = "http://localhost:8080/admin/menu";
+
             } else {
+                console.log('bezpośrednio po logowaniu klient ', localStorage.getItem('userIsCustomer'));
                 window.location.href = "menu";
+
             }
+
         },
         error: function () {
             alert("Login error - bad credentials");

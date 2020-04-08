@@ -1,11 +1,7 @@
 package application.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class MainController {
@@ -15,19 +11,24 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(value = "/customer/menu")
+   /* @GetMapping(value = "/customer/menu")
     public String customerMenu() {
-        return "customer/menu";
+        return "menu";
     }
 
     @GetMapping(value = "/seller/menu")
     public String sellerMenu() {
-        return "seller/menu";
+        return "/menu";
     }
 
     @GetMapping(value = "/admin/menu")
     public String adminMenu() {
-        return "admin/menu";
+        return "menu";
+    }*/
+
+    @GetMapping(value = "*/menu")
+    public String adminMenu() {
+        return "menu";
     }
 
     @GetMapping(value="/footer")
@@ -35,7 +36,17 @@ public class MainController {
         return "footer";
     }
 
-    @GetMapping(value="/customer/header")
+    @GetMapping(value="/header")
+    public String header(){
+        return "header";
+    }
+
+    @GetMapping(value="/sidebar")
+    public String sidebar(){
+        return "sidebar";
+    }
+
+    /*@GetMapping(value="/customer/header")
     public String headerCustomer(){
         return "customer/header";
     }
@@ -45,7 +56,12 @@ public class MainController {
         return "seller/header";
     }
 
-    @GetMapping(value="/customer/sidebar")
+    @GetMapping(value="/admin/header")
+    public String headerAdmin(){
+        return "admin/header";
+    }*/
+
+   /* @GetMapping(value="/customer/sidebar")
     public String sidebarCustomer(){
         return "customer/sidebar";
     }
@@ -55,13 +71,8 @@ public class MainController {
         return "seller/sidebar";
     }
 
-    @GetMapping(value="/admin/header")
-    public String headerAdmin(){
-        return "admin/header";
-    }
-
     @GetMapping(value="/admin/sidebar")
     public String sidebarAdmin(){
         return "admin/sidebar";
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ import application.dao.AppUserDAO;
 import application.model.AppUser;
 import application.model.Role;
 import application.service.AppUserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+@Api(value = "KHN login API controller")
 @Controller
 public class LoginController {
 

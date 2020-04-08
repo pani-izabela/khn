@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista użytkowników</title>
+    <title>Aukcje</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css" type="text/css">
@@ -10,7 +10,6 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="/js/users.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -19,20 +18,19 @@
 
     <!--Page Content-->
     <div id="content">
-        <div id="headerOnEveryPage">
-        </div>
+        <div id="headerOnEveryPage"></div>
 
         <div class="container">
             <br>
-            <h1>Lista użytkowników</h1>
+            <h1>Aukcje</h1>
             <br>
-            <table id="tableUsersList" class="table table-striped dataTable">
+            <table id="auctionsList" class="table table-striped dataTable">
                 <thead>
                 <tr >
-                    <th data-sortable="true">id</th>
-                    <th data-sortable="true">imię</th>
-                    <th data-sortable="true">nazwisko</th>
-                    <th data-sortable="true">email</th>
+                    <th data-sortable="true">typ</th>
+                    <th data-sortable="true">miejscowość</th>
+                    <th data-sortable="true">cena</th>
+                    <th data-sortable="true">powierzchnia</th>
                     <th data-sortable="false">akcja</th>
                 </tr>
                 </thead>

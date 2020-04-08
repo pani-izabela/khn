@@ -1,11 +1,15 @@
 $(document).ready(function(){
    $("#footerOnPage").load("/footer.html");
-   $("#headerOnCustomerPage").load("/customer/header.html");
+   $("#headerOnEveryPage").load("/header.html");
+   $("#sidebarOnEveryPage").load("/sidebar.html");
+
+//bedą do usunięcia
+  /* $("#headerOnCustomerPage").load("/customer/header.html");
    $("#headerOnSellerPage").load("/seller/header.html");
    $("#headerOnAdminPage").load("/admin/header.html");
    $("#sidebarOnCustomerPage").load("/customer/sidebar.html");
    $("#sidebarOnSellerPage").load("/seller/sidebar.html");
-   $("#sidebarOnAdminPage").load("/admin/sidebar.html");
+   $("#sidebarOnAdminPage").load("/admin/sidebar.html");*/
 
    showEmailLoggedUser();
    logout();
@@ -22,7 +26,7 @@ function setRole() {
 
 function checkRole(data) {
    var role;
-   var isAdmin, isSeller, isCustomer;
+   var isAdmin, isSeller, isCustomer, isCustomerAndSeller;
    var rolesArray = data["roles"];
    for (let value of Object.values(rolesArray)) {
       console.log(value.id);
@@ -35,27 +39,38 @@ function checkRole(data) {
          isAdmin = true;
    }
    if (isAdmin === true) {
+      localStorage.setItem('userIsAdmin', isAdmin);
+      console.log('user is admin main ', localStorage.getItem('userIsAdmin'));
       return "admin";
    } else {
-      if (isSeller === true && isCustomer === true)
+      if (isSeller === true && isCustomer === true){
+         isCustomerAndSeller = true;
+         localStorage.setItem('userIsCustomerAndSeller', isCustomerAndSeller);
          return "customer+seller";
-      else if (isSeller === true)
+      }
+      else if (isSeller === true) {
+         localStorage.setItem('userIsSeller', isSeller);
          return "seller";
-      else if (isCustomer === true)
+      }
+      else if (isCustomer === true) {
+         localStorage.setItem('userIsCustomer', isCustomer);
+         console.log('user is customer main ', localStorage.getItem('userIsCustomer'));
          return "customer";
+      }
    }
 }
 
-function logout(page) {
+
+function logout() {
    $.ajax({
       url: "http://localhost:8080/performLogout",
       type: "GET",
       contentType: "application/json",
    });
-   if (page === 'admin')
-      window.location = "http://localhost:8080/index";
-   else {
-      window.location = "login";
-   }
+   window.location = "http://localhost:8080/index";
+   localStorage.setItem('userIsAdmin', null);
+   localStorage.setItem('userIsCustomerAndSeller', null);
+   localStorage.setItem('userIsSeller', null);
+   localStorage.setItem('userIsCustomer', null);
 }
 

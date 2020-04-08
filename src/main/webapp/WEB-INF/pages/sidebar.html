@@ -1,0 +1,59 @@
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>Menu</h3>
+    </div>
+
+    <ul id="menuForRoleUl" class="list-unstyled components">
+        <li id="menuForRoleLiA" class="active">
+            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin:</a>
+            <ul id="adminSubmenu" class="collapse list-unstyled" >
+                <li id="auctionsAdmin">
+                    <a href="/admin/auctions">Aukcje</a>
+                </li>
+                <li id="usersList">
+                    <a href="/admin/users">Lista użytkowników</a>
+                </li>
+            </ul>
+        </li>
+
+        <li id="menuForRoleLiS" class="active">
+            <a href="#sellerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sprzedający:</a>
+            <ul id="sellerSubmenu" class="collapse list-unstyled" >
+                <li id="auctionsSeller">
+                    <a href="/seller/auctions">Aukcje</a>
+                </li>
+                <li id="mySalesSeller">
+                    <a  href="#">Moje sprzedaże</a>
+                </li>
+                <li id="addForSale">
+                    <a  href="#">Wystaw nieruchomość</a>
+                </li>
+            </ul>
+        </li>
+
+        <li id="menuForRoleLiC" class="active">
+            <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Kupujący:</a>
+            <ul id="customerSubmenu" class="collapse list-unstyled" >
+                <li id="auctionsCustomer">
+                    <a href="/customer/auctions">Aukcje</a>
+                </li>
+                <li id="myShoppingCustomer">
+                    <a  href="#">Moje zakupy</a>
+                </li>
+                <li id="myCreditCustomer">
+                    <a  href="#">Moje kredyty</a>
+                </li>
+            </ul>
+        </li>
+        <p></p>
+        <li id="profile">
+            <a  href="#">Profil</a>
+        </li>
+        <li id="logout">
+            <a href="#" onclick="logout()">Wyloguj</a>
+        </li>
+    </ul>
+</nav>
+
+<script src="/js/sidebar.js"></script>
+

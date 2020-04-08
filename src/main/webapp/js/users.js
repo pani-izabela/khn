@@ -28,19 +28,21 @@ function getUsersList() {
 }
 
 function deleteUser(user_Id) {
-    $.ajax({
-        type: "DELETE",
-        url: "http://localhost:8080/deleteAppUser?" + $.param({id: user_Id}) + "&" + $.param({loggedUserId: localStorage.getItem('loggedUserId')}),
-        data: JSON.stringify(user_Id),
-        contentType: "application/json",
-        success: function () {
-            location.reload();
-            console.log("Usunięto usera o id: " + user_Id);
-        },
-        error: function () {
-            console.log("Nie udało się usunąć użytkownika o id " + user_Id);
-        }
-    });
+    if(confirm("Jesteś pewny/a, że chcesz usunąć użytkownika?")) {
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/deleteAppUser?" + $.param({id: user_Id}) + "&" + $.param({loggedUserId: localStorage.getItem('loggedUserId')}),
+            data: JSON.stringify(user_Id),
+            contentType: "application/json",
+            success: function () {
+                location.reload();
+                alert('Udało się usunąć użytkownika');
+            },
+            error: function () {
+                console.log("Nie udało się usunąć użytkownika");
+            }
+        });
+    }
 }
 
 /*function deleteUser(id) {
