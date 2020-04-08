@@ -29,6 +29,9 @@
 }
 
 /*sidebar*/
+#menuView{
+    display: -webkit-box;
+}
 .wrapper{
     display: flex;
     width: 100%;

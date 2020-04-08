@@ -4,23 +4,20 @@
     </div>
 
     <ul class="list-unstyled components">
-        <p>Nagłówek sekcji 1</p>
         <li class="active">
-            <a href="#firstSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">First</a>
+            <a href="#firstSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administracja</a>
             <ul class="collapse list-unstyled" id="firstSubmenu">
                 <li>
-                    <a href="#">First 1</a>
+                    <a id="usersList" href="http://localhost:8080/admin/users">Lista użytkowników</a>
                 </li>
                 <li>
-                    <a href="#">First 2</a>
-                </li>
-                <li>
-                    <a href="#">First 3</a>
+                    <a id="auctions" href="#">Aukcje</a>
                 </li>
             </ul>
         </li>
+        <p></p>
         <li>
-            <a id="usersList" href="http://localhost:8080/admin/users">Lista użytkowników</a>
+            <a id="profile" href="#">Profil</a>
         </li>
         <li>
             <a id="logout" href="#" onclick="logout('admin')">Wyloguj</a>
