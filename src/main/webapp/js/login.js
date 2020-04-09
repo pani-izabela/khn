@@ -33,12 +33,17 @@ function checkUserCustomer(data, page) {
                 role = checkRole(res);
                 if (role === "admin") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
+                    console.log('rola ', role);
                     loginSecured(loggedUser)
                 } else if (role === "customer") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
+                    console.log('rola ', role);
                     loginSecured(loggedUser)
                 } else if (role === "customer+seller") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
                     loginSecured(loggedUser)
                 } else {
                     alert("Nie masz uprawnień, aby zalodować się na tej stronie")
@@ -65,12 +70,15 @@ function checkUserSeller(data, page) {
                 role = checkRole(res);
                 if (role === "admin") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
                     loginSecured(loggedUser)
                 } else if (role === "seller") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
                     loginSecured(loggedUser)
                 } else if (role === "customer+seller") {
                     let loggedUser = $('form').serialize();
+                    localStorage.setItem('userRole', role);
                     loginSecured(loggedUser)
                 } else {
                     alert("Nie masz uprawnień, aby zalodować się na tej stronie")
@@ -95,15 +103,12 @@ function loginSecured(data) {
             localStorage.setItem('loggedUserEmail', emailField);
             localStorage.setItem('loggedUserId', userId);
             if (role === 'admin') {
-                console.log('bezpośrednio po logowaniu admin ', localStorage.getItem('userIsAdmin'));
                 window.location.href = "http://localhost:8080/admin/menu";
 
             } else {
-                console.log('bezpośrednio po logowaniu klient ', localStorage.getItem('userIsCustomer'));
                 window.location.href = "menu";
 
             }
-
         },
         error: function () {
             alert("Login error - bad credentials");

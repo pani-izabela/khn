@@ -1,6 +1,6 @@
 $(document).ready(function () {
     toggleClassSidebar();
-    showEmailLoggedUser();
+    //showEmailLoggedUser();
 });
 
 function toggleClassSidebar() {

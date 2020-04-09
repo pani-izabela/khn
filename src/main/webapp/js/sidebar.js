@@ -1,54 +1,22 @@
 $(document).ready(function(){
-    schowCorrectMenu();
+    showCorrectMenu();
 });
 
-/*function schowCorrectMenu() {
-    $("#firstSubmenu li").hide();
-    if(localStorage.getItem('userIsAdmin', true)){
-        $('#usersList').show();
-    }
-    else if(localStorage.getItem('userIsSeller', true)){
-        $('#mySalesSeller').show();
-        $('#addForSale').show();
-    }
-    else if(localStorage.getItem('userIsCustomer', true)){
-        $('#myShoppingCustomer').show();
-        $('#myCreditCustomer').show();
-    }
-    else if(localStorage.getItem('userIsCustomerAndSeller', true)){
-        $('#mySalesSeller').show();
-        $('#addForSale').show();
-        $('#myShoppingCustomer').show();
-        $('#myCreditCustomer').show();
-    }
-    $('#auctions').show();
-    $('#profile').show();
-    $('#logout').show();
-}*/
-
-function schowCorrectMenu() {
-    if(localStorage.getItem('userIsAdmin')){
-        console.log("admin = ",admin);
-        console.log("isAdmin : ", localStorage.getItem('userIsAdmin'));
+function showCorrectMenu() {
+    if((localStorage.getItem('userRole') === 'admin') === true){
         $("#menuForRoleLiC").hide();
         $("#menuForRoleLiS").hide();
     }
-    else if(localStorage.getItem('userIsSeller')){
-        console.log("isSeller : ", localStorage.getItem('userIsSeller'));
+    else if((localStorage.getItem('userRole') === 'seller') === true){
         $("#menuForRoleLiA").hide();
         $("#menuForRoleLiC").hide();
     }
-    else if(localStorage.getItem('userIsCustomer')){
-        console.log("klient = ", customer);
-        console.log("isCustomer : ", localStorage.getItem('userIsCustomer'));
+    if((localStorage.getItem('userRole') === 'customer') === true){
         $("#menuForRoleLiA").hide();
         $("#menuForRoleLiS").hide();
     }
-    else if(localStorage.getItem('userIsCustomerAndSeller')){
-        console.log("isCustomer+Seller : ", localStorage.getItem('userIsCustomerAndSeller'));
+    else if((localStorage.getItem('userRole') === 'customer+seller') === true){
         $("#menuForRoleLiA").hide();
+        $("#auctionsCustomer").hide();
     }
-
-    $('#profile').show();
-    $('#logout').show();
 }

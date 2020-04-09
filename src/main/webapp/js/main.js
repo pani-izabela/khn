@@ -3,14 +3,6 @@ $(document).ready(function(){
    $("#headerOnEveryPage").load("/header.html");
    $("#sidebarOnEveryPage").load("/sidebar.html");
 
-//bedą do usunięcia
-  /* $("#headerOnCustomerPage").load("/customer/header.html");
-   $("#headerOnSellerPage").load("/seller/header.html");
-   $("#headerOnAdminPage").load("/admin/header.html");
-   $("#sidebarOnCustomerPage").load("/customer/sidebar.html");
-   $("#sidebarOnSellerPage").load("/seller/sidebar.html");
-   $("#sidebarOnAdminPage").load("/admin/sidebar.html");*/
-
    showEmailLoggedUser();
    logout();
 });
