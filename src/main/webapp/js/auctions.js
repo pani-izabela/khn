@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 function getHousesList() {
     $.get("http://localhost:8080" + "/getAllHouses", function (data) {
-        $('#tableUsersList').DataTable({
+        $('#auctionsList').DataTable({
             data: data,
             paging: true,
             searching: true,
