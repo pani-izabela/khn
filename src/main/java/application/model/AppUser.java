@@ -56,13 +56,13 @@ public class AppUser {
     inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(targetEntity = House.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    /*@OneToMany(targetEntity = House.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<House> houses = new ArrayList<>();
 
     @OneToMany(targetEntity = Flat.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Flat> flats = new ArrayList<>();
 
     @OneToMany(targetEntity = Plot.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Plot> plots = new ArrayList<>();
+    private List<Plot> plots = new ArrayList<>();*/
 
 }

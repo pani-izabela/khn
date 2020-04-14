@@ -17,7 +17,6 @@ import javax.persistence.Table;
 public class Userrealassets {
 
     @Id
-	@Column(name = "id")
     private int id;
 
     @Column(name = "appuser_id")
@@ -33,12 +32,7 @@ public class Userrealassets {
     private int plot;
 }
 
-/* Stowrzyłam widok na bazie tego zapytania:
-    CREATE VIEW userrealassets AS
-    SELECT Au.id as appuser_id, Fl.id as flat_id, Ho.id as house_id, Pl.id as plot_id
-        FROM APPUSER Au, FLAT Fl, HOUSE Ho, PLOT Pl;*/
-
-/*
+/* Stworzyłam widok tym zapytaniem
 CREATE VIEW userrealassets AS
 SELECT ROW_NUMBER() OVER(ORDER BY Au.id) as id, Au.id as appuser_id, Fl.id as flat_id, Ho.id as house_id, Pl.id as plot_id
 FROM APPUSER Au, FLAT Fl, HOUSE Ho, PLOT Pl
