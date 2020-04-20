@@ -1,13 +1,11 @@
-package application.model;
+/*package application.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "USERREALASSETS")
@@ -17,20 +15,27 @@ import javax.persistence.Table;
 public class Userrealassets {
 
     @Id
+    @NotNull
+    @Column(name="userrealassets_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "appuser_id")
-    private int appuser;
+    @ManyToOne
+    @JoinColumn(name = "appuser_id")
+    private AppUser appUser;
 
-    @Column(name = "flat_id")
-    private int flat;
+    @ManyToOne
+    @JoinColumn(name = "flat_id")
+    private Flat flat;
 
-    @Column(name = "house_id")
-    private int house;
+    @ManyToOne
+    @JoinColumn(name = "house_id")
+    private House house;
 
-    @Column(name = "plot_id")
-    private int plot;
-}
+    @ManyToOne
+    @JoinColumn(name = "plot_id")
+    private Plot plot;
+}*/
 
 /* Stworzyłam widok tym zapytaniem
 CREATE VIEW userrealassets AS

@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css" type="text/css">
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/propper.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/auctions.js"></script>
+
 </head>
 <body>
 <div class="wrapper">
@@ -25,10 +27,23 @@
             <br>
             <h1>Aukcje</h1>
             <br>
-            <table id="auctionsList" class="table table-striped dataTable">
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Rodzaj
+                </button>
+
+                <div id="auctionsOptions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a id = "h" class="dropdown-item" data-value="1" href="#">Domy</a>
+                    <a id = "f" class="dropdown-item" data-value="2" href="#">Mieszkania</a>
+                    <a id = "p" class="dropdown-item" data-value="3" href="#">Działki</a>
+                </div>
+            </div>
+            <br>
+            <div class="tables" style="display: none">
+            <table id="auctionsListHouse" class="table table-striped dataTable">
                 <thead>
-                <tr >
-                    <th data-sortable="true">typ</th>
+                <tr>
+                    <th data-sortable="true">id</th>
                     <th data-sortable="true">cena</th>
                     <th data-sortable="true">powierzchnia</th>
                     <th data-sortable="true">liczba pokoi</th>
@@ -37,6 +52,32 @@
                 </tr>
                 </thead>
             </table>
+            <table id="auctionsListFlat" class="table table-striped dataTable">
+                <thead>
+                <tr>
+                    <th data-sortable="true">id</th>
+                    <th data-sortable="true">cena</th>
+                    <th data-sortable="true">powierzchnia</th>
+                    <th data-sortable="true">liczba pokoi</th>
+                    <th data-sortable="true">piętro</th>
+                    <th data-sortable="true">miejscowość</th>
+                    <th data-sortable="false">akcja</th>
+                </tr>
+                </thead>
+            </table>
+            <table id="auctionsListPlot" class="table table-striped dataTable">
+                <thead>
+                <tr>
+                    <th data-sortable="true">id</th>
+                    <th data-sortable="true">cena</th>
+                    <th data-sortable="true">powierzchnia</th>
+                    <th data-sortable="true">typ</th>
+                    <th data-sortable="true">miejscowość</th>
+                    <th data-sortable="false">akcja</th>
+                </tr>
+                </thead>
+            </table>
+            </div>
             <br>
             <br>
         </div>
@@ -45,6 +86,53 @@
         </div>
     </div>
 </div>
-
 </body>
+<script>
+    $(".dropdown-menu a").click(function () {
+        var selTable = $(this).attr('data-value');
+        $(".tables").show();
+        if(selTable == 1){
+            $("#auctionsListHouse").show();
+            $("#auctionsListFlat").hide();
+            $("#auctionsListPlot").hide();
+        }
+        else if(selTable == 2){
+            $("#auctionsListFlat").show();
+            $("#auctionsListHouse").hide();
+            $("#auctionsListPlot").hide();
+        }
+        else if(selTable == 3){
+            $("#auctionsListPlot").show();
+            $("#auctionsListHouse").hide();
+            $("#auctionsListFlat").hide();
+        }
+    })
+</script>
+<script>
+    $.get("http://localhost:8080" + "/getAllHouses", function (data) {
+        $('#auctionsListHouse').DataTable({
+            data: data,
+            paging: true,
+            searching: true,
+            destroy: true,
+            autoWidth: true,
+            columns: [
+                {data: "id"},
+                {data: "price"},
+                {data: "size"},
+                {data: "rooms"},
+                {data: null},
+                {
+                    data: "akcja",
+                    "render": function (data, type, full) {
+                        let houseId = full.id;
+                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                    }
+                },
+            ]
+        });
+    })
+</script>
 </html>
+
