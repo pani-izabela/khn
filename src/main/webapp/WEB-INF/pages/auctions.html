@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="/js/auctions.js"></script>
+    <script type="text/javascript" src="/js/auction.js"></script>
 
 </head>
 <body>
@@ -87,52 +87,4 @@
     </div>
 </div>
 </body>
-<script>
-    $(".dropdown-menu a").click(function () {
-        var selTable = $(this).attr('data-value');
-        $(".tables").show();
-        if(selTable == 1){
-            $("#auctionsListHouse").show();
-            $("#auctionsListFlat").hide();
-            $("#auctionsListPlot").hide();
-        }
-        else if(selTable == 2){
-            $("#auctionsListFlat").show();
-            $("#auctionsListHouse").hide();
-            $("#auctionsListPlot").hide();
-        }
-        else if(selTable == 3){
-            $("#auctionsListPlot").show();
-            $("#auctionsListHouse").hide();
-            $("#auctionsListFlat").hide();
-        }
-    })
-</script>
-<script>
-    $.get("http://localhost:8080" + "/getAllHouses", function (data) {
-        $('#auctionsListHouse').DataTable({
-            data: data,
-            paging: true,
-            searching: true,
-            destroy: true,
-            autoWidth: true,
-            columns: [
-                {data: "id"},
-                {data: "price"},
-                {data: "size"},
-                {data: "rooms"},
-                {data: null},
-                {
-                    data: "akcja",
-                    "render": function (data, type, full) {
-                        let houseId = full.id;
-                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
-                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
-                    }
-                },
-            ]
-        });
-    })
-</script>
 </html>
-

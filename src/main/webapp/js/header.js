@@ -18,3 +18,5 @@ function showEmailLoggedUser() {
     const a = document.querySelector('#placeForEmail');
     a.appendChild(createBodyElement(localStorage.getItem('loggedUserEmail')));
 }
+
+
