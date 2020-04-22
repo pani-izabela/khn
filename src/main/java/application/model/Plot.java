@@ -41,3 +41,4 @@ public class Plot {
 }
 
 /*INSERT INTO plot (id, size, price, type, appuser_id, adress_id) VALUES (1, '1000m', 60000.00, 'budowlana', 3, 2);*/
+/*INSERT INTO plot (id, size, price, type, house_id, appuser_id, adress_id) VALUES (2, '2000m', 75000.00, 'budowlana',5, 77, 3);*/

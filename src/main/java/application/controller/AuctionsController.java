@@ -1,8 +1,10 @@
 package application.controller;
 
 
+import application.dao.AuctionViewDAO;
 import application.dao.HouseDAO;
 import application.model.AppUser;
+import application.model.AuctionView;
 import application.model.House;
 import application.service.HouseService;
 import io.swagger.annotations.Api;
@@ -19,10 +21,12 @@ public class AuctionsController {
 
     private HouseService houseService;
     private HouseDAO houseDAO;
+    private AuctionViewDAO auctionViewDAO;
 
-    public AuctionsController(HouseService houseService, HouseDAO houseDAO){
+    public AuctionsController(HouseService houseService, HouseDAO houseDAO, AuctionViewDAO auctionViewDAO){
         this.houseService = houseService;
         this.houseDAO = houseDAO;
+        this.auctionViewDAO = auctionViewDAO;
     }
 
     //----------------------------------------------------------------------------
@@ -36,5 +40,11 @@ public class AuctionsController {
     @GetMapping(value = "/getAllHouses")
     public @ResponseBody List<House> getAppUsers() {
         return houseService.findAllHousesQuery();
+    }
+
+    @ApiOperation(value = "Get data for all homes from the auction")
+    @GetMapping(value = "/getAllHousesView")
+    public @ResponseBody List<AuctionView> getAll() {
+        return auctionViewDAO.findAllQuery();
     }
 }

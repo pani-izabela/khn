@@ -40,3 +40,4 @@ public class Adress {
 /*INSERT INTO adress (id, city, street, homeNumber, localNumber, postcode, realassetsid) VALUES (2, 'Radom', 'Błękitna', '112', '10', '50-700', 3);*/
 /*INSERT INTO adress (id, city, street, homeNumber, localNumber, postcode, realassetsid) VALUES (3, 'Pułtusk', 'Mickiewicza', '80', '', '06-100', 2);*/
 /*INSERT INTO adress (id, city, street, homeNumber, localNumber, postcode, realassetsid) VALUES (4, 'Dukla', 'Podkarpacka', '5', '12v', '40-400', 2);*/
+/*INSERT INTO adress (id, city, street, homeNumber, localNumber, postcode, realassetsid) VALUES (5, 'Tomaszów Mazowiecki', 'Słowackiego', '12', '', '12-123', 2);*/

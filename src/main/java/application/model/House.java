@@ -47,3 +47,4 @@ public class House {
 
 /*INSERT INTO house (id, size, price, rooms, appuser_id, adress_id) VALUES (1, '100m', 300000.00, 3, 3, 3);*/
 /*INSERT INTO house (id, size, price, rooms, appuser_id, adress_id) VALUES (2, '300m', 900000.00, 6, 3, 4);*/
+/*INSERT INTO house (id, size, price, rooms, appuser_id, adress_id) VALUES (3, '270m', 100000.00, 5, 77, 5);*/
