@@ -1,28 +1,121 @@
 $(document).ready(function () {
     showTables();
-    getHousesList();
 });
 
 function showTables(){
     $(".dropdown-menu a").click(function () {
         var selTable = $(this).attr('data-value');
+        console.log("wartość selTable po showTables() to: ", selTable);
         $(".tables").show();
         if(selTable == 1){
-            $("#auctionsListHouse").show();
+            getListOfHauses();
             $("#auctionsListFlat").hide();
+            $("#auctionsListFlat_wrapper").hide();
             $("#auctionsListPlot").hide();
+            $("#auctionsListPlot_wrapper").hide();
+            $("#auctionsListHouse").show();
         }
         else if(selTable == 2){
-            $("#auctionsListFlat").show();
+            getListOfFlats();
             $("#auctionsListHouse").hide();
+            $("#auctionsListHouse_wrapper").hide();
             $("#auctionsListPlot").hide();
+            $("#auctionsListPlot_wrapper").hide();
+            $("#auctionsListFlat").show();
         }
         else if(selTable == 3){
-            $("#auctionsListPlot").show();
+            getListOfPlots();
             $("#auctionsListHouse").hide();
+            $("#auctionsListHouse_wrapper").hide();
             $("#auctionsListFlat").hide();
-
+            $("#auctionsListFlat_wrapper").hide();
+            $("#auctionsListPlot").show();
         }
+    });
+}
+
+function getListOfHauses() {
+    var type = "house";
+    $.get("http://localhost:8080" + "/getAssets?" + $.param({assetType: type}), function (data) {
+        $('#auctionsListHouse').DataTable({
+            data: data,
+            paging: true,
+            searching: true,
+            destroy: true,
+            autoWidth: true,
+            columns: [
+                {data: "id"},
+                {data: "price"},
+                {data: "size"},
+                {data: "rooms"},
+                {data: "city"},
+                {
+                    data: "akcja",
+                    "render": function (data, type, full) {
+                        let houseId = full.id;
+                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                    }
+                },
+            ]
+        });
+    })
+}
+
+function getListOfFlats() {
+    var type = "flat";
+    $.get("http://localhost:8080" + "/getAssets?" + $.param({assetType: type}), function (data) {
+        $('#auctionsListFlat').DataTable({
+            data: data,
+            paging: true,
+            searching: true,
+            destroy: true,
+            autoWidth: true,
+            columns: [
+                {data: "id"},
+                {data: "price"},
+                {data: "size"},
+                {data: "rooms"},
+                {data: "floor"},
+                {data: "city"},
+                {
+                    data: "akcja",
+                    "render": function (data, type, full) {
+                        let houseId = full.id;
+                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                    }
+                },
+            ]
+        });
+    })
+}
+
+function getListOfPlots() {
+    var type = "plot";
+    $.get("http://localhost:8080" + "/getAssets?" + $.param({assetType: type}), function (data) {
+        $('#auctionsListPlot').DataTable({
+            data: data,
+            paging: true,
+            searching: true,
+            destroy: true,
+            autoWidth: true,
+            columns: [
+                {data: "id"},
+                {data: "price"},
+                {data: "size"},
+                {data: "plot_type"},
+                {data: "city"},
+                {
+                    data: "akcja",
+                    "render": function (data, type, full) {
+                        let houseId = full.id;
+                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                    }
+                },
+            ]
+        });
     })
 }
 
@@ -53,29 +146,3 @@ function getHousesList() {
     })
 }
 
-/*function getHousesList() {
-    $.get("http://localhost:8080" + "/getAllHouses", function (data) {
-        $('#auctionsListHouse').DataTable({
-            data: data,
-            paging: true,
-            searching: true,
-            destroy: true,
-            autoWidth: true,
-            columns: [
-                {data: "id"},
-                {data: "size"},
-                {data: "price"},
-                {data: "rooms"},
-                {data: "rooms"},
-                {
-                    data: "akcja",
-                    "render": function (data, type, full) {
-                        let houseId = full.id;
-                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
-                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
-                    }
-                },
-            ]
-        });
-    })
-}*/

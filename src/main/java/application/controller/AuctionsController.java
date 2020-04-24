@@ -8,9 +8,12 @@ import application.model.AuctionView;
 import application.model.House;
 import application.service.HouseService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -46,5 +49,12 @@ public class AuctionsController {
     @GetMapping(value = "/getAllHousesView")
     public @ResponseBody List<AuctionView> getAll() {
         return auctionViewDAO.findAllQuery();
+    }
+
+    @ApiOperation(value = "Get assets by type")
+    @ApiImplicitParam(name="type", value = "RealAssets type", required = true)
+    @GetMapping(value = "/getAssets")
+    public @ResponseBody List<AuctionView> getAssetsByType(@RequestBody @RequestParam String assetType) {
+        return auctionViewDAO.findAllQueryByAssetsType(assetType);
     }
 }

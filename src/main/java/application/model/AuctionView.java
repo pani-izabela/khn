@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = AuctionView.GET_ALL, query = AuctionView.QUERY_GET_ALL)
+        @NamedQuery(name = AuctionView.GET_ALL, query = AuctionView.QUERY_GET_ALL),
+        @NamedQuery(name = AuctionView.GET_ALL_Assets, query = AuctionView.QUERY_GET_ALL_ASSETS)
 })
 
 @Entity
@@ -19,6 +20,9 @@ public class AuctionView {
 
     public static final String GET_ALL = "AuctionView.get_all";
     public static final String QUERY_GET_ALL = "select av from AuctionView av";
+
+    public static final String GET_ALL_Assets = "AuctionView.get_all_assets";
+    public static final String QUERY_GET_ALL_ASSETS = "select av from AuctionView av where av.asset_type = :assetType";
 
     @Id
     @Column(name = "id")
