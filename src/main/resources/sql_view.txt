@@ -1,4 +1,4 @@
-CREATE VIEW auction_view3 as
+CREATE VIEW auction_view as
 select row_number() over (order by appuser_id) as id,
 *
 FROM(

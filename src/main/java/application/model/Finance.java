@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,7 +25,6 @@ public class Finance {
     @JoinColumn(name="appuser_id")
     private AppUser appuser;
 
-
     @NotNull
     private double amount;
 
@@ -32,3 +32,6 @@ public class Finance {
     private String currency;
 }
 
+/*INSERT INTO finance (id, amount, currency, appuser_id) VALUES (1, 2000000.00, 'PLN', 2);*/
+/*INSERT INTO finance (id, amount, currency, appuser_id) VALUES (2, 10000000.00, 'PLN', 8);*/
+/*INSERT INTO finance (id, amount, currency, appuser_id) VALUES (3, 1000000.00, 'PLN', 72);*/
