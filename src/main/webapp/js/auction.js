@@ -53,8 +53,12 @@ function getListOfHauses() {
                     data: "akcja",
                     "render": function (data, type, full) {
                         let houseId = full.id;
-                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
-                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                            return '<button id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
+                        }
+                        else {
+                            return '<button id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>';
+                        }
                     }
                 },
             ]
@@ -81,9 +85,13 @@ function getListOfFlats() {
                 {
                     data: "akcja",
                     "render": function (data, type, full) {
-                        let houseId = full.id;
-                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
-                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        let flatId = full.id;
+                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                            return '<button id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
+                        }
+                        else{
+                            return '<button id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>'
+                        }
                     }
                 },
             ]
@@ -109,9 +117,13 @@ function getListOfPlots() {
                 {
                     data: "akcja",
                     "render": function (data, type, full) {
-                        let houseId = full.id;
-                        //return '<button onclick="deleteUser(' + houseId + ')" type="button" class="btn btn-success deleteBtn">Kup</button>'
-                        return '<button type="button" class="btn btn-success deleteBtn">Kup</button>'
+                        let plotId = full.id;
+                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                            return '<button id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
+                        }
+                        else {
+                            return '<button id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: none">Kup</button>';
+                        }
                     }
                 },
             ]
