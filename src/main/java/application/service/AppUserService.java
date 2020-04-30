@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface AppUserService {
-    //AppUser findByIdQuery(int id);
+    AppUser findByIdQuery(int id);
     //AppUser findById(int id);
     //boolean checkAppUserByEmail(String email);
 

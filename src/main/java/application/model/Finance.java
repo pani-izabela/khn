@@ -5,8 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+@NamedQueries({
+        @NamedQuery(name = Finance.GET_FINANCE_BY_APPUSERID, query = Finance.QUERY_GET_FINANCE_BY_APPUSERID)
+})
 
 @Entity
 @Table(name = "FINANCE")
@@ -14,6 +17,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 public class Finance {
+
+    public static final String GET_FINANCE_BY_APPUSERID = "Finance.get_finance_by_appuserid";
+    public static final String QUERY_GET_FINANCE_BY_APPUSERID = "select f from Finance f where f.appuser = :appuserid";
 
     @Id
     @NotNull

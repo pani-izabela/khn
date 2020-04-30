@@ -56,39 +56,4 @@ public class AppUser {
     inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles = new ArrayList<>();
 
-/*
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "USERREALASSETS",
-            joinColumns = @JoinColumn(name = "appuser_id"),
-            inverseJoinColumns = @JoinColumn(name = "house_id")
-    )
-    private List<House> houses;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "USERREALASSETS",
-            joinColumns = @JoinColumn(name = "appuser_id"),
-            inverseJoinColumns = @JoinColumn(name = "flat_id")
-    )
-    private List<Flat> flats;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "USERREALASSETS",
-            joinColumns = @JoinColumn(name = "appuser_id"),
-            inverseJoinColumns = @JoinColumn(name = "plot_id")
-    )
-    private List<Plot> plots;*/
-
-
-    /*@OneToMany(targetEntity = House.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<House> houses = new ArrayList<>();
-
-    @OneToMany(targetEntity = Flat.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Flat> flats = new ArrayList<>();
-
-    @OneToMany(targetEntity = Plot.class, mappedBy = "appuser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Plot> plots = new ArrayList<>();*/
-
 }

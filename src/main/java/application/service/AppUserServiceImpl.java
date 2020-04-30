@@ -28,10 +28,10 @@ public class AppUserServiceImpl implements AppUserService {
         this.appUserDAO = appUserDAO;
     }
 
-    /*@Override
+    @Override
     public AppUser findByIdQuery(int id) {return appUserDAO.findByIdQuery(id);}
 
-     @Override
+   /*  @Override
     public AppUser findById(int id) {return appUserDAO.findById(id);}*/
 
 

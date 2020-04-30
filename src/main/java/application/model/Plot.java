@@ -7,12 +7,24 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@NamedQueries({
+        @NamedQuery(name = Plot.GET_PLOTS, query = Plot.QUERY_GET_PLOTS),
+        @NamedQuery(name = Plot.GET_PLOTS_BY_ID, query = Plot.QUERY_GET_PLOTS_BY_ID)
+})
+
 @Entity
 @Table(name = "PLOT")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Plot {
+
+    public static final String GET_PLOTS = "Plot.get_plots";
+    public static final String QUERY_GET_PLOTS = "select pl from Plot pl";
+
+    public static final String GET_PLOTS_BY_ID = "Plot.get_plots_by_id";
+    public static final String QUERY_GET_PLOTS_BY_ID = "select pl from Plot pl where pl.id = :id";
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

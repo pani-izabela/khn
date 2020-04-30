@@ -7,12 +7,23 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@NamedQueries({
+        @NamedQuery(name = Flat.GET_FLATS, query = Flat.QUERY_GET_FLATS),
+        @NamedQuery(name = Flat.GET_FLATS_BY_ID, query = Flat.QUERY_GET_FLATS_BY_ID)
+})
+
 @Entity
 @Table(name = "FLAT")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Flat {
+
+    public static final String GET_FLATS = "Flat.get_flats";
+    public static final String QUERY_GET_FLATS = "select fl from Flat fl";
+
+    public static final String GET_FLATS_BY_ID = "Flat.get_flats_by_id";
+    public static final String QUERY_GET_FLATS_BY_ID = "select fl from Flat fl where fl.id = :id";
 
     @Id
     @NotNull

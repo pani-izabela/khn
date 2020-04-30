@@ -9,7 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NamedQueries({
-        @NamedQuery(name = House.GET_HOUSES, query = House.QUERY_GET_HOUSES)
+        @NamedQuery(name = House.GET_HOUSES, query = House.QUERY_GET_HOUSES),
+        @NamedQuery(name = House.GET_HOUSES_BY_ID, query = House.QUERY_GET_HOUSES_BY_ID)
 })
 
 @Entity
@@ -21,6 +22,9 @@ public class House {
 
     public static final String GET_HOUSES = "House.get_houses";
     public static final String QUERY_GET_HOUSES = "select ho from House ho";
+
+    public static final String GET_HOUSES_BY_ID = "House.get_houses_by_id";
+    public static final String QUERY_GET_HOUSES_BY_ID = "select ho from House ho where ho.id = :id";
 
     @Id
     @NotNull

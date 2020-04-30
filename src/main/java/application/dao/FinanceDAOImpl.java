@@ -1,0 +1,41 @@
+package application.dao;
+
+import application.model.AppUser;
+import application.model.Finance;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
+@Repository
+public class FinanceDAOImpl implements FinanceDAO {
+
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    private EntityManager em;
+
+    @Override
+    public Finance findByAppuseridQuery(AppUser appuserid) {
+        try {
+            return em.createNamedQuery(Finance.GET_FINANCE_BY_APPUSERID, Finance.class)
+                    .setParameter("appuserid", appuserid)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    public Finance updateAmount(AppUser oldAppuserId, double  newAmount) {
+        try{
+            Finance finance = findByAppuseridQuery(oldAppuserId);
+            finance.setAmount(newAmount);
+            return em.merge(finance);
+
+        } catch(NoResultException e){
+            return null;
+        }
+    }
+}

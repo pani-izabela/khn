@@ -1,7 +1,8 @@
 package application.dao;
 
 import application.model.AppUser;
-import application.model.House;
+import application.model.Flat;
+import application.model.Plot;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,15 +13,15 @@ import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
-public class HouseDAOImpl implements HouseDAO{
+public class PlotDAOImpl implements PlotDAO{
     @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 
     @Override
     @Transactional(readOnly = true)
-    public List<House> findAllHousesQuery() {
+    public List<Plot> findAllQuery() {
         try{
-            return em.createNamedQuery(House.GET_HOUSES, House.class)
+            return em.createNamedQuery(Plot.GET_PLOTS, Plot.class)
                     .getResultList();
         }
         catch (NoResultException e) {
@@ -29,9 +30,9 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
-    public House findHouseByIdQuery(int id) {
+    public Plot findPlotByIdQuery(int id) {
         try{
-            return em.createNamedQuery(House.GET_HOUSES_BY_ID, House.class)
+            return em.createNamedQuery(Plot.GET_PLOTS_BY_ID, Plot.class)
                     .setParameter("id", id)
                     .getSingleResult();
         }
@@ -41,10 +42,10 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
-    public House updateAppuser(House house, AppUser appUser) {
+    public Plot updateAppuser(Plot plot, AppUser appUser) {
         try{
-            house.setAppuser(appUser);
-            return em.merge(house);
+            plot.setAppuser(appUser);
+            return em.merge(plot);
 
         } catch(NoResultException e){
             return null;
