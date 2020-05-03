@@ -4,10 +4,7 @@ import application.dao.AppUserDAO;
 import application.dao.AuctionViewDAO;
 import application.dao.FinanceDAO;
 import application.dao.HouseDAO;
-import application.model.AppUser;
-import application.model.AuctionView;
-import application.model.Finance;
-import application.model.House;
+import application.model.*;
 import application.service.FinanceService;
 import application.service.FlatService;
 import application.service.HouseService;
@@ -18,10 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -68,25 +62,34 @@ public class AuctionsController {
         return auctionViewDAO.findAllQuery();
     }
 
+    @ApiOperation(value = "Get all flats")
+    @GetMapping(value = "/getFlats")
+    public @ResponseBody List<Flat> getAllFlats() {
+        return flatService.findAllFlatsQuery();
+    }
+
+    @GetMapping(value = "/getFinance")
+    public @ResponseBody Finance getFinanceById(@RequestBody @RequestParam int financeId) {
+        return financeDAO.findById(financeId);
+    }
+
+    @ApiOperation(value = "Get all userrealassets")
+    @GetMapping(value = "/getUas")
+    public @ResponseBody List<Userrealassets> getAllUas() {
+        return userrealassetsService.findAllUserrealassets();
+    }
+
     @ApiOperation(value = "Get assets by type")
     @ApiImplicitParam(name="type", value = "RealAssets type", required = true)
     @GetMapping(value = "/getAssets")
     public @ResponseBody List<AuctionView> getAssetsByType(@RequestBody @RequestParam String assetType) {
-        return auctionViewDAO.findAllQueryByAssetsType(assetType);
+        //return auctionViewDAO.findAllQueryByAssetsType(assetType);
+        return auctionViewDAO.findPropertyByAssetsTypeAndAppuserRole(assetType, 2);
     }
 
-    /*@ApiOperation(value = "Get finance by appuserid")
-    @ApiImplicitParam(name="apppuserid", required = true)
-    @GetMapping(value = "/getFinance")
-    public @ResponseBody Finance getFinanceByAppuserid(@RequestBody @RequestParam int appuserid) {
-        return financeService.chcekUserAccountStatusBeforeShopping(appuserid);
-        //return financeDAO.findByAppuseridQuery(appUserDAO.findByIdQuery(appuserid));
-    }*/
-
-    @ApiOperation(value = "Get finance by appuserid")
-    @ApiImplicitParam(name="apppuserid", required = true)
-    @GetMapping(value = "/buyProperty")
-    public @ResponseBody ResponseEntity<String> getFinanceByAppuserid(@RequestBody @RequestParam int appuserid, @RequestParam int assetsId, @RequestParam String assetsType) {
+    @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")
+    @PostMapping(value = "/buyProperty")
+    public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
         boolean result = financeService.chcekUserAccountStatusBeforeShopping(appuserid, assetsId, assetsType);
         if(result) {
             financeService.updateAmount(appuserid);
@@ -102,7 +105,15 @@ public class AuctionsController {
         }
         else
             //jeśli to wyżej zwróci false to wyświetl komunikat, że nie ma środkó na zakup
-            return new ResponseEntity<>("Brak wystarczających środkó na koncie", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Brak wystarczających środków na koncie", HttpStatus.NOT_FOUND);
     }
+
+    @ApiOperation(value = "Delete auctionView by id")
+    @ApiImplicitParam(name="id", value = "AuctionView id", required = true)
+    @DeleteMapping(value = "/deleteAuctionView")
+    public @ResponseBody void deleteAustionView(@RequestParam int auctionViewId){
+        auctionViewDAO.deleteById(auctionViewId);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package application.dao;
 import application.model.AppUser;
 import application.model.Finance;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -35,6 +36,19 @@ public class FinanceDAOImpl implements FinanceDAO {
             return em.merge(finance);
 
         } catch(NoResultException e){
+            return null;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Finance findById(int financeId) {
+        try{
+            return em.createNamedQuery(Finance.GET_FINANCE_BY_ID, Finance.class)
+                    .setParameter("financeId", financeId)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
             return null;
         }
     }

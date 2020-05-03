@@ -8,7 +8,8 @@ import javax.persistence.*;
 
 @NamedQueries({
         @NamedQuery(name = AuctionView.GET_ALL, query = AuctionView.QUERY_GET_ALL),
-        @NamedQuery(name = AuctionView.GET_ALL_Assets, query = AuctionView.QUERY_GET_ALL_ASSETS)
+        @NamedQuery(name = AuctionView.GET_ALL_Assets, query = AuctionView.QUERY_GET_ALL_ASSETS),
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE)
 })
 
 @Entity
@@ -24,12 +25,18 @@ public class AuctionView {
     public static final String GET_ALL_Assets = "AuctionView.get_all_assets";
     public static final String QUERY_GET_ALL_ASSETS = "select av from AuctionView av where av.asset_type = :assetType";
 
+    public static final String GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "AuctionView.get_all_assets_by_type_and_appuserrole";
+    public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "select av from AuctionView av where av.asset_type = :assetType and av.appuser_role = :appuserRole";
+
     @Id
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "appuser_id")
     private Integer appuser_id;
+
+    @Column(name = "appuser_role")
+    private Integer appuser_role;
 
     @Column(name = "asset_type")
     private String asset_type;

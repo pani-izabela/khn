@@ -59,6 +59,18 @@ public class FinanceServiceImpl implements FinanceService {
         return financeDAO.updateAmount(appUser, newAmount);
     }
 
+    @Override
+    public Finance update(int id) {
+        AppUser appUser = appUserService.findByIdQuery(id);
+        Finance finance = financeDAO.findByAppuseridQuery(appUser);
+        finance.getId();
+        amount = finance.getAmount();
+        double newAmount = amount - 100;
+        Finance financeAfterChange = financeDAO.updateAmount(appUser, newAmount);
+        double amountAfter = financeAfterChange.getAmount();
+        return financeAfterChange;
+    }
+
 
     //-------------------------------------------------------------------metody prywatne
 

@@ -7,6 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@NamedQueries({
+        @NamedQuery(name = Userrealassets.GET_USERREALASSETS, query = Userrealassets.QUERY_GET_USERREALASSETS)
+})
+
 @Entity
 @Getter
 @Setter
@@ -14,10 +18,13 @@ import javax.validation.constraints.NotNull;
 @Table(name = "USERREALASSETS")
 public class Userrealassets {
 
+    public static final String GET_USERREALASSETS = "Userrealassets.get_flats";
+    public static final String QUERY_GET_USERREALASSETS = "select uas from Userrealassets uas";
+
     @Id
     @NotNull
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @ManyToOne

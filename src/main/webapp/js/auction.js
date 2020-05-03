@@ -44,7 +44,7 @@ function getListOfHauses() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "id"},
+                {data: "asset_id"},
                 {data: "price"},
                 {data: "size"},
                 {data: "rooms"},
@@ -52,10 +52,10 @@ function getListOfHauses() {
                 {
                     data: "akcja",
                     "render": function (data, type, full) {
-                        let houseId = full.id;
+                        let houseId = full.asset_id;
+                        let auctionViewId = full.id;
                         if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
-                            //return '<button id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
+                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +','+ auctionViewId +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
                         }
                         else {
                             return '<button id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>';
@@ -77,7 +77,7 @@ function getListOfFlats() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "id"},
+                {data: "asset_id"},
                 {data: "price"},
                 {data: "size"},
                 {data: "rooms"},
@@ -86,10 +86,10 @@ function getListOfFlats() {
                 {
                     data: "akcja",
                     "render": function (data, type, full) {
-                        let flatId = full.id;
+                        let flatId = full.asset_id;
+                        let auctionViewId = full.id;
                         if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
-                            //return '<button id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
+                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +','+ auctionViewId +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
                         }
                         else{
                             return '<button id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>'
@@ -111,7 +111,7 @@ function getListOfPlots() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "id"},
+                {data: "asset_id"},
                 {data: "price"},
                 {data: "size"},
                 {data: "plot_type"},
@@ -119,10 +119,10 @@ function getListOfPlots() {
                 {
                     data: "akcja",
                     "render": function (data, type, full) {
-                        let plotId = full.id;
+                        let plotId = full.asset_id;
+                        let auctionViewId = full.id;
                         if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
-                            //return '<button id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ plotId +','+ "\'plot\'" +')" id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
+                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ plotId +','+ "\'plot\'" +','+ auctionViewId +')" id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
                         }
                         else {
                             return '<button id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: none">Kup</button>';
@@ -134,10 +134,39 @@ function getListOfPlots() {
     })
 }
 
-function buyProperty(user_id, property_id, property_type) {
+function buyProperty(user_id, property_id, property_type, auctionViewId) {
     if(confirm("Jesteś pewny/a, że chcesz kupić tę nieruchomość?")) {
-        console.log('dupa');
+        $.ajax({
+            url: "http://localhost:8080/buyProperty?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
+            method: "POST",
+
+            success: function (res) {
+                console.log("Udało się kupić");
+                alert(res);
+                deleteBoughtPropertyFromView(auctionViewId);
+                window.location.href = "myProperties"
+                //location.reload();
+            },
+            error: function () {
+                console.log("Nie udało się kupić");
+            }
+        });
     }
+}
+
+function deleteBoughtPropertyFromView(auctionViewId) {
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/deleteAuctionView?" + $.param({auctionViewId: auctionViewId}),
+        data: JSON.stringify(auctionViewId),
+        contentType: "application/json",
+        success: function () {
+            console.log("Usunięto kupioną nieruchomość");
+        },
+        error: function () {
+            console.log("Nie udało się usunąć kupionej nieruchomości");
+        }
+    });
 }
 
 

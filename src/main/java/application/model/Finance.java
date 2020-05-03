@@ -8,7 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NamedQueries({
-        @NamedQuery(name = Finance.GET_FINANCE_BY_APPUSERID, query = Finance.QUERY_GET_FINANCE_BY_APPUSERID)
+        @NamedQuery(name = Finance.GET_FINANCE_BY_APPUSERID, query = Finance.QUERY_GET_FINANCE_BY_APPUSERID),
+        @NamedQuery(name = Finance.GET_FINANCE_BY_ID, query = Finance.QUERY_GET_FINANCE_BY_ID),
 })
 
 @Entity
@@ -21,6 +22,8 @@ public class Finance {
     public static final String GET_FINANCE_BY_APPUSERID = "Finance.get_finance_by_appuserid";
     public static final String QUERY_GET_FINANCE_BY_APPUSERID = "select f from Finance f where f.appuser = :appuserid";
 
+    public static final String GET_FINANCE_BY_ID = "Finance.get_finance_by_id";
+    public static final String QUERY_GET_FINANCE_BY_ID = "select f from Finance f where f.id = :financeId";
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

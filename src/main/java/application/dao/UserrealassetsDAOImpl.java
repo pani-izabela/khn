@@ -8,12 +8,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import java.util.List;
 
 @Repository
 public class UserrealassetsDAOImpl implements UserrealassetsDAO{
 
     @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Userrealassets> findAllUserrealassetsQuery() {
+        try{
+            return em.createNamedQuery(Userrealassets.GET_USERREALASSETS, Userrealassets.class)
+                    .getResultList();
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+    }
 
     @Override
     @Transactional

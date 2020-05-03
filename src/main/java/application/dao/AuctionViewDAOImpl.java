@@ -31,6 +31,7 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
     }
 
     @Override
+    @Transactional
     public List<AuctionView> findAllQueryByAssetsType(String assetType) {
         try{
             return em.createNamedQuery(AuctionView.GET_ALL_Assets, AuctionView.class)
@@ -40,5 +41,27 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
         catch (NoResultException e){
             return null;
         }
+    }
+
+    @Override
+    @Transactional
+    public List<AuctionView> findPropertyByAssetsTypeAndAppuserRole(String assetType, int appuserRole) {
+        try{
+            return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, AuctionView.class)
+                    .setParameter("assetType", assetType)
+                    .setParameter("appuserRole", appuserRole)
+                    .getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(int id) {
+        AuctionView auctionView = em.find(AuctionView.class,id);
+        if(auctionView!=null)
+            em.remove(auctionView);
     }
 }

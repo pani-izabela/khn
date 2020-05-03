@@ -7,4 +7,5 @@ public interface FinanceDAO {
 
     Finance findByAppuseridQuery(AppUser appuserid);
     Finance updateAmount(AppUser oldAppuserId, double newAmount);
+    Finance findById(int financeId);
 }

@@ -9,6 +9,8 @@ import application.model.House;
 import application.model.Userrealassets;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserrealassetsServiceImpl implements UserrealassetsService{
 
@@ -17,10 +19,16 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     private HouseDAO houseDAO;
     private UserrealassetsDAO userrealassetsDAO;
 
-    public UserrealassetsServiceImpl(AppUserService appUserService, FlatDAO flatDAO, HouseDAO houseDAO) {
+    public UserrealassetsServiceImpl(AppUserService appUserService, FlatDAO flatDAO, HouseDAO houseDAO, UserrealassetsDAO userrealassetsDAO) {
         this.appUserService = appUserService;
         this.flatDAO = flatDAO;
         this.houseDAO = houseDAO;
+        this.userrealassetsDAO = userrealassetsDAO;
+    }
+
+    @Override
+    public List<Userrealassets> findAllUserrealassets() {
+        return userrealassetsDAO.findAllUserrealassetsQuery();
     }
 
     @Override
@@ -36,7 +44,6 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
             House house = houseDAO.findHouseByIdQuery(assetsId);
             userrealassets.setHouse(house);
         }
-        // na podstawie tych danych musze pobierać odpowiednie obiekty, które złożą sie na koniec w obiekt Userrealassets
         return userrealassetsDAO.addUserrealassets(userrealassets);
     }
 }
