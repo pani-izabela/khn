@@ -30,6 +30,7 @@ public class PlotDAOImpl implements PlotDAO{
     }
 
     @Override
+    @Transactional
     public Plot findPlotByIdQuery(int id) {
         try{
             return em.createNamedQuery(Plot.GET_PLOTS_BY_ID, Plot.class)
@@ -42,6 +43,7 @@ public class PlotDAOImpl implements PlotDAO{
     }
 
     @Override
+    @Transactional
     public Plot updateAppuser(Plot plot, AppUser appUser) {
         try{
             plot.setAppuser(appUser);

@@ -53,6 +53,15 @@ public class FinanceServiceImpl implements FinanceService {
     }
 
     @Override
+    public boolean chcekUserAccountStatusBeforeShopping3(int id, double totalCost) {
+        AppUser appUser = appUserService.findByIdQuery(id);
+        Finance finance = financeDAO.findByAppuseridQuery(appUser);
+        amount = finance.getAmount();
+        assetPrice = totalCost;
+        return amount>=assetPrice;
+    }
+
+    @Override
     public Finance updateAmount(int appuserId) {
         AppUser appUser = appUserService.findByIdQuery(appuserId);
         double newAmount = amount - assetPrice;

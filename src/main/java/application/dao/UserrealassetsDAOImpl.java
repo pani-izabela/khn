@@ -1,6 +1,6 @@
 package application.dao;
 
-import application.model.Userrealassets;
+import application.model.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +29,20 @@ public class UserrealassetsDAOImpl implements UserrealassetsDAO{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Userrealassets findUserrealAssetsByUserId(AppUser appuserId) {
+        try{
+            return em.createNamedQuery(Userrealassets.GET_USERREALASSETS_BY_APPUSERID, Userrealassets.class)
+                    .setParameter("appuserId", appuserId)
+                    .getSingleResult();
+
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
     @Transactional
     public Userrealassets addUserrealassets(Userrealassets userrealassets) {
         try{
@@ -38,4 +52,41 @@ public class UserrealassetsDAOImpl implements UserrealassetsDAO{
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public Userrealassets updateUserrealassetsHouse(Userrealassets userrealassets, House house) {
+        try{
+            userrealassets.setHouse(house);
+            return em.merge(userrealassets);
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public Userrealassets updateUserrealassetsPlot(Userrealassets userrealassets, Plot plot) {
+        try{
+            userrealassets.setPlot(plot);
+            return em.merge(userrealassets);
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public Userrealassets updateUserrealassetsFlat(Userrealassets userrealassets, Flat flat) {
+        try{
+            userrealassets.setFlat(flat);
+            return em.merge(userrealassets);
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
 }

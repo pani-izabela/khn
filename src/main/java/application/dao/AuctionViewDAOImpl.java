@@ -59,6 +59,35 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
 
     @Override
     @Transactional
+    public AuctionView findByAssetsTypeAndAssetId(String assetType, int assetId) {
+        try{
+            return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_ASSETID, AuctionView.class)
+                    .setParameter("assetType", assetType)
+                    .setParameter("assetId", assetId)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<AuctionView> findByAdress(String city, String postcode, String homenumber) {
+        try{
+            return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_ADRESS, AuctionView.class)
+                    .setParameter("city", city)
+                    .setParameter("postcode", postcode)
+                    .setParameter("homenumber", homenumber)
+                    .getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
     public void deleteById(int id) {
         AuctionView auctionView = em.find(AuctionView.class,id);
         if(auctionView!=null)

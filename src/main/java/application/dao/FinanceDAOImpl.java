@@ -29,6 +29,7 @@ public class FinanceDAOImpl implements FinanceDAO {
     }
 
     @Override
+    @Transactional
     public Finance updateAmount(AppUser oldAppuserId, double  newAmount) {
         try{
             Finance finance = findByAppuseridQuery(oldAppuserId);
@@ -40,8 +41,8 @@ public class FinanceDAOImpl implements FinanceDAO {
         }
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public Finance findById(int financeId) {
         try{
             return em.createNamedQuery(Finance.GET_FINANCE_BY_ID, Finance.class)

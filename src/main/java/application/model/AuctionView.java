@@ -9,7 +9,9 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = AuctionView.GET_ALL, query = AuctionView.QUERY_GET_ALL),
         @NamedQuery(name = AuctionView.GET_ALL_Assets, query = AuctionView.QUERY_GET_ALL_ASSETS),
-        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE)
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE),
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_ASSETID, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSETID),
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_ADRESS, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_ADRESS)
 })
 
 @Entity
@@ -27,6 +29,12 @@ public class AuctionView {
 
     public static final String GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "AuctionView.get_all_assets_by_type_and_appuserrole";
     public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "select av from AuctionView av where av.asset_type = :assetType and av.appuser_role = :appuserRole";
+
+    public static final String GET_ALL_ASSETS_BY_TYPE_AND_ASSETID = "AuctionView.get_all_assets_by_type_and_assetid";
+    public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSETID = "select av from AuctionView av where av.asset_type = :assetType and av.asset_id = :assetId";
+
+    public static final String GET_ALL_ASSETS_BY_ADRESS = "AuctionView.get_all_assets_by_adress";
+    public static final String QUERY_GET_ALL_ASSETS_BY_ADRESS = "select av from AuctionView av where av.city = :city and av.postcode = :postcode and av.homenumber = :homenumber";
 
     @Id
     @Column(name = "id")

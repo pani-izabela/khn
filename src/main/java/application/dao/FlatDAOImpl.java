@@ -30,6 +30,7 @@ public class FlatDAOImpl implements FlatDAO{
     }
 
     @Override
+    @Transactional
     public Flat findFlatByIdQuery(int id) {
         try{
             return em.createNamedQuery(Flat.GET_FLATS_BY_ID, Flat.class)
@@ -42,6 +43,7 @@ public class FlatDAOImpl implements FlatDAO{
     }
 
     @Override
+    @Transactional
     public Flat updateAppuser(Flat flat, AppUser appUser) {
         try{
             flat.setAppuser(appUser);

@@ -29,6 +29,7 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
+    @Transactional
     public House findHouseByIdQuery(int id) {
         try{
             return em.createNamedQuery(House.GET_HOUSES_BY_ID, House.class)
@@ -41,6 +42,7 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
+    @Transactional
     public House updateAppuser(House house, AppUser appUser) {
         try{
             house.setAppuser(appUser);
