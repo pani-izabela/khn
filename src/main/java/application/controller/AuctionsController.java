@@ -21,27 +21,19 @@ import java.util.List;
 public class AuctionsController {
 
     private HouseService houseService;
-    private HouseDAO houseDAO;
     private AuctionViewDAO auctionViewDAO;
     private FinanceDAO financeDAO;
-    private AppUserDAO appUserDAO;
-    private FinanceService financeService;
     private UserrealassetsService userrealassetsService;
     private FlatService flatService;
-    private AuctionViewService auctionViewService;
-    private PlotService plotService;
+    private AuctionService auctionService;
 
-    public AuctionsController(HouseService houseService, HouseDAO houseDAO, AuctionViewDAO auctionViewDAO, FinanceDAO financeDAO, AppUserDAO appUserDAO, FinanceService financeService, UserrealassetsService userrealassetsService, FlatService flatService, AuctionViewService auctionViewService, PlotService plotService){
+    public AuctionsController(HouseService houseService, AuctionViewDAO auctionViewDAO, FinanceDAO financeDAO, UserrealassetsService userrealassetsService, FlatService flatService, AuctionService auctionService){
         this.houseService = houseService;
-        this.houseDAO = houseDAO;
         this.auctionViewDAO = auctionViewDAO;
         this.financeDAO = financeDAO;
-        this.appUserDAO = appUserDAO;
-        this.financeService = financeService;
         this.userrealassetsService = userrealassetsService;
         this.flatService = flatService;
-        this.auctionViewService = auctionViewService;
-        this.plotService = plotService;
+        this.auctionService = auctionService;
     }
 
     //----------------------------------------------------------------------------
@@ -51,14 +43,40 @@ public class AuctionsController {
         return "auctions";
     }
 
+    @ApiOperation(value = "Get assets by type")
+    @ApiImplicitParam(name="type", value = "RealAssets type", required = true)
+    @GetMapping(value = "/getAssets")
+    public @ResponseBody List<AuctionView> getAssetsByType(@RequestBody @RequestParam String assetType) {
+        return auctionViewDAO.findPropertyByAssetsTypeAndAppuserRole(assetType, 2);
+    }
+
+    @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")
+    @PostMapping(value = "/buyProperty")
+    public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
+        boolean result = auctionService.buyProperty(appuserid, assetsId, assetsType);
+        if (result) {
+            return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Delete auctionView by id")
+    @ApiImplicitParam(name="id", value = "AuctionView id", required = true)
+    @DeleteMapping(value = "/deleteAuctionView")
+    public @ResponseBody void deleteAustionView(@RequestParam int auctionViewId){
+        auctionViewDAO.deleteById(auctionViewId);
+    }
+
+    //----------- chwilowe pomocnicze
     @ApiOperation(value = "Get all houses")
     @GetMapping(value = "/getAllHouses")
     public @ResponseBody List<House> getAppUsers() {
         return houseService.findAllHousesQuery();
     }
 
-    @ApiOperation(value = "Get data for all homes from the auction")
-    @GetMapping(value = "/getAllHousesView")
+    @ApiOperation(value = "Get all from auction view")
+    @GetMapping(value = "/getAll")
     public @ResponseBody List<AuctionView> getAll() {
         return auctionViewDAO.findAllQuery();
     }
@@ -79,66 +97,5 @@ public class AuctionsController {
     public @ResponseBody List<Userrealassets> getAllUas() {
         return userrealassetsService.findAllUserrealassets();
     }
-
-    @ApiOperation(value = "Get assets by type")
-    @ApiImplicitParam(name="type", value = "RealAssets type", required = true)
-    @GetMapping(value = "/getAssets")
-    public @ResponseBody List<AuctionView> getAssetsByType(@RequestBody @RequestParam String assetType) {
-        //return auctionViewDAO.findAllQueryByAssetsType(assetType);
-        return auctionViewDAO.findPropertyByAssetsTypeAndAppuserRole(assetType, 2);
-    }
-
-    @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")
-    @PostMapping(value = "/buyProperty")
-    public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
-        double totalCost = auctionViewService.returnTotalCost(assetsType, assetsId);
-        boolean result = financeService.chcekUserAccountStatusBeforeShopping3(appuserid, totalCost);
-        if(result) {
-            financeService.updateAmount(appuserid);
-            if(assetsType.equals("house")){
-                AuctionView secondProperty = auctionViewService.returnOtherPropertyWithTheSameAdress(assetsType, assetsId);
-
-                if(secondProperty != null){
-                    houseService.changeAppuser(assetsId, appuserid);
-                    plotService.changeAppuser(secondProperty.getAsset_id(), appuserid);
-                    userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-                    userrealassetsService.updateUserrealassetsProperty(appuserid, secondProperty.getAsset_id(), "plot");
-                }
-                else{
-                    houseService.changeAppuser(assetsId, appuserid);
-                    userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-                }
-            }
-            else if(assetsType.equals("plot")){
-                AuctionView secondProperty = auctionViewService.returnOtherPropertyWithTheSameAdress(assetsType, assetsId);
-
-                if(secondProperty != null){
-                    plotService.changeAppuser(assetsId, appuserid);
-                    houseService.changeAppuser(secondProperty.getAsset_id(), appuserid);
-                    userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-                    userrealassetsService.updateUserrealassetsProperty(appuserid, secondProperty.getAsset_id(), "house");
-                }
-                else{
-                    plotService.changeAppuser(assetsId, appuserid);
-                    userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-                }
-            }
-            else if(assetsType.equals("flat")){
-                flatService.changeAppuser(assetsId, appuserid);
-                userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-            }
-            return new ResponseEntity<>("Kupiłeś nieruchomość", HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>("Brak wystarczających środków na koncie", HttpStatus.NOT_FOUND);
-    }
-
-    @ApiOperation(value = "Delete auctionView by id")
-    @ApiImplicitParam(name="id", value = "AuctionView id", required = true)
-    @DeleteMapping(value = "/deleteAuctionView")
-    public @ResponseBody void deleteAustionView(@RequestParam int auctionViewId){
-        auctionViewDAO.deleteById(auctionViewId);
-    }
-
 
 }

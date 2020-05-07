@@ -8,5 +8,4 @@ public interface FinanceService {
     boolean chcekUserAccountStatusBeforeShopping(int id, int assetsId, String assetsType);
     boolean chcekUserAccountStatusBeforeShopping3(int id, double totalCost);
     Finance updateAmount(int appuserId);
-    Finance update(int id);
 }

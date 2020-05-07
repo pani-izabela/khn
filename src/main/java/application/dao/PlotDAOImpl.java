@@ -30,7 +30,7 @@ public class PlotDAOImpl implements PlotDAO{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Plot findPlotByIdQuery(int id) {
         try{
             return em.createNamedQuery(Plot.GET_PLOTS_BY_ID, Plot.class)

@@ -30,7 +30,7 @@ public class FlatDAOImpl implements FlatDAO{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Flat findFlatByIdQuery(int id) {
         try{
             return em.createNamedQuery(Flat.GET_FLATS_BY_ID, Flat.class)

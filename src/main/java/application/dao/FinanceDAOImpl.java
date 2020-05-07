@@ -17,6 +17,7 @@ public class FinanceDAOImpl implements FinanceDAO {
     private EntityManager em;
 
     @Override
+    @Transactional(readOnly = true)
     public Finance findByAppuseridQuery(AppUser appuserid) {
         try {
             return em.createNamedQuery(Finance.GET_FINANCE_BY_APPUSERID, Finance.class)

@@ -29,7 +29,7 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public House findHouseByIdQuery(int id) {
         try{
             return em.createNamedQuery(House.GET_HOUSES_BY_ID, House.class)
