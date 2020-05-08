@@ -61,12 +61,12 @@ public class AuctionsController {
         }
     }
 
-    @ApiOperation(value = "Delete auctionView by id")
+    /*@ApiOperation(value = "Delete auctionView by id")
     @ApiImplicitParam(name="id", value = "AuctionView id", required = true)
     @DeleteMapping(value = "/deleteAuctionView")
     public @ResponseBody void deleteAustionView(@RequestParam int auctionViewId){
         auctionViewDAO.deleteById(auctionViewId);
-    }
+    }*/
 
     //----------- chwilowe pomocnicze
     @ApiOperation(value = "Get all houses")

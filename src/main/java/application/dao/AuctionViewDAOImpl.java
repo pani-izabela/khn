@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -77,5 +78,20 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
         AuctionView auctionView = em.find(AuctionView.class,id);
         if(auctionView!=null)
             em.remove(auctionView);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AuctionView> findPropertiesByType(String assetType) {
+        List<AuctionView> xxx = new ArrayList<>();
+        try{
+            xxx = em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE, AuctionView.class)
+                    .setParameter("assetType", assetType)
+                    .getResultList();
+            return xxx;
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 }

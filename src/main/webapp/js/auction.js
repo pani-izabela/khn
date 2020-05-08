@@ -44,7 +44,7 @@ function getListOfHauses() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "asset_id"},
+                {data: "asset_type"},
                 {data: "price"},
                 {data: "size"},
                 {data: "rooms"},
@@ -77,7 +77,7 @@ function getListOfFlats() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "asset_id"},
+                {data: "asset_type"},
                 {data: "price"},
                 {data: "size"},
                 {data: "rooms"},
@@ -111,7 +111,7 @@ function getListOfPlots() {
             destroy: true,
             autoWidth: true,
             columns: [
-                {data: "asset_id"},
+                {data: "asset_type"},
                 {data: "price"},
                 {data: "size"},
                 {data: "plot_type"},
@@ -143,7 +143,7 @@ function buyProperty(user_id, property_id, property_type, auctionViewId) {
             success: function (res) {
                 console.log("Udało się kupić");
                 alert(res);
-                deleteBoughtPropertyFromView(auctionViewId);
+                //deleteBoughtPropertyFromView(auctionViewId);
                 window.location.href = "myProperties"
                 //location.reload();
             },
@@ -154,7 +154,7 @@ function buyProperty(user_id, property_id, property_type, auctionViewId) {
     }
 }
 
-function deleteBoughtPropertyFromView(auctionViewId) {
+/*function deleteBoughtPropertyFromView(auctionViewId) {
     $.ajax({
         type: "DELETE",
         url: "http://localhost:8080/deleteAuctionView?" + $.param({auctionViewId: auctionViewId}),
@@ -167,6 +167,6 @@ function deleteBoughtPropertyFromView(auctionViewId) {
             console.log("Nie udało się usunąć kupionej nieruchomości");
         }
     });
-}
+}*/
 
 

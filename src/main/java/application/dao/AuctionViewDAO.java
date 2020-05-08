@@ -10,4 +10,5 @@ public interface AuctionViewDAO {
     AuctionView findByAssetsTypeAndAssetId(String assetType, int assetId);
     List<AuctionView> findByAdress(String city, String postcode, String homenumber);
     void deleteById(int id);
+    List<AuctionView> findPropertiesByType(String assetType);
 }

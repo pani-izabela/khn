@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @NamedQueries({
         @NamedQuery(name = AuctionView.GET_ALL, query = AuctionView.QUERY_GET_ALL),
-        @NamedQuery(name = AuctionView.GET_ALL_Assets, query = AuctionView.QUERY_GET_ALL_ASSETS),
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE),
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE),
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_ASSETID, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSETID),
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_ADRESS, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_ADRESS)
@@ -24,8 +24,8 @@ public class AuctionView {
     public static final String GET_ALL = "AuctionView.get_all";
     public static final String QUERY_GET_ALL = "select av from AuctionView av";
 
-    public static final String GET_ALL_Assets = "AuctionView.get_all_assets";
-    public static final String QUERY_GET_ALL_ASSETS = "select av from AuctionView av where av.asset_type = :assetType";
+    public static final String GET_ALL_ASSETS_BY_TYPE = "AuctionView.get_all_assets_by_type";
+    public static final String QUERY_GET_ALL_ASSETS_BY_TYPE = "select av from AuctionView av where av.asset_type = :assetType";
 
     public static final String GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "AuctionView.get_all_assets_by_type_and_appuserrole";
     public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "select av from AuctionView av where av.asset_type = :assetType and av.appuser_role = :appuserRole";
@@ -36,9 +36,9 @@ public class AuctionView {
     public static final String GET_ALL_ASSETS_BY_ADRESS = "AuctionView.get_all_assets_by_adress";
     public static final String QUERY_GET_ALL_ASSETS_BY_ADRESS = "select av from AuctionView av where av.city = :city and av.postcode = :postcode and av.homenumber = :homenumber";
 
-    @Id
-    @Column(name = "id")
-    private Integer id;
+    //@Id
+    //@Column(name = "id")
+    //private Integer id;
 
     @Column(name = "appuser_id")
     private Integer appuser_id;
@@ -49,6 +49,7 @@ public class AuctionView {
     @Column(name = "asset_type")
     private String asset_type;
 
+    @Id
     @Column(name = "asset_id")
     private Integer asset_id;
 
