@@ -20,6 +20,29 @@ import java.util.List;
 @Controller
 public class AuctionsController {
 
+    /*Tutaj warto zrobić Facade, np AuctionFacade, która będzie miała jako pola:
+
+    - auctionViewDAO
+    - financeService
+    - propertyFacade
+
+oraz kolejną Facade np PropertyFacade, która będzie miała:
+houseService, plotService i flatService
+
+    a userrealassetsService sobie zostanie w kontrolerze
+
+
+    wtedy mamy zachowaną dobra praktykę i zostają 2 pola:
+    - AuctionFacade
+    - UserrealassetsService
+
+czemu 3 a nie 2?:
+    AuctionService -> stanie się AuctionFacade
+
+    Mała uwaga - Facada powinna być zwykłą klasą
+    ---
+    */
+
     private HouseService houseService;
     private AuctionViewDAO auctionViewDAO;
     private FinanceDAO financeDAO;
@@ -52,6 +75,8 @@ public class AuctionsController {
 
     @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyProperty")
+    // Tak jak poradziłam Mateuszowi fajnie by to podzielić na 3 różne typy nieruchomosci,
+    //czyli buyHouse, buyPlot, buyFlat - wtedy na froncie rowniez uderzamy na 3 rozne metody w kontrolerach
     public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
         boolean result = auctionService.buyProperty(appuserid, assetsId, assetsType);
         if (result) {
@@ -68,7 +93,7 @@ public class AuctionsController {
         auctionViewDAO.deleteById(auctionViewId);
     }*/
 
-    //----------- chwilowe pomocnicze
+    //----------- chwilowe pomocnicze   <--- to nie patrzę :D
     @ApiOperation(value = "Get all houses")
     @GetMapping(value = "/getAllHouses")
     public @ResponseBody List<House> getAppUsers() {

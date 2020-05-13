@@ -7,6 +7,8 @@ function showTables(){
         var selTable = $(this).attr('data-value');
         console.log("wartość selTable po showTables() to: ", selTable);
         $(".tables").show();
+
+        //moze oddzielna funkcja na sprawdzenie ?:)
         if(selTable == 1){
             getListOfHauses();
             $("#auctionsListFlat").hide();
@@ -33,7 +35,6 @@ function showTables(){
         }
     });
 }
-
 function getListOfHauses() {
     var property_type = "house";
     $.get("http://localhost:8080" + "/getAssets?" + $.param({assetType: property_type}), function (data) {
@@ -54,6 +55,7 @@ function getListOfHauses() {
                     "render": function (data, type, full) {
                         let houseId = full.asset_id;
                         let auctionViewId = full.id;
+                        // ten warunek można uprościć, na pewno pobranie wartosci zapisacdo zmiennej i na niej bazowac, bez pobierania w warunku wartosci
                         if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
                             return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +','+ auctionViewId +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
                         }
@@ -88,6 +90,7 @@ function getListOfFlats() {
                     "render": function (data, type, full) {
                         let flatId = full.asset_id;
                         let auctionViewId = full.id;
+                        //tak jak wyzej
                         if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
                             return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +','+ auctionViewId +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
                         }

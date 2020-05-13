@@ -26,14 +26,18 @@ public class AuctionView {
 
     public static final String GET_ALL_ASSETS_BY_TYPE = "AuctionView.get_all_assets_by_type";
     public static final String QUERY_GET_ALL_ASSETS_BY_TYPE = "select av from AuctionView av where av.asset_type = :assetType";
-
+//GET_ALL_ASSETS_BY_TYPE_AND_APP_USER_ROLE
     public static final String GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "AuctionView.get_all_assets_by_type_and_appuserrole";
+    //QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APP USER ROLE
     public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE = "select av from AuctionView av where av.asset_type = :assetType and av.appuser_role = :appuserRole";
-
+//GET_ALL_ASSETS_BY_TYPE_AND_ASSET_ID
     public static final String GET_ALL_ASSETS_BY_TYPE_AND_ASSETID = "AuctionView.get_all_assets_by_type_and_assetid";
+    //QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSET_ID
     public static final String QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSETID = "select av from AuctionView av where av.asset_type = :assetType and av.asset_id = :assetId";
 
+//GET_ALL_ASSETS_BY_ADDRESS
     public static final String GET_ALL_ASSETS_BY_ADRESS = "AuctionView.get_all_assets_by_adress";
+//    QUERY_GET_ALL_ASSETS_BY_ADDRESS
     public static final String QUERY_GET_ALL_ASSETS_BY_ADRESS = "select av from AuctionView av where av.city = :city and av.postcode = :postcode and av.homenumber = :homenumber";
 
     //@Id
@@ -41,9 +45,11 @@ public class AuctionView {
     //private Integer id;
 
     @Column(name = "appuser_id")
+    //appUserId lub app_user_id
     private Integer appuser_id;
 
     @Column(name = "appuser_role")
+    //appUserRole lub app_user_role
     private Integer appuser_role;
 
     @Column(name = "asset_type")
@@ -63,9 +69,11 @@ public class AuctionView {
     private String street;
 
     @Column(name = "homenumber")
+    //homeNuber lub home_number
     private String homenumber;
 
     @Column(name = "localnumber")
+    //localNumber lub local_number
     public String localnumber;
 
     @Column(name = "price")

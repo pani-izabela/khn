@@ -3,7 +3,7 @@ package application.dao;
 import application.model.*;
 
 import java.util.List;
-
+//UserRealAssetsDAO
 public interface UserrealassetsDAO {
 
     List<Userrealassets> findAllUserrealassetsQuery();

@@ -22,6 +22,10 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
+    //Jak rozdzielisz w kontrolerze na 3 metody to wtedy tu się trochę uporządkuje :D  - ogólnie tzw "ifowni" chcemy miec jak najmniej :)
+    // fajnie sobie podzielic tematami - operacje finansow, operacje dodawania, odpinania nieruchomosci etc
+    //Dodatkowo ten serwis stanie się Facade :)
+    // Będzie tu sporo pracy z tym podziałem ale dasz sobię radę :)
     public boolean buyProperty(int appuserid, int assetsId, String assetsType) {
         double totalCost = auctionViewService.returnTotalCost(assetsType, assetsId);
         boolean result = financeService.chcekUserAccountStatusBeforeShopping3(appuserid, totalCost);

@@ -32,6 +32,7 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     }
 
     @Override
+    //Zamiast jednej wspólnej metody to podzieliłabym na 3 - dla house, flat i plot oddzielnie - Wtedy nie będziemy miec też tych ifów
     public Userrealassets addUserrealassets(int appuserId, int assetsId, String assetsType) {
         Userrealassets userrealassets = new Userrealassets();
         AppUser appUser = appUserService.findByIdQuery(appuserId);
@@ -52,6 +53,7 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     }
 
     @Override
+    //Tak samo jak dla addUserrealassets
     public Userrealassets updateUserrealassetsProperty(int appuserId, int assetsId, String assetsType) {
         AppUser appUser = appUserService.findByIdQuery(appuserId);
         Userrealassets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);

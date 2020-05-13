@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @Table(name = "USERREALASSETS")
+//UserRealAssets
 public class Userrealassets {
 
     public static final String GET_USERREALASSETS = "Userrealassets.get_userrealassets";

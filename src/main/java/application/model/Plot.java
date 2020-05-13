@@ -45,6 +45,7 @@ public class Plot {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="appuser_id")
+    //appUser lub app_user
     private AppUser appuser;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

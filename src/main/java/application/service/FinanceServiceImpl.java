@@ -53,6 +53,7 @@ public class FinanceServiceImpl implements FinanceService {
     }
 
     @Override
+    //Fajnie zminimalizowana metoda w stosunku do jej poprzedniej wersji :)
     public boolean chcekUserAccountStatusBeforeShopping3(int id, double totalCost) {
         AppUser appUser = appUserService.findByIdQuery(id);
         Finance finance = financeDAO.findByAppuseridQuery(appUser);

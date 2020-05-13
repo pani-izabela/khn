@@ -19,6 +19,7 @@ public class AuctionViewServiceImpl implements AuctionViewService {
     public double returnTotalCost(String assetType, int assetId) {
         double totalCost;
         AuctionView propertyToBuy = auctionViewDAO.findByAssetsTypeAndAssetId(assetType, assetId);
+        // te 4 linijki można wyniesc do prywatnej metody
         String city = propertyToBuy.getCity();
         String postcode = propertyToBuy.getPostcode();
         String homenumber = propertyToBuy.getHomenumber();
@@ -33,6 +34,7 @@ public class AuctionViewServiceImpl implements AuctionViewService {
     }
 
     @Override
+    // te if-y te fajnie byłoby zmniejszyć, może podział na prywatne metody, może switch?
     public AuctionView returnOtherPropertyWithTheSameAdress(String assetType, int assetId) {
         AuctionView propertyToReturn = new AuctionView();
         AuctionView propertyToBuy = auctionViewDAO.findByAssetsTypeAndAssetId(assetType, assetId);

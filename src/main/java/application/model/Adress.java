@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @NoArgsConstructor
+//Address - w sumie z tymi nazwami i camel case się trochę czepiam - nie lubię jak Intellij mi i coś podkreśla xD
 public class Adress {
     @Id
     @NotNull
