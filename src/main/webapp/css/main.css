@@ -104,6 +104,20 @@ a[data-toggle="collapse"]{
         margin-left: 0;
     }
 }
+/*profil*/
+#profileForm .is-readonly .btn-save{
+    display: none;
+}
+#profileForm .is-editing .btn-edit{
+    display: none;
+}
+form [disabled]{
+    cursor: text;
+    background-color: #fff;
+    border-color: transparent;
+    outline-color: transparent;
+    box-shadow: none;
+}
 /*stopka*/
 .footer {
     background-color: green;

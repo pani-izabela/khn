@@ -110,4 +110,18 @@ public class AppUserDAOImpl implements AppUserDAO {
             return null;
         }
     }
+
+    @Override
+    public AppUser updateAppUser(AppUser oldUser, AppUser newUser) {
+        try{
+            oldUser.setFirstname(newUser.getFirstname());
+            oldUser.setLastname(newUser.getLastname());
+            oldUser.setEmail(newUser.getEmail());
+            oldUser.setPass(newUser.getPass());
+            return em.merge(oldUser);
+        } catch(NoResultException e){
+            return null;
+        }
+
+    }
 }

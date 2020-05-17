@@ -1,5 +1,6 @@
 $(document).ready(function(){
     showCorrectMenu();
+    showCorrectProfile();
 });
 
 function showCorrectMenu() {
@@ -18,5 +19,24 @@ function showCorrectMenu() {
     else if((localStorage.getItem('userRole') === 'customer+seller') === true){
         $("#menuForRoleLiA").hide();
         $("#auctionsCustomer").hide();
+    }
+}
+
+function showCorrectProfile() {
+    if((localStorage.getItem('userRole') === 'admin') === true){
+        $("#profileCustomer").hide();
+        $("#profileSeller").hide();
+    }
+    else if((localStorage.getItem('userRole') === 'seller') === true){
+        $("#profileAdmin").hide();
+        $("#profileCustomer").hide();
+    }
+    if((localStorage.getItem('userRole') === 'customer') === true){
+        $("#profileAdmin").hide();
+        $("#profileSeller").hide();
+    }
+    else if((localStorage.getItem('userRole') === 'customer+seller') === true){
+        $("#profileAdmin").hide();
+        $("#profileCustomer").hide();
     }
 }

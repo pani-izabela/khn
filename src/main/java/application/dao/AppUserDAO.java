@@ -15,5 +15,6 @@ public interface AppUserDAO {
     AppUser findByEmailAndPassQuery(String email, String pass);
     AppUser findByEmail(String email);
     AppUser updatePass(AppUser appUser, String newPass);
+    AppUser updateAppUser(AppUser oldUser, AppUser newUser);
 
 }

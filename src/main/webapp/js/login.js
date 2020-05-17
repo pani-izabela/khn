@@ -1,4 +1,4 @@
-let emailField, passField, typeOfPage, role, userId;
+let emailField, passField, typeOfPage, role, userId, userFirstname, userLastname;
 
 function prepareLoginData() { //zbiera dane: email i pass oraz rodzaj strony customer/seller
     typeOfPage = setRole();
@@ -30,6 +30,8 @@ function checkUserCustomer(data, page) {
         success: function (res) {
             if (res.id !== null) {
                 userId = res.id;
+                userFirstname = res.firstname;
+                userLastname = res.lastname;
                 role = checkRole(res);
                 if (role === "admin") {
                     let loggedUser = $('form').serialize();
@@ -67,6 +69,8 @@ function checkUserSeller(data, page) {
         success: function (res) {
             if (res.id !== null) {
                 userId = res.id;
+                userFirstname = res.firstname;
+                userLastname = res.lastname;
                 role = checkRole(res);
                 if (role === "admin") {
                     let loggedUser = $('form').serialize();
@@ -100,8 +104,11 @@ function loginSecured(data) {
         contentType: "application/x-www-form-urlencoded",
         data: data,
         success: function () {
+            localStorage.setItem('loggedUserFirstname', userFirstname);
+            localStorage.setItem('loggedUserLastname', userLastname);
             localStorage.setItem('loggedUserEmail', emailField);
             localStorage.setItem('loggedUserId', userId);
+            localStorage.setItem('loggedUserPass', passField);
             if (role === 'admin') {
                 window.location.href = "http://localhost:8080/admin/menu";
 

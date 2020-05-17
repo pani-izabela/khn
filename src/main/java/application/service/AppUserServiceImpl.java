@@ -94,6 +94,18 @@ public class AppUserServiceImpl implements AppUserService {
             return null;
     }
 
+    //---------------------------------------- zmiana danych użytkownika --------------
+
+    @Override
+    public AppUser changeDataOfUser(AppUser newUser) {
+        AppUser appUserFromDb = findByIdQuery(newUser.getId());
+        if(appUserFromDb != null){
+            return appUserDAO.updateAppUser(appUserFromDb, newUser);
+        }
+        else
+            return null;
+    }
+
     //----------------------------------------usuwanie użytkownika przez admina --------------
 
     @Override
