@@ -34,26 +34,24 @@ function showCorrectBtn() {
         $('#saveBtn').hide();
         $('#backBtn').hide();
         $('#editBtn').show();
+        if((localStorage.getItem('userRole') === 'seller') === true){
+            $('#becomeCustomerBtn').show();
+        }
+        else{
+            $('#becomeCustomerBtn').hide();
+        }
     }
     else{
         $('#editBtn').hide();
         $('#backBtn').show();
         $('#saveBtn').show();
+        $('#becomeCustomerBtn').hide();
     }
+
 }
 
 function editUserData() {
-    var editable = false;
     $('.js-edit').on('click', function() {
-        /*editable = !editable;
-        if (editable) {
-            $(this).text('Wróć');
-            $('#saveBtn').show();
-        } else {
-            $(this).text('Zmień');
-            $('#saveBtn').hide();
-        }*/
-
         var $form = $(this).closest('form');
         $form.toggleClass('is-readonly is-editing');
         var isReadonly = $form.hasClass('is-readonly');
