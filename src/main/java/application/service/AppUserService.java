@@ -15,4 +15,5 @@ public interface AppUserService {
     AppUser loginUserFromCustomerPage(AppUser appUser);
     AppUser changePassword(String email, String oldPass, String newPass);
     AppUser changeDataOfUser(AppUser newUser);
+    AppUser addCustomerRole(AppUser appUser);
 }

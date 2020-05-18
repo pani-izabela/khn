@@ -1,13 +1,44 @@
 let userData;
+var role;
 $(document).ready(function () {
-    getUserData();
-    showCorrectBtn();
+    getLoggedUserData();
+    //getUserData();
+    //showCorrectBtn();
     editUserData();
     saveUserData();
     back();
+    becomeCustomer();
 });
 
-function getUserData() {
+function getLoggedUserData() {
+    $.ajax({
+        url: "http://localhost:8080/getAppUser?" + $.param({id: localStorage.getItem('loggedUserId')}),
+        type: "GET",
+        contentType: "application/json",
+        success: function (res) {
+            role = checkRole(res);
+            localStorage.setItem('userRole', role);
+            showCorrectBtn();
+            userData = {
+                id: res.id,
+                firstname: res.firstname,
+                lastname: res.lastname,
+                email: res.email,
+                pass: res.pass
+            };
+            $('#firstname').val(userData.firstname);
+            $('#lastname').val(userData.lastname);
+            $('#email').val(userData.email);
+            $('#pass').val(userData.pass);
+
+        },
+        error: function (res) {
+            console.log("Nie udało się pobrać danych zalogowanego usera")
+        }
+    });
+}
+
+/*function getUserData() {
     userData = {
         id: localStorage.getItem('loggedUserId'),
         firstname: localStorage.getItem('loggedUserFirstname'),
@@ -19,7 +50,7 @@ function getUserData() {
     $('#lastname').val(userData.lastname);
     $('#email').val(userData.email);
     $('#pass').val(userData.pass);
-}
+}*/
 
 function getUserDataAfterChange() {
     $('#firstname').val(userData.firstname);
@@ -34,7 +65,8 @@ function showCorrectBtn() {
         $('#saveBtn').hide();
         $('#backBtn').hide();
         $('#editBtn').show();
-        if((localStorage.getItem('userRole') === 'seller') === true){
+        //if((localStorage.getItem('userRole') === 'seller') === true){
+        if((role === 'seller') === true){
             $('#becomeCustomerBtn').show();
         }
         else{
@@ -73,10 +105,16 @@ function back() {
 
 function saveUserData(){
     $('.js-save').on('click', function() {
-        if(localStorage.getItem('loggedUserFirstname') === $('#firstname').val() &&
+        /*if(localStorage.getItem('loggedUserFirstname') === $('#firstname').val() &&
             localStorage.getItem('loggedUserLastname') === $('#lastname').val() &&
             localStorage.getItem('loggedUserEmail') === $('#email').val() &&
             localStorage.getItem('loggedUserPass') === $('#pass').val()){
+            console.log('dane są identyczne');
+        }*/
+        if(userData.firstname === $('#firstname').val() &&
+            userData.lastname === $('#lastname').val() &&
+            userData.email === $('#email').val() &&
+            userData.pass === $('#pass').val()){
             console.log('dane są identyczne');
         }
         else{
@@ -109,5 +147,27 @@ function saveUserData(){
         $form.toggleClass('is-editing is-readonly');
         $form.find('input,textarea').prop('disabled', true);
         showCorrectBtn();
+    });
+}
+
+function becomeCustomer(){
+    $('.js-becomeCustomer').on('click', function() {
+        $.ajax({
+            url: "http://localhost:8080/seller/addCustomerRole",
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(userData),
+            success: function (res) {
+                alert("Zostałes kupujacym");
+                window.location.reload();
+                //window.location.href = "menu";
+
+            },
+            error: function (res) {
+                alert("Operacja zostania kupujacym nie powiodla sie");
+
+            }
+        })
     });
 }

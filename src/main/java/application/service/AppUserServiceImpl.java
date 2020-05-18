@@ -106,6 +106,18 @@ public class AppUserServiceImpl implements AppUserService {
             return null;
     }
 
+    //----------------------------------dodanie nowej roli użytkownikowi-----------------------
+
+    @Override
+    public AppUser addCustomerRole(AppUser appUser) {
+        AppUser appUserFromDb = findByIdQuery(appUser.getId());
+        if(appUserFromDb != null){
+            return appUserDAO.updateUserRole(appUserFromDb, addAdditionalRole(1, Enums.CUSTOMER, appUser));
+        }
+        else
+            return null;
+    }
+
     //----------------------------------------usuwanie użytkownika przez admina --------------
 
     @Override
@@ -135,6 +147,16 @@ public class AppUserServiceImpl implements AppUserService {
         roleSeller.setName(roleName);
         roles.add(roleSeller);
         return roles;
+    }
+
+    private List<Role> addAdditionalRole(int roleId, String roleName, AppUser appUser){
+        AppUser appUserFromDB = findByIdQuery(appUser.getId());
+        List<Role> roles1 = appUserFromDB.getRoles();
+        Role role = new Role();
+        role.setId(roleId);
+        role.setName(roleName);
+        roles1.add(role);
+        return roles1;
     }
 
     private AppUser updatePass(AppUser appUser, String newPass) {
