@@ -15,14 +15,16 @@
         <intercept-url pattern="/admin/*" access="hasAuthority('admin')"/>
 
         <intercept-url pattern="/customer/menu" access="hasAnyAuthority('customer')"/>
-        <intercept-url pattern="/customer/auctions" access="hasAnyAuthority('customer')"/>
-        <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer')"/>
+        <intercept-url pattern="/customer/auctions" access="hasAnyAuthority('customer', 'seller')"/>
+        <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer', 'seller')"/>
         <intercept-url pattern="/customer/profile" access="hasAnyAuthority('customer')"/>
 
         <intercept-url pattern="/seller/menu" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/auctions" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/profile" access="hasAnyAuthority('seller')"/>
 
+        <!--<intercept-url pattern="/*/myProperties" access="isAuthenticated()"/>
+        <intercept-url pattern="/*/auctions" access="isAuthenticated()"/>-->
 
         <intercept-url pattern="/index" access="permitAll()"/>
         <intercept-url pattern="/passwordChange" access="permitAll()"/>

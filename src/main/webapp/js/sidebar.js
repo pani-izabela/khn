@@ -18,7 +18,7 @@ function showCorrectMenu() {
     }
     else if((localStorage.getItem('userRole') === 'customer+seller') === true){
         $("#menuForRoleLiA").hide();
-        $("#auctionsCustomer").hide();
+        $("#auctionsSeller").hide();
     }
 }
 
