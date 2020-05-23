@@ -1,6 +1,13 @@
+var isCustomer, isCustomerSeller;
 $(document).ready(function () {
+    getUserRole();
     showTables();
 });
+
+function getUserRole() {
+    isCustomer = (localStorage.getItem('userRole') === 'customer');
+    isCustomerSeller = (localStorage.getItem('userRole') === 'customer+seller');
+}
 
 function showTables(){
     $(".dropdown-menu a").click(function () {
@@ -54,7 +61,7 @@ function getListOfHauses() {
                     "render": function (data, type, full) {
                         let houseId = full.asset_id;
                         let auctionViewId = full.id;
-                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                        if(isCustomer === true || isCustomerSeller === true){
                             return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +','+ auctionViewId +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
                         }
                         else {
@@ -88,7 +95,7 @@ function getListOfFlats() {
                     "render": function (data, type, full) {
                         let flatId = full.asset_id;
                         let auctionViewId = full.id;
-                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                        if(isCustomer === true || isCustomerSeller === true){
                             return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +','+ auctionViewId +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
                         }
                         else{
@@ -121,7 +128,7 @@ function getListOfPlots() {
                     "render": function (data, type, full) {
                         let plotId = full.asset_id;
                         let auctionViewId = full.id;
-                        if((localStorage.getItem('userRole') === 'customer') === true || (localStorage.getItem('userRole') === 'customer+seller') === true) {
+                        if(isCustomer === true || isCustomerSeller === true){
                             return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ plotId +','+ "\'plot\'" +','+ auctionViewId +')" id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
                         }
                         else {
