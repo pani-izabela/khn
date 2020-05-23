@@ -31,11 +31,11 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AuctionView> findPropertyByAssetsTypeAndAppuserRole(String assetType, int appuserRole) {
+    public List<AuctionView> findPropertyByAssetsTypeAndAppUserRole(String assetType, int appUserRole) {
         try{
             return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, AuctionView.class)
                     .setParameter("assetType", assetType)
-                    .setParameter("appuserRole", appuserRole)
+                    .setParameter("appuserRole", appUserRole)
                     .getResultList();
         }
         catch (NoResultException e){

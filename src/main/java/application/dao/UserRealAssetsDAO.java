@@ -4,10 +4,10 @@ import application.model.*;
 
 import java.util.List;
 
-public interface UserrealassetsDAO {
+public interface UserRealAssetsDAO {
 
     List<Userrealassets> findAllUserrealassetsQuery();
-    Userrealassets findUserrealAssetsByUserId(AppUser appuser);
+    Userrealassets findUserrealAssetsByUserId(AppUser appUser);
     Userrealassets addUserrealassets(Userrealassets userrealassets);
     Userrealassets updateUserrealassetsHouse(Userrealassets userrealassets, House house);
     Userrealassets updateUserrealassetsPlot(Userrealassets userrealassets, Plot plot);

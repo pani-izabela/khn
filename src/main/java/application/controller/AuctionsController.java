@@ -1,9 +1,7 @@
 package application.controller;
 
-import application.dao.AppUserDAO;
 import application.dao.AuctionViewDAO;
 import application.dao.FinanceDAO;
-import application.dao.HouseDAO;
 import application.model.*;
 import application.service.*;
 import io.swagger.annotations.Api;
@@ -47,7 +45,7 @@ public class AuctionsController {
     @ApiImplicitParam(name="type", value = "RealAssets type", required = true)
     @GetMapping(value = "/getAssets")
     public @ResponseBody List<AuctionView> getAssetsByType(@RequestBody @RequestParam String assetType) {
-        return auctionViewDAO.findPropertyByAssetsTypeAndAppuserRole(assetType, 2);
+        return auctionViewDAO.findPropertyByAssetsTypeAndAppUserRole(assetType, 2);
     }
 
     @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")

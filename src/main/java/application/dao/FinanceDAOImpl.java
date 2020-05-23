@@ -18,10 +18,10 @@ public class FinanceDAOImpl implements FinanceDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public Finance findByAppuseridQuery(AppUser appuserid) {
+    public Finance findByAppuseridQuery(AppUser appUserId) {
         try {
             return em.createNamedQuery(Finance.GET_FINANCE_BY_APPUSERID, Finance.class)
-                    .setParameter("appuserid", appuserid)
+                    .setParameter("appuserid", appUserId)
                     .getSingleResult();
         }
         catch (NoResultException e){
@@ -31,9 +31,9 @@ public class FinanceDAOImpl implements FinanceDAO {
 
     @Override
     @Transactional
-    public Finance updateAmount(AppUser oldAppuserId, double  newAmount) {
+    public Finance updateAmount(AppUser oldAppUserId, double  newAmount) {
         try{
-            Finance finance = findByAppuseridQuery(oldAppuserId);
+            Finance finance = findByAppuseridQuery(oldAppUserId);
             finance.setAmount(newAmount);
             return em.merge(finance);
 

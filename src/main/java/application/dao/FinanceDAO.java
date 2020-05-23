@@ -5,7 +5,7 @@ import application.model.Finance;
 
 public interface FinanceDAO {
 
-    Finance findByAppuseridQuery(AppUser appuserid);
-    Finance updateAmount(AppUser oldAppuserId, double newAmount);
+    Finance findByAppuseridQuery(AppUser appUserId);
+    Finance updateAmount(AppUser oldAppUserId, double newAmount);
     Finance findById(int financeId);
 }

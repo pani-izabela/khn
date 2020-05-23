@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
-public class UserrealassetsDAOImpl implements UserrealassetsDAO{
+public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
@@ -30,10 +30,10 @@ public class UserrealassetsDAOImpl implements UserrealassetsDAO{
 
     @Override
     @Transactional(readOnly = true)
-    public Userrealassets findUserrealAssetsByUserId(AppUser appuserId) {
+    public Userrealassets findUserrealAssetsByUserId(AppUser appUser) {
         try{
             return em.createNamedQuery(Userrealassets.GET_USERREALASSETS_BY_APPUSERID, Userrealassets.class)
-                    .setParameter("appuserId", appuserId)
+                    .setParameter("appuserId", appUser)
                     .getSingleResult();
 
         }

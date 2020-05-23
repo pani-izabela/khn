@@ -3,7 +3,7 @@ package application.service;
 import application.dao.FlatDAO;
 import application.dao.HouseDAO;
 import application.dao.PlotDAO;
-import application.dao.UserrealassetsDAO;
+import application.dao.UserRealAssetsDAO;
 import application.model.*;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,9 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     private FlatDAO flatDAO;
     private HouseDAO houseDAO;
     private PlotDAO plotDAO;
-    private UserrealassetsDAO userrealassetsDAO;
+    private UserRealAssetsDAO userrealassetsDAO;
 
-    public UserrealassetsServiceImpl(AppUserService appUserService, FlatDAO flatDAO, HouseDAO houseDAO, PlotDAO plotDAO, UserrealassetsDAO userrealassetsDAO) {
+    public UserrealassetsServiceImpl(AppUserService appUserService, FlatDAO flatDAO, HouseDAO houseDAO, PlotDAO plotDAO, UserRealAssetsDAO userrealassetsDAO) {
         this.appUserService = appUserService;
         this.flatDAO = flatDAO;
         this.houseDAO = houseDAO;
