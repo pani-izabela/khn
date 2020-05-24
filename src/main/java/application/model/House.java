@@ -46,7 +46,7 @@ public class House {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="adress_id")
-    private Adress adress;
+    private Address address;
 }
 
 /*INSERT INTO house (id, size, price, rooms, appuser_id, adress_id) VALUES (1, '100m', 300000.00, 3, 3, 3);*/

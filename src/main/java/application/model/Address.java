@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Adress {
+public class Address {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

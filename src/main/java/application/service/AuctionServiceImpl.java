@@ -28,7 +28,7 @@ public class AuctionServiceImpl implements AuctionService {
         if(result) {
             financeService.updateAmount(appuserid);
             if(assetsType.equals("house")){
-                AuctionView secondProperty = auctionViewService.returnOtherPropertyWithTheSameAdress(assetsType, assetsId);
+                AuctionView secondProperty = auctionViewService.returnPropertyWithTheSameAddress(assetsType, assetsId);
 
                 if(secondProperty != null){
                     plotService.changeAppuser(secondProperty.getAsset_id(), appuserid);
@@ -42,7 +42,7 @@ public class AuctionServiceImpl implements AuctionService {
                 }
             }
             else if(assetsType.equals("plot")){
-                AuctionView secondProperty = auctionViewService.returnOtherPropertyWithTheSameAdress(assetsType, assetsId);
+                AuctionView secondProperty = auctionViewService.returnPropertyWithTheSameAddress(assetsType, assetsId);
 
                 if(secondProperty != null){
                     plotService.changeAppuser(assetsId, appuserid);

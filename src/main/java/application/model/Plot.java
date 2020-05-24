@@ -49,7 +49,7 @@ public class Plot {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="adress_id")
-    private Adress adress;
+    private Address address;
 }
 
 /*INSERT INTO plot (id, size, price, type, appuser_id, adress_id) VALUES (1, '1000m', 60000.00, 'budowlana', 3, 2);*/

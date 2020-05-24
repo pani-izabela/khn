@@ -2,6 +2,7 @@ package application.controller;
 
 import application.dao.AuctionViewDAO;
 import application.dao.FinanceDAO;
+import application.facade.AuctionFacade;
 import application.model.*;
 import application.service.*;
 import io.swagger.annotations.Api;
@@ -18,22 +19,29 @@ import java.util.List;
 @Controller
 public class AuctionsController {
 
-    private HouseService houseService;
+    private UserrealassetsService userrealassetsService;
+    private AuctionFacade auctionFacade;
+    private AuctionViewDAO auctionViewDAO;
+    /*private HouseService houseService;
     private AuctionViewDAO auctionViewDAO;
     private FinanceDAO financeDAO;
-    private UserrealassetsService userrealassetsService;
     private FlatService flatService;
-    private AuctionService auctionService;
+    private AuctionService auctionService;*/
 
-    public AuctionsController(HouseService houseService, AuctionViewDAO auctionViewDAO, FinanceDAO financeDAO, UserrealassetsService userrealassetsService, FlatService flatService, AuctionService auctionService){
+    /*public AuctionsController(HouseService houseService, AuctionViewDAO auctionViewDAO, FinanceDAO financeDAO, UserrealassetsService userrealassetsService, FlatService flatService, AuctionService auctionService){
         this.houseService = houseService;
         this.auctionViewDAO = auctionViewDAO;
         this.financeDAO = financeDAO;
         this.userrealassetsService = userrealassetsService;
         this.flatService = flatService;
         this.auctionService = auctionService;
-    }
+    }*/
 
+    public AuctionsController(UserrealassetsService userrealassetsService, AuctionViewDAO auctionViewDAO, AuctionFacade auctionFacade) {
+        this.userrealassetsService = userrealassetsService;
+        this.auctionViewDAO = auctionViewDAO;
+        this.auctionFacade = auctionFacade;
+    }
     //----------------------------------------------------------------------------
 
     @GetMapping(value = "*/auctions")
@@ -48,11 +56,30 @@ public class AuctionsController {
         return auctionViewDAO.findPropertyByAssetsTypeAndAppUserRole(assetType, 2);
     }
 
-    @ApiOperation(value = "Change appuser in house/flat/plot, change amount in finance, add row to userrealassets")
-    @PostMapping(value = "/buyProperty")
+    @ApiOperation(value = "Change appuser in flat, change amount in finance, add row to userrealassets")
+    @PostMapping(value = "/buyFlat")
     public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
-        boolean result = auctionService.buyProperty(appuserid, assetsId, assetsType);
-        if (result) {
+        if (auctionFacade.buyFlat(appuserid, assetsId, assetsType)) {
+            return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Change appuser in house, change amount in finance, add row to userrealassets")
+    @PostMapping(value = "/buyHouse")
+    public @ResponseBody ResponseEntity<String> buyHouse(int appuserid, int assetsId, String assetsType) {
+        if (auctionFacade.buyHouse(appuserid, assetsId, assetsType)) {
+            return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Change appuser in plot, change amount in finance, add row to userrealassets")
+    @PostMapping(value = "/buyPlot")
+    public @ResponseBody ResponseEntity<String> buyPlot(int appuserid, int assetsId, String assetsType) {
+        if (auctionFacade.buyPlot(appuserid, assetsId, assetsType)) {
             return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
@@ -66,34 +93,5 @@ public class AuctionsController {
         auctionViewDAO.deleteById(auctionViewId);
     }*/
 
-    //----------- chwilowe pomocnicze
-    @ApiOperation(value = "Get all houses")
-    @GetMapping(value = "/getAllHouses")
-    public @ResponseBody List<House> getAppUsers() {
-        return houseService.findAllHousesQuery();
-    }
-
-    @ApiOperation(value = "Get all from auction view")
-    @GetMapping(value = "/getAll")
-    public @ResponseBody List<AuctionView> getAll() {
-        return auctionViewDAO.findAllQuery();
-    }
-
-    @ApiOperation(value = "Get all flats")
-    @GetMapping(value = "/getFlats")
-    public @ResponseBody List<Flat> getAllFlats() {
-        return flatService.findAllFlatsQuery();
-    }
-
-    @GetMapping(value = "/getFinance")
-    public @ResponseBody Finance getFinanceById(@RequestBody @RequestParam int financeId) {
-        return financeDAO.findById(financeId);
-    }
-
-    @ApiOperation(value = "Get all userrealassets")
-    @GetMapping(value = "/getUas")
-    public @ResponseBody List<Userrealassets> getAllUas() {
-        return userrealassetsService.findAllUserrealassets();
-    }
 
 }

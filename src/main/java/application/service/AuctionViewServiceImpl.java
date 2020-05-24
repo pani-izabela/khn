@@ -33,7 +33,7 @@ public class AuctionViewServiceImpl implements AuctionViewService {
     }
 
     @Override
-    public AuctionView returnOtherPropertyWithTheSameAdress(String assetType, int assetId) {
+    public AuctionView returnPropertyWithTheSameAddress(String assetType, int assetId) {
         AuctionView propertyToReturn = new AuctionView();
         AuctionView propertyToBuy = auctionViewDAO.findByAssetsTypeAndAssetId(assetType, assetId);
         List<AuctionView> secondProperty = auctionViewDAO.findByAdress(

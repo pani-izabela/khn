@@ -62,7 +62,7 @@ function getListOfHauses() {
                         let houseId = full.asset_id;
                         let auctionViewId = full.id;
                         if(isCustomer === true || isCustomerSeller === true){
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +','+ auctionViewId +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
+                            return '<button onclick="buyHouse('+ localStorage.getItem('loggedUserId') +','+ houseId +','+ "\'house\'" +','+ auctionViewId +')" id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>';
                         }
                         else {
                             return '<button id="houseBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>';
@@ -96,7 +96,7 @@ function getListOfFlats() {
                         let flatId = full.asset_id;
                         let auctionViewId = full.id;
                         if(isCustomer === true || isCustomerSeller === true){
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +','+ auctionViewId +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
+                            return '<button onclick="buyFlat('+ localStorage.getItem('loggedUserId') +','+ flatId +','+ "\'flat\'" +','+ auctionViewId +')" id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: block">Kup</button>'
                         }
                         else{
                             return '<button id="flatBuyBtn" type="button" class="btn btn-success deleteBtn" style="display: none">Kup</button>'
@@ -129,7 +129,7 @@ function getListOfPlots() {
                         let plotId = full.asset_id;
                         let auctionViewId = full.id;
                         if(isCustomer === true || isCustomerSeller === true){
-                            return '<button onclick="buyProperty('+ localStorage.getItem('loggedUserId') +','+ plotId +','+ "\'plot\'" +','+ auctionViewId +')" id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
+                            return '<button onclick="buyPlot('+ localStorage.getItem('loggedUserId') +','+ plotId +','+ "\'plot\'" +','+ auctionViewId +')" id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: block">Kup</button>';
                         }
                         else {
                             return '<button id="plotBuyBtn" type="button" class="btn btn-success buyBtn" style="display: none">Kup</button>';
@@ -141,7 +141,58 @@ function getListOfPlots() {
     })
 }
 
-function buyProperty(user_id, property_id, property_type, auctionViewId) {
+function buyFlat(user_id, property_id, property_type) {
+    if(confirm("Jesteś pewny/a, że chcesz kupić to mieszkanie?")) {
+        $.ajax({
+            url: "http://localhost:8080/buyFlat?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
+            method: "POST",
+            success: function (res) {
+                console.log("Udało się kupić mieszkanie");
+                alert(res);
+                window.location.href = "myProperties"
+            },
+            error: function () {
+                console.log("Nie udało się kupić");
+            }
+        });
+    }
+}
+
+function buyHouse(user_id, property_id, property_type) {
+    if(confirm("Jesteś pewny/a, że chcesz kupić ten dom?")) {
+        $.ajax({
+            url: "http://localhost:8080/buyHouse?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
+            method: "POST",
+            success: function (res) {
+                console.log("Udało się kupić dom");
+                alert(res);
+                window.location.href = "myProperties"
+            },
+            error: function () {
+                console.log("Nie udało się kupić");
+            }
+        });
+    }
+}
+
+function buyPlot(user_id, property_id, property_type) {
+    if(confirm("Jesteś pewny/a, że chcesz kupić tę działkę?")) {
+        $.ajax({
+            url: "http://localhost:8080/buyPlot?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
+            method: "POST",
+            success: function (res) {
+                console.log("Udało się kupić działkę");
+                alert(res);
+                window.location.href = "myProperties"
+            },
+            error: function () {
+                console.log("Nie udało się kupić");
+            }
+        });
+    }
+}
+
+/*function buyProperty(user_id, property_id, property_type, auctionViewId) {
     if(confirm("Jesteś pewny/a, że chcesz kupić tę nieruchomość?")) {
         $.ajax({
             url: "http://localhost:8080/buyProperty?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
@@ -159,7 +210,7 @@ function buyProperty(user_id, property_id, property_type, auctionViewId) {
             }
         });
     }
-}
+}*/
 
 /*function deleteBoughtPropertyFromView(auctionViewId) {
     $.ajax({
