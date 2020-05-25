@@ -1,21 +1,19 @@
 package application.facade;
 
-import application.model.*;
+import application.model.AuctionView;
+import application.model.Userrealassets;
 import application.service.AuctionViewService;
 import application.service.FinanceService;
-import application.service.UserrealassetsService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuctionFacade {
 
-    private UserrealassetsService userrealassetsService;
     private AuctionViewService auctionViewService;
     private FinanceService financeService;
     private PropertyFacade propertyFacade;
 
-    public AuctionFacade(UserrealassetsService userrealassetsService, AuctionViewService auctionViewService, FinanceService financeService, PropertyFacade propertyFacade) {
-        this.userrealassetsService = userrealassetsService;
+    public AuctionFacade(AuctionViewService auctionViewService, FinanceService financeService, PropertyFacade propertyFacade) {
         this.auctionViewService = auctionViewService;
         this.financeService = financeService;
         this.propertyFacade = propertyFacade;
@@ -23,35 +21,31 @@ public class AuctionFacade {
 
     //--------operacje kupowania
 
-    public boolean buyHouse(int appuserid, int assetsId, String assetsType){
-        boolean result = false;
+    public Userrealassets buyHouse(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
-            result = propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType, "plot");
+            return propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType);
         }
         else {
-            result = propertyFacade.buyHouse(appuserid, assetsId, assetsType);
+            return propertyFacade.buyHouse(appuserid, assetsId);
         }
-        return result;
     }
 
-    public boolean buyFlat(int appuserid, int assetsId, String assetsType){
+    public Userrealassets buyFlat(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
-        return propertyFacade.buyFlat(appuserid, assetsId, assetsType);
+        return propertyFacade.buyFlat(appuserid, assetsId);
     }
 
-    public boolean buyPlot(int appuserid, int assetsId, String assetsType){
-        boolean result = false;
+    public Userrealassets buyPlot(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
-            result = propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType, "house");
+            return propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType);
         }
         else {
-            result = propertyFacade.buyPlot(appuserid, assetsId, assetsType);
+            return propertyFacade.buyPlot(appuserid, assetsId);
         }
-        return result;
     }
 
     //-------operacje finansowe
@@ -63,7 +57,6 @@ public class AuctionFacade {
         }
     }
 
-    //----------operacje przepinania nieruchmości
 
 
 

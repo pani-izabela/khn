@@ -1,5 +1,6 @@
 package application.facade;
 
+import application.model.Userrealassets;
 import application.service.FlatService;
 import application.service.HouseService;
 import application.service.PlotService;
@@ -20,36 +21,36 @@ public class PropertyFacade {
         this.userrealassetsService = userrealassetsService;
     }
 
-    public boolean buyHouse(int appuserid, int assetsId, String assetsType){
+    public Userrealassets buyHouse(int appuserid, int assetsId){
         houseService.changeAppuser(assetsId, appuserid);
-        userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-        return true;
+        return userrealassetsService.addHouse(appuserid, assetsId);
     }
 
-    public boolean buyFlat(int appuserid, int assetsId, String assetsType){
+    public Userrealassets buyFlat(int appuserid, int assetsId){
         flatService.changeAppuser(assetsId, appuserid);
-        userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-        return true;
+        return userrealassetsService.addFlat(appuserid, assetsId);
     }
 
-    public boolean buyPlot(int appuserid, int assetsId, String assetsType){
+    public Userrealassets buyPlot(int appuserid, int assetsId){
         plotService.changeAppuser(assetsId, appuserid);
-        userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-        return true;
+        return userrealassetsService.addPlot(appuserid, assetsId);
     }
 
-    public boolean buyPlotPlusHouse(int appuserid, int assetsId, int secondAssetId, String assetsType, String secondAssetType){
+    public Userrealassets buyPlotPlusHouse(int appuserid, int assetsId, int secondAssetId, String assetsType){
+        Userrealassets userrealassets = new Userrealassets();
         if(assetsType.equals("plot")){
             plotService.changeAppuser(assetsId, appuserid);
             houseService.changeAppuser(secondAssetId, appuserid);
+            userrealassets = userrealassetsService.addPlot(appuserid, assetsId);
+            userrealassets = userrealassetsService.updateHouse(appuserid, secondAssetId);
         }
         else if(assetsType.equals("house")){
             plotService.changeAppuser(secondAssetId, appuserid);
             houseService.changeAppuser(assetsId, appuserid);
+            userrealassets = userrealassetsService.addHouse(appuserid, assetsId);
+            userrealassets = userrealassetsService.updatePlot(appuserid, secondAssetId);
         }
-        userrealassetsService.addUserrealassets(appuserid, assetsId, assetsType);
-        userrealassetsService.updateUserrealassetsProperty(appuserid, secondAssetId, secondAssetType);
-        return true;
+        return userrealassets;
     }
 
 

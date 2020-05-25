@@ -32,31 +32,11 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     }
 
     @Override
-    public Userrealassets addUserrealassets(int appuserId, int assetsId, String assetsType) {
-        Userrealassets userrealassets = new Userrealassets();
-        AppUser appUser = appUserService.findByIdQuery(appuserId);
-        userrealassets.setAppUser(appUser);
-        if(assetsType.equals("flat")){
-            Flat flat = flatDAO.findFlatByIdQuery(assetsId);
-            userrealassets.setFlat(flat);
-        }
-        else if(assetsType.equals("house")){
-            House house = houseDAO.findHouseByIdQuery(assetsId);
-            userrealassets.setHouse(house);
-        }
-        else if(assetsType.equals("plot")){
-            Plot plot = plotDAO.findPlotByIdQuery(assetsId);
-            userrealassets.setPlot(plot);
-        }
-        return userrealassetsDAO.addUserrealassets(userrealassets);
-    }
-
-    @Override
     public Userrealassets addHouse(int appuserId, int assetsId) {
         Userrealassets userrealassets = new Userrealassets();
         userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
         userrealassets.setHouse(houseDAO.findHouseByIdQuery(assetsId));
-        return userrealassets;
+        return userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
@@ -64,7 +44,7 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
         Userrealassets userrealassets = new Userrealassets();
         userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
         userrealassets.setFlat(flatDAO.findFlatByIdQuery(assetsId));
-        return userrealassets;
+        return userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
@@ -72,26 +52,31 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
         Userrealassets userrealassets = new Userrealassets();
         userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
         userrealassets.setPlot(plotDAO.findPlotByIdQuery(assetsId));
-        return userrealassets;
+        return userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
-    public Userrealassets updateUserrealassetsProperty(int appuserId, int assetsId, String assetsType) {
+    public Userrealassets updateHouse(int appuserId, int assetsId) {
         AppUser appUser = appUserService.findByIdQuery(appuserId);
         Userrealassets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
-        if(assetsType.equals("house")){
-            House house = houseDAO.findHouseByIdQuery(assetsId);
-            userrealassets = userrealassetsDAO.updateUserrealassetsHouse(userrealassets, house);
-        }
-        else if(assetsType.equals("plot")){
-            Plot plot = plotDAO.findPlotByIdQuery(assetsId);
-            userrealassets = userrealassetsDAO.updateUserrealassetsPlot(userrealassets, plot);
-        }
-        else if(assetsType.equals("flat")){
-            Flat flat = flatDAO.findFlatByIdQuery(assetsId);
-            userrealassets = userrealassetsDAO.updateUserrealassetsFlat(userrealassets, flat);
-        }
-        return userrealassets;
+        House house = houseDAO.findHouseByIdQuery(assetsId);
+        return userrealassetsDAO.updateUserrealassetsHouse(userrealassets, house);
+    }
+
+    @Override
+    public Userrealassets updateFlat(int appuserId, int assetsId) {
+        AppUser appUser = appUserService.findByIdQuery(appuserId);
+        Userrealassets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
+        Flat flat = flatDAO.findFlatByIdQuery(assetsId);
+        return userrealassetsDAO.updateUserrealassetsFlat(userrealassets, flat);
+    }
+
+    @Override
+    public Userrealassets updatePlot(int appuserId, int assetsId) {
+        AppUser appUser = appUserService.findByIdQuery(appuserId);
+        Userrealassets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
+        Plot plot = plotDAO.findPlotByIdQuery(assetsId);
+        return userrealassetsDAO.updateUserrealassetsPlot(userrealassets, plot);
     }
 
 }

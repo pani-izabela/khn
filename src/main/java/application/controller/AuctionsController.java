@@ -43,7 +43,7 @@ public class AuctionsController {
     @ApiOperation(value = "Change appuser in flat, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyFlat")
     public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
-        if (auctionFacade.buyFlat(appuserid, assetsId, assetsType)) {
+        if (auctionFacade.buyFlat(appuserid, assetsId, assetsType) != null) {
             return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class AuctionsController {
     @ApiOperation(value = "Change appuser in house, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyHouse")
     public @ResponseBody ResponseEntity<String> buyHouse(int appuserid, int assetsId, String assetsType) {
-        if (auctionFacade.buyHouse(appuserid, assetsId, assetsType)) {
+        if (auctionFacade.buyHouse(appuserid, assetsId, assetsType) != null) {
             return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
@@ -63,7 +63,7 @@ public class AuctionsController {
     @ApiOperation(value = "Change appuser in plot, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyPlot")
     public @ResponseBody ResponseEntity<String> buyPlot(int appuserid, int assetsId, String assetsType) {
-        if (auctionFacade.buyPlot(appuserid, assetsId, assetsType)) {
+        if (auctionFacade.buyPlot(appuserid, assetsId, assetsType) != null) {
             return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
