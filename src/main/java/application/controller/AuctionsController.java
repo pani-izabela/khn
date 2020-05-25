@@ -19,26 +19,10 @@ import java.util.List;
 @Controller
 public class AuctionsController {
 
-    private UserrealassetsService userrealassetsService;
     private AuctionFacade auctionFacade;
     private AuctionViewDAO auctionViewDAO;
-    /*private HouseService houseService;
-    private AuctionViewDAO auctionViewDAO;
-    private FinanceDAO financeDAO;
-    private FlatService flatService;
-    private AuctionService auctionService;*/
 
-    /*public AuctionsController(HouseService houseService, AuctionViewDAO auctionViewDAO, FinanceDAO financeDAO, UserrealassetsService userrealassetsService, FlatService flatService, AuctionService auctionService){
-        this.houseService = houseService;
-        this.auctionViewDAO = auctionViewDAO;
-        this.financeDAO = financeDAO;
-        this.userrealassetsService = userrealassetsService;
-        this.flatService = flatService;
-        this.auctionService = auctionService;
-    }*/
-
-    public AuctionsController(UserrealassetsService userrealassetsService, AuctionViewDAO auctionViewDAO, AuctionFacade auctionFacade) {
-        this.userrealassetsService = userrealassetsService;
+    public AuctionsController(AuctionViewDAO auctionViewDAO, AuctionFacade auctionFacade) {
         this.auctionViewDAO = auctionViewDAO;
         this.auctionFacade = auctionFacade;
     }

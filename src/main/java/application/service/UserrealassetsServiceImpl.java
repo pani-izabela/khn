@@ -52,6 +52,30 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     }
 
     @Override
+    public Userrealassets addHouse(int appuserId, int assetsId) {
+        Userrealassets userrealassets = new Userrealassets();
+        userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
+        userrealassets.setHouse(houseDAO.findHouseByIdQuery(assetsId));
+        return userrealassets;
+    }
+
+    @Override
+    public Userrealassets addFlat(int appuserId, int assetsId) {
+        Userrealassets userrealassets = new Userrealassets();
+        userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
+        userrealassets.setFlat(flatDAO.findFlatByIdQuery(assetsId));
+        return userrealassets;
+    }
+
+    @Override
+    public Userrealassets addPlot(int appuserId, int assetsId) {
+        Userrealassets userrealassets = new Userrealassets();
+        userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
+        userrealassets.setPlot(plotDAO.findPlotByIdQuery(assetsId));
+        return userrealassets;
+    }
+
+    @Override
     public Userrealassets updateUserrealassetsProperty(int appuserId, int assetsId, String assetsType) {
         AppUser appUser = appUserService.findByIdQuery(appuserId);
         Userrealassets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);

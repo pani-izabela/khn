@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AuctionViewService {
     double returnTotalCost(String assetType, int assetId);
-    AuctionView returnPropertyWithTheSameAddress(String assetType, int assetId);
+    AuctionView getPropertyWithTheSameAddress(String assetType, int assetId);
 }

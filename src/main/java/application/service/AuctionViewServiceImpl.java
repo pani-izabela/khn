@@ -19,10 +19,7 @@ public class AuctionViewServiceImpl implements AuctionViewService {
     public double returnTotalCost(String assetType, int assetId) {
         double totalCost;
         AuctionView propertyToBuy = auctionViewDAO.findByAssetsTypeAndAssetId(assetType, assetId);
-        String city = propertyToBuy.getCity();
-        String postcode = propertyToBuy.getPostcode();
-        String homenumber = propertyToBuy.getHomenumber();
-        List<AuctionView> propertyToReturn = auctionViewDAO.findByAdress(city,postcode,homenumber);
+        List<AuctionView> propertyToReturn = getPropertiesByAddress(propertyToBuy);
         if(propertyToReturn.size()==2){
             totalCost = propertyToReturn.get(0).getPrice() + propertyToReturn.get(1).getPrice();
         }
@@ -33,25 +30,36 @@ public class AuctionViewServiceImpl implements AuctionViewService {
     }
 
     @Override
-    public AuctionView returnPropertyWithTheSameAddress(String assetType, int assetId) {
-        AuctionView propertyToReturn = new AuctionView();
+    public AuctionView getPropertyWithTheSameAddress(String assetType, int assetId) {
         AuctionView propertyToBuy = auctionViewDAO.findByAssetsTypeAndAssetId(assetType, assetId);
-        List<AuctionView> secondProperty = auctionViewDAO.findByAdress(
-                propertyToBuy.getCity(), propertyToBuy.getPostcode(), propertyToBuy.getHomenumber()
-        );
+        List<AuctionView> secondProperty = getPropertiesByAddress(propertyToBuy);
         if(secondProperty.size()==2){
-            String asset_type1 = secondProperty.get(0).getAsset_type();
-            String asset_type2 = secondProperty.get(1).getAsset_type();
-            if (asset_type1.equals(assetType) && !asset_type2.equals(assetType)){
-                propertyToReturn = secondProperty.get(1);
-            }
-            else if (asset_type2.equals(assetType) && !asset_type1.equals(assetType)){
-                propertyToReturn = secondProperty.get(0);
-            }
-            return propertyToReturn;
+            return getProperty(secondProperty, assetType);
         }
         else {
-            propertyToReturn = null;
+            return null;
+        }
+    }
+
+
+    //---------------prywatne metody
+
+    private List<AuctionView> getPropertiesByAddress(AuctionView auctionView){
+        String city = auctionView.getCity();
+        String postcode = auctionView.getPostcode();
+        String homenumber = auctionView.getHomenumber();
+        return auctionViewDAO.findByAdress(city,postcode,homenumber);
+    }
+
+    private AuctionView getProperty(List<AuctionView> auctionViewList, String assetType){
+        AuctionView propertyToReturn = new AuctionView();
+        boolean asset_type1 = auctionViewList.get(0).getAsset_type().equals(assetType);
+        boolean asset_type2 = auctionViewList.get(1).getAsset_type().equals(assetType);
+        if(asset_type1 && !asset_type2){
+            propertyToReturn = auctionViewList.get(1);
+        }
+        else if(asset_type2 && !asset_type1){
+            propertyToReturn = auctionViewList.get(0);
         }
         return propertyToReturn;
     }

@@ -1,7 +1,8 @@
 var isCustomer, isCustomerSeller;
+var selTable;
 $(document).ready(function () {
     getUserRole();
-    showTables();
+    selectTable();
 });
 
 function getUserRole() {
@@ -9,37 +10,42 @@ function getUserRole() {
     isCustomerSeller = (localStorage.getItem('userRole') === 'customer+seller');
 }
 
-function showTables(){
+function selectTable() {
     $(".dropdown-menu a").click(function () {
-        var selTable = $(this).attr('data-value');
+        selTable = $(this).attr('data-value');
         console.log("wartość selTable po showTables() to: ", selTable);
         $(".tables").show();
-        if(selTable == 1){
-            getListOfHauses();
-            $("#auctionsListFlat").hide();
-            $("#auctionsListFlat_wrapper").hide();
-            $("#auctionsListPlot").hide();
-            $("#auctionsListPlot_wrapper").hide();
-            $("#auctionsListHouse").show();
-        }
-        else if(selTable == 2){
-            getListOfFlats();
-            $("#auctionsListHouse").hide();
-            $("#auctionsListHouse_wrapper").hide();
-            $("#auctionsListPlot").hide();
-            $("#auctionsListPlot_wrapper").hide();
-            $("#auctionsListFlat").show();
-        }
-        else if(selTable == 3){
-            getListOfPlots();
-            $("#auctionsListHouse").hide();
-            $("#auctionsListHouse_wrapper").hide();
-            $("#auctionsListFlat").hide();
-            $("#auctionsListFlat_wrapper").hide();
-            $("#auctionsListPlot").show();
-        }
-    });
+        showTables();
+    })
 }
+
+function showTables() {
+    if(selTable == 1){
+        getListOfHauses();
+        $("#auctionsListFlat").hide();
+        $("#auctionsListFlat_wrapper").hide();
+        $("#auctionsListPlot").hide();
+        $("#auctionsListPlot_wrapper").hide();
+        $("#auctionsListHouse").show();
+    }
+    else if(selTable == 2){
+        getListOfFlats();
+        $("#auctionsListHouse").hide();
+        $("#auctionsListHouse_wrapper").hide();
+        $("#auctionsListPlot").hide();
+        $("#auctionsListPlot_wrapper").hide();
+        $("#auctionsListFlat").show();
+    }
+    else if(selTable == 3){
+        getListOfPlots();
+        $("#auctionsListHouse").hide();
+        $("#auctionsListHouse_wrapper").hide();
+        $("#auctionsListFlat").hide();
+        $("#auctionsListFlat_wrapper").hide();
+        $("#auctionsListPlot").show();
+    }
+}
+
 
 function getListOfHauses() {
     var property_type = "house";

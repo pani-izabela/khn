@@ -1,6 +1,5 @@
 package application.facade;
 
-import application.dao.AuctionViewDAO;
 import application.model.*;
 import application.service.AuctionViewService;
 import application.service.FinanceService;
@@ -27,7 +26,7 @@ public class AuctionFacade {
     public boolean buyHouse(int appuserid, int assetsId, String assetsType){
         boolean result = false;
         financialOperations(appuserid, assetsId, assetsType);
-        AuctionView secondProperty = auctionViewService.returnPropertyWithTheSameAddress(assetsType, assetsId);
+        AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
             result = propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType, "plot");
         }
@@ -45,7 +44,7 @@ public class AuctionFacade {
     public boolean buyPlot(int appuserid, int assetsId, String assetsType){
         boolean result = false;
         financialOperations(appuserid, assetsId, assetsType);
-        AuctionView secondProperty = auctionViewService.returnPropertyWithTheSameAddress(assetsType, assetsId);
+        AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
             result = propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType, "house");
         }
@@ -58,7 +57,7 @@ public class AuctionFacade {
     //-------operacje finansowe
     private void financialOperations(int appuserid, int assetsId, String assetsType){
         double totalCost = auctionViewService.returnTotalCost(assetsType, assetsId);
-        boolean result = financeService.chcekUserAccountStatusBeforeShopping3(appuserid, totalCost);
+        boolean result = financeService.chcekUserAccountStatus(appuserid, totalCost);
         if(result){
             financeService.updateAmount(appuserid);
         }
