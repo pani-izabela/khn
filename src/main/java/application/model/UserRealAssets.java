@@ -8,8 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @NamedQueries({
-        @NamedQuery(name = Userrealassets.GET_USERREALASSETS, query = Userrealassets.QUERY_GET_USERREALASSETS),
-        @NamedQuery(name = Userrealassets.GET_USERREALASSETS_BY_APPUSERID, query = Userrealassets.QUERY_GET_USERREALASSETS_BY_APPUSERID)
+        @NamedQuery(name = UserRealAssets.GET_USERREALASSETS, query = UserRealAssets.QUERY_GET_USERREALASSETS),
+        @NamedQuery(name = UserRealAssets.GET_USERREALASSETS_BY_APPUSERID, query = UserRealAssets.QUERY_GET_USERREALASSETS_BY_APPUSERID)
 })
 
 @Entity
@@ -17,13 +17,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @Table(name = "USERREALASSETS")
-public class Userrealassets {
+public class UserRealAssets {
 
     public static final String GET_USERREALASSETS = "Userrealassets.get_userrealassets";
-    public static final String QUERY_GET_USERREALASSETS = "select uas from Userrealassets uas";
+    public static final String QUERY_GET_USERREALASSETS = "select uas from UserRealAssets uas";
 
     public static final String GET_USERREALASSETS_BY_APPUSERID = "Userrealassets.get_userrealassets_by_appuserid";
-    public static final String QUERY_GET_USERREALASSETS_BY_APPUSERID = "select uas from Userrealassets uas where uas.appUser = :appuserId";
+    public static final String QUERY_GET_USERREALASSETS_BY_APPUSERID = "select uas from UserRealAssets uas where uas.appUser = :appuserId";
 
     @Id
     @NotNull

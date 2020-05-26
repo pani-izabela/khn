@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface UserRealAssetsDAO {
 
-    List<Userrealassets> findAllUserrealassetsQuery();
-    Userrealassets findUserrealAssetsByUserId(AppUser appUser);
-    Userrealassets addUserrealassets(Userrealassets userrealassets);
-    Userrealassets updateUserrealassetsHouse(Userrealassets userrealassets, House house);
-    Userrealassets updateUserrealassetsPlot(Userrealassets userrealassets, Plot plot);
-    Userrealassets updateUserrealassetsFlat(Userrealassets userrealassets, Flat flat);
+    List<UserRealAssets> findAllUserrealassetsQuery();
+    UserRealAssets findUserrealAssetsByUserId(AppUser appUser);
+    UserRealAssets addUserrealassets(UserRealAssets userRealAssets);
+    UserRealAssets updateUserrealassetsHouse(UserRealAssets userRealAssets, House house);
+    UserRealAssets updateUserrealassetsPlot(UserRealAssets userRealAssets, Plot plot);
+    UserRealAssets updateUserrealassetsFlat(UserRealAssets userRealAssets, Flat flat);
 }

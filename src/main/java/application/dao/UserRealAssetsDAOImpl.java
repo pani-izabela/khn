@@ -18,9 +18,9 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Userrealassets> findAllUserrealassetsQuery() {
+    public List<UserRealAssets> findAllUserrealassetsQuery() {
         try{
-            return em.createNamedQuery(Userrealassets.GET_USERREALASSETS, Userrealassets.class)
+            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS, UserRealAssets.class)
                     .getResultList();
         }
         catch (NoResultException e) {
@@ -30,9 +30,9 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public Userrealassets findUserrealAssetsByUserId(AppUser appUser) {
+    public UserRealAssets findUserrealAssetsByUserId(AppUser appUser) {
         try{
-            return em.createNamedQuery(Userrealassets.GET_USERREALASSETS_BY_APPUSERID, Userrealassets.class)
+            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_APPUSERID, UserRealAssets.class)
                     .setParameter("appuserId", appUser)
                     .getSingleResult();
 
@@ -44,9 +44,9 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional
-    public Userrealassets addUserrealassets(Userrealassets userrealassets) {
+    public UserRealAssets addUserrealassets(UserRealAssets userRealAssets) {
         try{
-            return em.merge(userrealassets);
+            return em.merge(userRealAssets);
         }
         catch (NoResultException e){
             return null;
@@ -55,10 +55,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional
-    public Userrealassets updateUserrealassetsHouse(Userrealassets userrealassets, House house) {
+    public UserRealAssets updateUserrealassetsHouse(UserRealAssets userRealAssets, House house) {
         try{
-            userrealassets.setHouse(house);
-            return em.merge(userrealassets);
+            userRealAssets.setHouse(house);
+            return em.merge(userRealAssets);
         }
         catch (NoResultException e){
             return null;
@@ -67,10 +67,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional
-    public Userrealassets updateUserrealassetsPlot(Userrealassets userrealassets, Plot plot) {
+    public UserRealAssets updateUserrealassetsPlot(UserRealAssets userRealAssets, Plot plot) {
         try{
-            userrealassets.setPlot(plot);
-            return em.merge(userrealassets);
+            userRealAssets.setPlot(plot);
+            return em.merge(userRealAssets);
         }
         catch (NoResultException e){
             return null;
@@ -79,10 +79,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional
-    public Userrealassets updateUserrealassetsFlat(Userrealassets userrealassets, Flat flat) {
+    public UserRealAssets updateUserrealassetsFlat(UserRealAssets userRealAssets, Flat flat) {
         try{
-            userrealassets.setFlat(flat);
-            return em.merge(userrealassets);
+            userRealAssets.setFlat(flat);
+            return em.merge(userRealAssets);
         }
         catch (NoResultException e){
             return null;

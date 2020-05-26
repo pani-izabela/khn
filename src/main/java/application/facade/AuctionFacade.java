@@ -1,7 +1,7 @@
 package application.facade;
 
 import application.model.AuctionView;
-import application.model.Userrealassets;
+import application.model.UserRealAssets;
 import application.service.AuctionViewService;
 import application.service.FinanceService;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class AuctionFacade {
 
     //--------operacje kupowania
 
-    public Userrealassets buyHouse(int appuserid, int assetsId, String assetsType){
+    public UserRealAssets buyHouse(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
@@ -32,12 +32,12 @@ public class AuctionFacade {
         }
     }
 
-    public Userrealassets buyFlat(int appuserid, int assetsId, String assetsType){
+    public UserRealAssets buyFlat(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
         return propertyFacade.buyFlat(appuserid, assetsId);
     }
 
-    public Userrealassets buyPlot(int appuserid, int assetsId, String assetsType){
+    public UserRealAssets buyPlot(int appuserid, int assetsId, String assetsType){
         financialOperations(appuserid, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
