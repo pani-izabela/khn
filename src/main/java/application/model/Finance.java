@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 public class Finance {
 
     public static final String GET_FINANCE_BY_APPUSERID = "Finance.get_finance_by_appuserid";
-    public static final String QUERY_GET_FINANCE_BY_APPUSERID = "select f from Finance f where f.appuser = :appuserid";
+    public static final String QUERY_GET_FINANCE_BY_APPUSERID = "select f from Finance f where f.appUser = :appuserId";
 
     public static final String GET_FINANCE_BY_ID = "Finance.get_finance_by_id";
     public static final String QUERY_GET_FINANCE_BY_ID = "select f from Finance f where f.id = :financeId";
@@ -32,7 +32,7 @@ public class Finance {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="appuser_id")
-    private AppUser appuser;
+    private AppUser appUser;
 
     @NotNull
     private double amount;

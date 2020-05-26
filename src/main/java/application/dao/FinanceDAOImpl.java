@@ -21,7 +21,7 @@ public class FinanceDAOImpl implements FinanceDAO {
     public Finance findByAppuseridQuery(AppUser appUserId) {
         try {
             return em.createNamedQuery(Finance.GET_FINANCE_BY_APPUSERID, Finance.class)
-                    .setParameter("appuserid", appUserId)
+                    .setParameter("appuserId", appUserId)
                     .getSingleResult();
         }
         catch (NoResultException e){
