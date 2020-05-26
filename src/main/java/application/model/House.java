@@ -42,7 +42,7 @@ public class House {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="appuser_id")
-    private AppUser appuser;
+    private AppUser appUser;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="adress_id")

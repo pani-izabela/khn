@@ -2,7 +2,6 @@ package application.dao;
 
 import application.model.AppUser;
 import application.model.Flat;
-import application.model.House;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +45,7 @@ public class FlatDAOImpl implements FlatDAO{
     @Transactional
     public Flat updateAppuser(Flat flat, AppUser appUser) {
         try{
-            flat.setAppuser(appUser);
+            flat.setAppUser(appUser);
             return em.merge(flat);
 
         } catch(NoResultException e){

@@ -40,7 +40,7 @@ public class AuctionsController {
         return auctionViewDAO.findPropertyByAssetsTypeAndAppUserRole(assetType, 2);
     }
 
-    @ApiOperation(value = "Change appuser in flat, change amount in finance, add row to userrealassets")
+    @ApiOperation(value = "Change appUser in flat, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyFlat")
     public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyFlat(appuserid, assetsId, assetsType) != null) {
@@ -50,7 +50,7 @@ public class AuctionsController {
         }
     }
 
-    @ApiOperation(value = "Change appuser in house, change amount in finance, add row to userrealassets")
+    @ApiOperation(value = "Change appUser in house, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyHouse")
     public @ResponseBody ResponseEntity<String> buyHouse(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyHouse(appuserid, assetsId, assetsType) != null) {
@@ -60,7 +60,7 @@ public class AuctionsController {
         }
     }
 
-    @ApiOperation(value = "Change appuser in plot, change amount in finance, add row to userrealassets")
+    @ApiOperation(value = "Change appUser in plot, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyPlot")
     public @ResponseBody ResponseEntity<String> buyPlot(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyPlot(appuserid, assetsId, assetsType) != null) {

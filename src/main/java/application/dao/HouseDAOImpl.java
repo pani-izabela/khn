@@ -45,7 +45,7 @@ public class HouseDAOImpl implements HouseDAO{
     @Transactional
     public House updateAppuser(House house, AppUser appUser) {
         try{
-            house.setAppuser(appUser);
+            house.setAppUser(appUser);
             return em.merge(house);
 
         } catch(NoResultException e){

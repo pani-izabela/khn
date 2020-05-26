@@ -1,7 +1,6 @@
 package application.dao;
 
 import application.model.AppUser;
-import application.model.Flat;
 import application.model.Plot;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,7 @@ public class PlotDAOImpl implements PlotDAO{
     @Transactional
     public Plot updateAppuser(Plot plot, AppUser appUser) {
         try{
-            plot.setAppuser(appUser);
+            plot.setAppUser(appUser);
             return em.merge(plot);
 
         } catch(NoResultException e){
