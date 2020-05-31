@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodawanie nieruchomości</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/propper.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/addProperty.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+    <!--Sidebar-->
+    <div id="sidebarOnEveryPage"></div>
+
+    <!--Page Content-->
+    <div id="content">
+        <div id="headerOnEveryPage"></div>
+
+        <div class="container">
+            <br>
+            <h1>Dodaj nieruchomość</h1>
+            <br>
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Wybierz
+                </button>
+
+                <div id="propertyType" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a id = "houseType" class="dropdown-item" data-value="1" href="#">Dom</a>
+                    <a id = "flatType" class="dropdown-item" data-value="2" href="#">Mieszkanie</a>
+                    <a id = "plotType" class="dropdown-item" data-value="3" href="#">Działka</a>
+                </div>
+            </div>
+            <br>
+            <div class="forms" style="display: none">
+                <div id="formHouse" class="form-group" style="display: none">
+                    <p style="font-weight: bold;">Formularz dodawania domu</p>
+                    <div class="form-group">
+                        <label for="field1">Pole pierwsze domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="field1" placeholder="Wpisz coś" name="field1">
+                    </div>
+                    <div class="form-group">
+                        <label for="field2">Pole drugie domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="field2" placeholder="Wpisz coś" name="field2">
+                    </div>
+                    <button type="button" class="btn btn-success" id="addHouseBtn">Dodaj dom</button>
+                </div>
+
+                <div id="formFlat" class="form-group" style="display: none">
+                    <p style="font-weight: bold;">Formularz dodawania mieszkania</p>
+                    <div class="form-group">
+                        <label for="city">Miiejscowość:</label>
+                        <input type="text" class="form-control form-control-sm" id="city" placeholder="Podaj nazwę miejscowości" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Pole drugie mieszkania:</label>
+                        <input type="text" class="form-control form-control-sm" id="street" placeholder="Podaj nazwę ulicy" name="street">
+                    </div>
+                    <div class="form-group">
+                        <label for="HouseNo">Nr domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="HouseNo" placeholder="Podaj nr domu" name="house_no">
+                    </div>
+                    <div class="form-group">
+                        <label for="FlatNo">Nr mieszkania:</label>
+                        <input type="text" class="form-control form-control-sm" id="FlatNo" placeholder="Podaj nr mieszkania" name="flat_no">
+                    </div>
+                    <button type="button" class="btn btn-success" id="addFlatBtn">Dodaj mieszkanie</button>
+                </div>
+
+                <div id="formPlot" class="form-group" style="display: none">
+                    <p style="font-weight: bold;">Formularz dodawania działki</p>
+                    <div class="form-group">
+                        <label for="field5">Pole pierwsze działki:</label>
+                        <input type="text" class="form-control form-control-sm" id="field5" placeholder="Wpisz coś" name="field1">
+                    </div>
+                    <div class="form-group">
+                        <label for="field6">Pole drugie działki:</label>
+                        <input type="text" class="form-control form-control-sm" id="field6" placeholder="Wpisz coś" name="field2">
+                    </div>
+                    <button type="button" class="btn btn-success" id="addPlotBtn">Dodaj działkę</button>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+
+        <div id="footerOnPage">
+        </div>
+    </div>
+</div>
+</body>
+</html>

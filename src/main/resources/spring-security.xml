@@ -22,6 +22,7 @@
         <intercept-url pattern="/seller/menu" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/auctions" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/profile" access="hasAnyAuthority('seller')"/>
+        <intercept-url pattern="/seller/addProperty" access="hasAnyAuthority('seller')"/>
 
         <!--<intercept-url pattern="/*/myProperties" access="isAuthenticated()"/>
         <intercept-url pattern="/*/auctions" access="isAuthenticated()"/>-->
