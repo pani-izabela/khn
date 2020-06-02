@@ -43,12 +43,32 @@
                 <div id="formHouse" class="form-group" style="display: none">
                     <p style="font-weight: bold;">Formularz dodawania domu</p>
                     <div class="form-group">
-                        <label for="field1">Pole pierwsze domu:</label>
-                        <input type="text" class="form-control form-control-sm" id="field1" placeholder="Wpisz coś" name="field1">
+                        <label for="cityH">Miejscowość:</label>
+                        <input type="text" class="form-control form-control-sm" id="cityH" placeholder="Podaj nazwę miejscowości">
                     </div>
                     <div class="form-group">
-                        <label for="field2">Pole drugie domu:</label>
-                        <input type="text" class="form-control form-control-sm" id="field2" placeholder="Wpisz coś" name="field2">
+                        <label for="streetH">Ulica:</label>
+                        <input type="text" class="form-control form-control-sm" id="streetH" placeholder="Podaj nazwę ulicy">
+                    </div>
+                    <div class="form-group">
+                        <label for="houseNoH">Nr domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="houseNoH" placeholder="Podaj nr domu">
+                    </div>
+                    <div class="form-group">
+                        <label for="postcodeH">Kod pocztowy:</label>
+                        <input type="text" class="form-control form-control-sm" id="postcodeH" placeholder="Podaj kod pocztowy">
+                    </div>
+                    <div class="form-group">
+                        <label for="priceH">Cena:</label>
+                        <input type="number" class="form-control form-control-sm" id="priceH" placeholder="Podaj cenę np. 150000.00" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="areaH">Powierzchnia:</label>
+                        <input type="text" class="form-control form-control-sm" id="areaH" placeholder="Podaj powierzchnię np. 85m">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomsNoH">Liczba pokoi:</label>
+                        <input type="number" class="form-control form-control-sm" id="roomsNoH" placeholder="Podaj liczbę pokoi">
                     </div>
                     <button type="button" class="btn btn-success" id="addHouseBtn">Dodaj dom</button>
                 </div>
@@ -56,20 +76,40 @@
                 <div id="formFlat" class="form-group" style="display: none">
                     <p style="font-weight: bold;">Formularz dodawania mieszkania</p>
                     <div class="form-group">
-                        <label for="city">Miiejscowość:</label>
-                        <input type="text" class="form-control form-control-sm" id="city" placeholder="Podaj nazwę miejscowości" name="city">
+                        <label for="cityF">Miejscowość:</label>
+                        <input type="text" class="form-control form-control-sm" id="cityF" placeholder="Podaj nazwę miejscowości">
                     </div>
                     <div class="form-group">
-                        <label for="street">Pole drugie mieszkania:</label>
-                        <input type="text" class="form-control form-control-sm" id="street" placeholder="Podaj nazwę ulicy" name="street">
+                        <label for="streetF">Ulica:</label>
+                        <input type="text" class="form-control form-control-sm" id="streetF" placeholder="Podaj nazwę ulicy">
                     </div>
                     <div class="form-group">
-                        <label for="HouseNo">Nr domu:</label>
-                        <input type="text" class="form-control form-control-sm" id="HouseNo" placeholder="Podaj nr domu" name="house_no">
+                        <label for="houseNoF">Nr domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="houseNoF" placeholder="Podaj nr domu">
                     </div>
                     <div class="form-group">
-                        <label for="FlatNo">Nr mieszkania:</label>
-                        <input type="text" class="form-control form-control-sm" id="FlatNo" placeholder="Podaj nr mieszkania" name="flat_no">
+                        <label for="flatNoF">Nr mieszkania:</label>
+                        <input type="text" class="form-control form-control-sm" id="flatNoF" placeholder="Podaj nr mieszkania">
+                    </div>
+                    <div class="form-group">
+                        <label for="postcodeF">Kod pocztowy:</label>
+                        <input type="text" class="form-control form-control-sm" id="postcodeF" placeholder="Podaj kod pocztowy">
+                    </div>
+                    <div class="form-group">
+                        <label for="priceF">Cena:</label>
+                        <input type="number" class="form-control form-control-sm" id="priceF" placeholder="Podaj cenę np. 150000.00" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="areaF">Powierzchnia:</label>
+                        <input type="text" class="form-control form-control-sm" id="areaF" placeholder="Podaj powierzchnię np. 85m">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomsNoF">Liczba pokoi:</label>
+                        <input type="number" class="form-control form-control-sm" id="roomsNoF" placeholder="Podaj liczbę pokoi">
+                    </div>
+                    <div class="form-group">
+                        <label for="floorF">Piętro:</label>
+                        <input type="number" class="form-control form-control-sm" id="floorF" placeholder="Podaj piętro">
                     </div>
                     <button type="button" class="btn btn-success" id="addFlatBtn">Dodaj mieszkanie</button>
                 </div>
@@ -77,12 +117,37 @@
                 <div id="formPlot" class="form-group" style="display: none">
                     <p style="font-weight: bold;">Formularz dodawania działki</p>
                     <div class="form-group">
-                        <label for="field5">Pole pierwsze działki:</label>
-                        <input type="text" class="form-control form-control-sm" id="field5" placeholder="Wpisz coś" name="field1">
+                        <label for="cityP">Miejscowość:</label>
+                        <input type="text" class="form-control form-control-sm" id="cityP" placeholder="Podaj nazwę miejscowości">
                     </div>
                     <div class="form-group">
-                        <label for="field6">Pole drugie działki:</label>
-                        <input type="text" class="form-control form-control-sm" id="field6" placeholder="Wpisz coś" name="field2">
+                        <label for="streetP">Ulica:</label>
+                        <input type="text" class="form-control form-control-sm" id="streetP" placeholder="Podaj nazwę ulicy">
+                    </div>
+                    <div class="form-group">
+                        <label for="houseNoP">Nr domu:</label>
+                        <input type="text" class="form-control form-control-sm" id="houseNoP" placeholder="Podaj nr domu">
+                    </div>
+                    <div class="form-group">
+                        <label for="postcodeP">Kod pocztowy:</label>
+                        <input type="text" class="form-control form-control-sm" id="postcodeP" placeholder="Podaj kod pocztowy">
+                    </div>
+                    <div class="form-group">
+                        <label for="priceP">Cena:</label>
+                        <input type="number" class="form-control form-control-sm" id="priceP" placeholder="Podaj cenę np. 150000.00" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="areaP">Powierzchnia:</label>
+                        <input type="text" class="form-control form-control-sm" id="areaP" placeholder="Podaj powierzchnię np. 85m">
+                    </div>
+                    <div class="form-group">
+                        <label for="typeP">Typ:</label>
+                        <select id="typeP">
+                            <option value="1">budowlana</option>
+                            <option value="2">rolna</option>
+                            <option value="3">usługowa</option>
+                        </select>
+                        <!--<input type="text" class="form-control form-control-sm" id="typeP" placeholder="Podaj typ">-->
                     </div>
                     <button type="button" class="btn btn-success" id="addPlotBtn">Dodaj działkę</button>
                 </div>
