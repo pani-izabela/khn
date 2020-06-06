@@ -10,4 +10,5 @@ public interface HouseDAO {
     List<House> findAllHousesQuery();
     House findHouseByIdQuery(int id);
     House updateAppuser(House house, AppUser appUser);
+    House addHouse(House house);
 }

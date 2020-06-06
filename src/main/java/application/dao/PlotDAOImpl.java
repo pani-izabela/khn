@@ -1,6 +1,7 @@
 package application.dao;
 
 import application.model.AppUser;
+import application.model.House;
 import application.model.Plot;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,34 @@ public class PlotDAOImpl implements PlotDAO{
     public Plot updateAppuser(Plot plot, AppUser appUser) {
         try{
             plot.setAppUser(appUser);
+            return em.merge(plot);
+
+        } catch(NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public Plot addPlot(Plot plot) {
+        try {
+            return em.merge(plot);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public Plot findPlotByAddressId(int id) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public Plot updateHouseId(Plot plot, House house) {
+        try{
+            plot.setHouse(house);
             return em.merge(plot);
 
         } catch(NoResultException e){

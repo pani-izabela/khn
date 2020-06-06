@@ -30,4 +30,9 @@ public class HouseServiceImpl implements HouseService {
         House house = houseDAO.findHouseByIdQuery(houseId);
         return houseDAO.updateAppuser(house, appUser);
     }
+
+    @Override
+    public House addHouse(House house) {
+        return houseDAO.addHouse(house);
+    }
 }

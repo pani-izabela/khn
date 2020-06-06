@@ -11,4 +11,5 @@ public interface FlatDAO {
     List<Flat> findAllQuery();
     Flat findFlatByIdQuery(int id);
     Flat updateAppuser(Flat flat, AppUser appUser);
+    Flat addFlat(Flat flat);
 }

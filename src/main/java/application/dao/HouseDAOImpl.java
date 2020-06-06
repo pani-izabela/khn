@@ -52,4 +52,14 @@ public class HouseDAOImpl implements HouseDAO{
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public House addHouse(House house) {
+        try {
+            return em.merge(house);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

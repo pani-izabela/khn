@@ -1,6 +1,6 @@
 package application.facade;
 
-import application.model.UserRealAssets;
+import application.model.*;
 import application.service.FlatService;
 import application.service.HouseService;
 import application.service.PlotService;
@@ -53,5 +53,31 @@ public class PropertyFacade {
         return userrealassets;
     }
 
+
+    //--------------metod do dodawania nieruchomości
+
+    public Flat addFlat(Flat flat){
+        return flatService.addFlat(flat);
+    }
+
+    public House addHouse(House house){
+        return houseService.addHouse(house);
+    }
+
+    public Plot addPlot(Plot plot){
+        return plotService.addPlot(plot);
+    }
+
+    public Plot updatePlot(Plot plot, House house){
+        return plotService.updatePlot(plot, house);
+    }
+
+    public UserRealAssets addUserRealAssetsForFlat(int appUserId, int assetId){
+        return userrealassetsService.addFlat(appUserId, assetId);
+    }
+
+    public UserRealAssets addUserRealAssetsForHouse(int appUserId, int assetId){
+        return userrealassetsService.addHouse(appUserId, assetId);
+    }
 
 }

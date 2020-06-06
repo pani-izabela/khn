@@ -7,12 +7,21 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+
+@NamedQueries({
+        @NamedQuery(name = Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO, query = Address.QUERY_GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO)
+})
+
 @Entity
 @Table(name = "ADRESS")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Address {
+
+    public static final String GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO = "Address.get_address_by_city_and_street_and_house_no";
+    public static final String QUERY_GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO = "select ad from Address ad where ad.city = :city and ad.street = :street and ad.homeNumber = :houseNo";
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

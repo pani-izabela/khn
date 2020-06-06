@@ -31,4 +31,14 @@ public class PlotServiceImpl implements PlotService {
         Plot plot = plotDAO.findPlotByIdQuery(plotId);
         return plotDAO.updateAppuser(plot, appUser);
     }
+
+    @Override
+    public Plot addPlot(Plot plot) {
+        return plotDAO.addPlot(plot);
+    }
+
+    @Override
+    public Plot updatePlot(Plot plot, House house) {
+        return plotDAO.updateHouseId(plot, house);
+    }
 }

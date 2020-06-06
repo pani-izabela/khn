@@ -52,4 +52,14 @@ public class FlatDAOImpl implements FlatDAO{
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public Flat addFlat(Flat flat) {
+        try {
+            return em.merge(flat);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

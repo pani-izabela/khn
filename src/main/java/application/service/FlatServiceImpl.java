@@ -31,4 +31,9 @@ public class FlatServiceImpl implements FlatService {
         Flat flat = flatDAO.findFlatByIdQuery(flatId);
         return flatDAO.updateAppuser(flat, appUser);
     }
+
+    @Override
+    public Flat addFlat(Flat flat) {
+        return flatDAO.addFlat(flat);
+    }
 }
