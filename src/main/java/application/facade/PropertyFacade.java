@@ -68,7 +68,9 @@ public class PropertyFacade {
         return plotService.addPlot(plot);
     }
 
-    public Plot updatePlot(Plot plot, House house){
+    public Plot updatePlot(Address plotAddressId, int houseId){
+        Plot plot = plotService.findPlotByAddressId(plotAddressId);
+        House house = houseService.findHouseById(houseId);
         return plotService.updatePlot(plot, house);
     }
 
@@ -78,6 +80,10 @@ public class PropertyFacade {
 
     public UserRealAssets addUserRealAssetsForHouse(int appUserId, int assetId){
         return userrealassetsService.addHouse(appUserId, assetId);
+    }
+
+    public UserRealAssets addUserRealAssetsForPlot(int appUserId, int assetId){
+        return userrealassetsService.addPlot(appUserId, assetId);
     }
 
 }

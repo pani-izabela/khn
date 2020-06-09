@@ -8,4 +8,6 @@ public interface AddressService {
 
     Address addFlatAddress(Address address);
     List<Address> addHouseAddress(Address address);
+    List<Address> addPlotAddress(Address address);
+    Address findAddressById(int addressId);
 }

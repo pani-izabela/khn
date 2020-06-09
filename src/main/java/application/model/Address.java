@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 
 
 @NamedQueries({
-        @NamedQuery(name = Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO, query = Address.QUERY_GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO)
+        @NamedQuery(name = Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO, query = Address.QUERY_GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO),
+        @NamedQuery(name = Address.GET_ADDRESS_BY_ID, query = Address.QUERY_GET_ADDRESS_BY_ID)
 })
 
 @Entity
@@ -22,6 +23,8 @@ public class Address {
     public static final String GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO = "Address.get_address_by_city_and_street_and_house_no";
     public static final String QUERY_GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO = "select ad from Address ad where ad.city = :city and ad.street = :street and ad.homeNumber = :houseNo";
 
+    public static final String GET_ADDRESS_BY_ID = "Address.get_address_by_id";
+    public static final String QUERY_GET_ADDRESS_BY_ID = "select ad from Address ad where ad.id = :id";
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

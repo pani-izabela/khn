@@ -1,5 +1,6 @@
 package application.dao;
 
+import application.model.Address;
 import application.model.AppUser;
 import application.model.House;
 import application.model.Plot;
@@ -66,8 +67,15 @@ public class PlotDAOImpl implements PlotDAO{
 
     @Override
     @Transactional
-    public Plot findPlotByAddressId(int id) {
-        return null;
+    public Plot findPlotByAddressId(Address addressId) {
+        try{
+            return em.createNamedQuery(Plot.GET_PLOT_BY_ADDRESS_ID, Plot.class)
+                    .setParameter("addressId", addressId)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override

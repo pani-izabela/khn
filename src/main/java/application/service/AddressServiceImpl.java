@@ -26,16 +26,29 @@ public class AddressServiceImpl implements AddressService {
             Address address1 = address;
             return address1;
         }
-        /*if(!checkAddres(address.getCity(), address.getStreet(), address.getHomeNumber())){
-            return addressDAO.addAddress(address);
-        }
-        else {
-            return null;
-        }*/
     }
 
     @Override
     public List<Address> addHouseAddress(Address address) {
+        List<Address> addresses = new ArrayList<>();
+        List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
+        if(addressesFromDB.size() == 0){
+            Address houseAddress = addressDAO.addAddress(address);
+            addresses.add(houseAddress);
+        }
+        else if(addressesFromDB.size() == 1){
+            int assetsType = addressesFromDB.get(0).getRealAssetsId();
+            Address houseAddress = addressDAO.addAddress(address);
+            addresses = getAdressesPerType(assetsType, houseAddress, addressesFromDB.get(0));
+        }
+        else if(addressesFromDB.size() == 2){
+            addresses = null;
+        }
+        return addresses;
+    }
+
+    @Override
+    public List<Address> addPlotAddress(Address address) {
         List<Address> addresses = new ArrayList<>();
         List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
         if(!addressesFromDB.isEmpty()){
@@ -46,50 +59,28 @@ public class AddressServiceImpl implements AddressService {
             addresses.add(address);
             return addresses;
         }
-        /*List<Address> addresses = new ArrayList<>();
-        List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
-        if(addressesFromDB.size()==0){
-            addresses.add(addressDAO.addAddress(address));
-            return addresses;
-        }
-        else if(addressesFromDB.size()==1 && addressesFromDB.get(0).getRealAssetsId()==3){
-            Address addressHouse = addressDAO.addAddress(address);
-            addresses.add(addressHouse);
-            Address addressPlot = addressesFromDB.get(0);
-            addresses.add(addressPlot);
-            return addresses;
-            //addressHouse.getId();//ten id adresu domu muszę przekazać do wiersza plot
-                //plotDAO.findPlotByAddressId(addressesFromDB.get(0).getId());
-            //plotDAO.updateHouseId(returnedAddress.getId());
-            //addresses.add(addressFromDB);
-            //return addresses;
-            //czyli zwracane są dwa adresy jeden nowo dodanego domu, a drugi działki, który już w bazie był
-        }
-        else {
-            return null;
-        }*/
+    }
+
+    @Override
+    public Address findAddressById(int addressId) {
+        return addressDAO.findAddressById(addressId);
     }
 
     //-------------------metody prywatne
-
-    private boolean checkAddres(String city, String street, String houseNo){
-        boolean addressIsInDB = true;
-        if(addressDAO.findByCityAndStreetAndHouseNo(city, street, houseNo) == null){
-            addressIsInDB = false;
-        }
-        return addressIsInDB;
-    }
 
     private List<Address> findAddressByCityAndStreetAndHouseNo(String city, String street, String houseNo){
         return addressDAO.findAddressesByCityAndStreetAndHouseNo(city, street, houseNo);
     }
 
-    private int checkAddressType(String city, String street, String houseNo){
-        Address address = addressDAO.findByCityAndStreetAndHouseNo(city, street, houseNo);
-        if(address!=null){
-            return address.getRealAssetsId();
+    private List<Address> getAdressesPerType(int assetsType, Address houseAddress, Address plotAddress){
+        List<Address> addresses = new ArrayList<>();
+        if(assetsType==2){
+            addresses = null;
         }
-        else
-            return 0;
+        else if(assetsType==3){
+            addresses.add(houseAddress);
+            addresses.add(plotAddress);
+        }
+        return addresses;
     }
 }

@@ -1,5 +1,6 @@
 package application.service;
 
+import application.model.Address;
 import application.model.Flat;
 import application.model.House;
 import application.model.Plot;
@@ -11,4 +12,6 @@ public interface PlotService {
     Plot changeAppuser(int plotId, int appUserId);
     Plot addPlot(Plot plot);
     Plot updatePlot(Plot plot, House house);
+    Plot findPlotById(int plotId);
+    Plot findPlotByAddressId(Address addressId);
 }
