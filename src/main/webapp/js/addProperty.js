@@ -87,15 +87,11 @@ function prepareFlat() {
                 address: null
             }
         }
-        console.log("dataFlat przekazane na backend ", flatData);
-        console.log("adres przekazane na backend ", flatAddress);
         addFlat(flatAddress, flatData);
     });
 }
 
 function addFlat(address, flat) {
-    console.log('Przekazany do addFlat adres: ', address);
-    console.log('Przekazany do addFlat flat: ', flat);
     var obj = {address, flat};
     $.ajax({
         url: "http://localhost:8080/seller/addFlat",
@@ -104,12 +100,122 @@ function addFlat(address, flat) {
         dataType: "json",
         data: JSON.stringify(obj),
         success: function (res) {
-            console.log('Id mieszkania dodanego do bazy: ', res.id);
+            alert('Mieszkanie zostało dodane');
             window.location.href = "addProperty";
-            console.log('Mieszkanie zostało dodane');
+
         },
         error: function (res) {
             alert('Nie udało się dodać mieszkania');
+            window.location.href = "addProperty";
+        }
+    })
+}
+
+//------------------------dom
+function prepareHouse() {
+    $('#addHouseBtn').click(function () {
+        cityH = $('#cityH').val();
+        streetH = $('#streetH').val();
+        house_numberH = $('#houseNoH').val();
+        postcodeH = $('#postcodeH').val();
+        priceH = $('#priceH').val();
+        areaH = $('#areaH').val();
+        rooms_noH = $('#roomsNoH').val();
+        if (cityH.trim().length === 0 || streetH.trim().length === 0 || house_numberH.trim().length === 0 ||
+            postcodeH.trim().length === 0 || priceH.trim().length === 0
+            || areaH.trim().length === 0 || rooms_noH.trim().length === 0)
+            alert('Uzupełnij brakujące pola');
+        else {
+            houseAddress = {
+                city: cityH,
+                street: streetH,
+                homeNumber: house_numberH,
+                postcode: postcodeH,
+                realAssetsId: 2
+            };
+            houseData = {
+                price: priceH,
+                size: areaH,
+                rooms: rooms_noH,
+                appUser: loggedAppUser,
+                address: null
+            }
+        }
+        addHouse(houseAddress, houseData);
+    });
+}
+
+
+function addHouse(address, house) {
+    var objHouse = {address, house};
+    $.ajax({
+        url: "http://localhost:8080/seller/addHouse",
+        method: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(objHouse),
+        success: function (res) {
+            alert('Dom został dodany');
+            window.location.href = "addProperty";
+
+        },
+        error: function (res) {
+            alert('Nie udało się dodać domu');
+            window.location.href = "addProperty";
+        }
+    })
+}
+
+//----------------------działka
+function preparePlot() {
+    $('#addPlotBtn').click(function () {
+        cityP = $('#cityP').val();
+        streetP = $('#streetP').val();
+        house_numberP = $('#houseNoP').val();
+        postcodeP = $('#postcodeP').val();
+        priceP = $('#priceP').val();
+        areaP = $('#areaP').val();
+        typeP = $('#typeP').val();
+        if (cityP.trim().length === 0 || streetP.trim().length === 0 || house_numberP.trim().length === 0 ||
+            postcodeP.trim().length === 0 || priceP.trim().length === 0
+            || areaP.trim().length === 0 || typeP.trim().length === 0)
+            alert('Uzupełnij brakujące pola');
+        else {
+            plotAddress = {
+                city: cityP,
+                street: streetP,
+                homeNumber: house_numberP,
+                postcode: postcodeP,
+                realAssetsId: 3
+            };
+            plotData = {
+                price: priceP,
+                size: areaP,
+                type: typeP,
+                appUser: loggedAppUser,
+                address: null
+            }
+        }
+        addPlot(plotAddress, plotData);
+    });
+}
+
+function addPlot(address, plot) {
+    var objPlot = {address, plot};
+    $.ajax({
+        url: "http://localhost:8080/seller/addPlot",
+        method: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(objPlot),
+        success: function (res) {
+            alert('Działka została dodana');
+            window.location.href = "addProperty";
+
+        },
+        error: function (res) {
+            alert('Nie udało się dodać działki');
+            window.location.href = "addProperty";
         }
     })
 }

@@ -1,7 +1,9 @@
 package application.dao;
 
+import application.model.Address;
 import application.model.AppUser;
 import application.model.House;
+import application.model.Plot;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +61,19 @@ public class HouseDAOImpl implements HouseDAO{
         try {
             return em.merge(house);
         } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public House findHouseByAddressId(Address addressId) {
+        try{
+            return em.createNamedQuery(House.GET_HOUSE_BY_ADDRESS_ID, House.class)
+                    .setParameter("addressId", addressId)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
             return null;
         }
     }

@@ -2,6 +2,7 @@ package application.service;
 
 import application.dao.AppUserDAO;
 import application.dao.HouseDAO;
+import application.model.Address;
 import application.model.AppUser;
 import application.model.House;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,10 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House findHouseById(int houseId) {
         return houseDAO.findHouseByIdQuery(houseId);
+    }
+
+    @Override
+    public House findHouseByAddressId(Address addressId) {
+        return houseDAO.findHouseByAddressId(addressId);
     }
 }

@@ -17,29 +17,15 @@ public class AddressServiceImpl implements AddressService {
     AddressDAO addressDAO;
 
     @Override
-    public Address addFlatAddress(Address address) {
-        List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
-        if(!addressesFromDB.isEmpty()){
-            return addressesFromDB.get(0);
-        }
-        else{
-            Address address1 = address;
-            return address1;
-        }
-    }
-
-    @Override
     public List<Address> addHouseAddress(Address address) {
         List<Address> addresses = new ArrayList<>();
         List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
         if(addressesFromDB.size() == 0){
-            Address houseAddress = addressDAO.addAddress(address);
-            addresses.add(houseAddress);
+            addresses.add(address);
         }
         else if(addressesFromDB.size() == 1){
             int assetsType = addressesFromDB.get(0).getRealAssetsId();
-            Address houseAddress = addressDAO.addAddress(address);
-            addresses = getAdressesPerType(assetsType, houseAddress, addressesFromDB.get(0));
+            addresses = getAdressesPerType(assetsType, address, addressesFromDB.get(0));
         }
         else if(addressesFromDB.size() == 2){
             addresses = null;
@@ -48,16 +34,17 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> addPlotAddress(Address address) {
-        List<Address> addresses = new ArrayList<>();
-        List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
-        if(!addressesFromDB.isEmpty()){
-            addresses.add(addressesFromDB.get(0));
-            return addresses;
+    public Address addPropertyAddress(Address address) {
+        Address addressesFromDB = findAddressByCityAndStreetAndHouseNoAndType(
+                address.getCity(),
+                address.getStreet(),
+                address.getHomeNumber(),
+                address.getRealAssetsId());
+        if(addressesFromDB==null){
+            return address;
         }
         else{
-            addresses.add(address);
-            return addresses;
+            return null;
         }
     }
 
@@ -72,14 +59,25 @@ public class AddressServiceImpl implements AddressService {
         return addressDAO.findAddressesByCityAndStreetAndHouseNo(city, street, houseNo);
     }
 
-    private List<Address> getAdressesPerType(int assetsType, Address houseAddress, Address plotAddress){
+    private Address findAddressByCityAndStreetAndHouseNoAndType(String city, String street, String houseNo, int type){
+        return addressDAO.findByCityAndStreetAndHouseNoAndType(city, street, houseNo, type);
+    }
+
+    private List<Address> getAdressesPerType(int assetsType, Address address, Address addressFromDB){
         List<Address> addresses = new ArrayList<>();
-        if(assetsType==2){
+        if(assetsType==2 && address.getRealAssetsId()==2){
             addresses = null;
         }
-        else if(assetsType==3){
-            addresses.add(houseAddress);
-            addresses.add(plotAddress);
+        else if(assetsType==3 && address.getRealAssetsId()==3){
+            addresses = null;
+        }
+        else if(assetsType==3 && address.getRealAssetsId()==2){
+            addresses.add(address);
+            addresses.add(addressFromDB);
+        }
+        else if(assetsType==2 && address.getRealAssetsId()==3){
+            addresses.add(address);
+            addresses.add(addressFromDB);
         }
         return addresses;
     }

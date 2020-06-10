@@ -9,4 +9,5 @@ public interface AddressDAO {
     Address findByCityAndStreetAndHouseNo(String city, String street, String houseNo);
     List<Address> findAddressesByCityAndStreetAndHouseNo(String city, String street, String houseNo);
     Address findAddressById(int id);
+    Address findByCityAndStreetAndHouseNoAndType(String city, String street, String houseNo, int type);
 }

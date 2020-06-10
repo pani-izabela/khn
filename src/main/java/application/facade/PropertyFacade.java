@@ -86,4 +86,12 @@ public class PropertyFacade {
         return userrealassetsService.addPlot(appUserId, assetId);
     }
 
+    public UserRealAssets addUserRealAssetsForHouseAndPlot(AppUser appUserId, House house, Plot plot){
+        return userrealassetsService.addHouseAndPlot(appUserId, house, plot);
+    }
+
+    public House getHouseByAddressId(Address addressId){
+        return houseService.findHouseByAddressId(addressId);
+    }
+
 }

@@ -68,4 +68,19 @@ public class AddressDAOImpl implements AddressDAO {
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public Address findByCityAndStreetAndHouseNoAndType(String city, String street, String houseNo, int type) {
+        try {
+            return em.createNamedQuery(Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO_AND_TYPE, Address.class)
+                    .setParameter("city", city)
+                    .setParameter("street", street)
+                    .setParameter("houseNo", houseNo)
+                    .setParameter("assetId", type)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

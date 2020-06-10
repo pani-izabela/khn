@@ -5,6 +5,8 @@ import application.facade.PropertyFacade;
 import application.model.*;
 import application.service.AddressService;
 import application.wrapper.FlatWrapper;
+import application.wrapper.HouseWrapper;
+import application.wrapper.PlotWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -18,13 +20,9 @@ import java.util.List;
 @Controller
 public class AddPropertyController {
 
-    private AddressService addressService;
-    private PropertyFacade propertyFacade;
     private AddPropertyFacade addPropertyFacade;
 
-    public AddPropertyController(AddressService addressService, PropertyFacade propertyFacade, AddPropertyFacade addPropertyFacade) {
-        this.addressService = addressService;
-        this.propertyFacade = propertyFacade;
+    public AddPropertyController(AddPropertyFacade addPropertyFacade) {
         this.addPropertyFacade = addPropertyFacade;
     }
 
@@ -37,13 +35,34 @@ public class AddPropertyController {
 
     @ApiOperation(value = "Add new flat")
     @PostMapping(value = "/seller/addFlat")
-    public @ResponseBody ResponseEntity<String> addFlat(@RequestBody FlatWrapper flatWrapper) {
-        Address address = flatWrapper.getAddress();
-        Flat flat = flatWrapper.getFlat();
-        if (addPropertyFacade.addFlat(address, flat) != null) {
-            return new ResponseEntity<>("Mieszkanie zostało dodane", HttpStatus.OK);
+    public @ResponseBody ResponseEntity<Flat> addFlat(@RequestBody FlatWrapper flatWrapper) {
+        Flat flat = addPropertyFacade.addFlat(flatWrapper.getAddress(), flatWrapper.getFlat());
+        if (flat != null) {
+            return new ResponseEntity<Flat>(flat, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Nie udało się dodać mieszkania, jest już w bazie", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Flat>(flat, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Add new house")
+    @PostMapping(value = "/seller/addHouse")
+    public @ResponseBody ResponseEntity<House> addHouse(@RequestBody HouseWrapper houseWrapper) {
+        House house = addPropertyFacade.addHouse(houseWrapper.getAddress(), houseWrapper.getHouse());
+        if (house != null) {
+            return new ResponseEntity<House>(house, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<House>(house, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Add new plot")
+    @PostMapping(value = "/seller/addPlot")
+    public @ResponseBody ResponseEntity<Plot> addPlot(@RequestBody PlotWrapper plotWrapper) {
+        Plot plot = addPropertyFacade.addPlot(plotWrapper.getAddress(), plotWrapper.getPlot());
+        if (plot != null) {
+            return new ResponseEntity<Plot>(plot, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Plot>(plot, HttpStatus.NOT_FOUND);
         }
     }
 }

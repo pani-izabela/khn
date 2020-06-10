@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 
 @NamedQueries({
         @NamedQuery(name = House.GET_HOUSES, query = House.QUERY_GET_HOUSES),
-        @NamedQuery(name = House.GET_HOUSES_BY_ID, query = House.QUERY_GET_HOUSES_BY_ID)
+        @NamedQuery(name = House.GET_HOUSES_BY_ID, query = House.QUERY_GET_HOUSES_BY_ID),
+        @NamedQuery(name = House.GET_HOUSE_BY_ADDRESS_ID, query = House.QUERY_GET_HOUSE_BY_ADDRESS_ID)
 })
 
 @Entity
@@ -25,6 +26,10 @@ public class House {
 
     public static final String GET_HOUSES_BY_ID = "House.get_houses_by_id";
     public static final String QUERY_GET_HOUSES_BY_ID = "select ho from House ho where ho.id = :id";
+
+    public static final String GET_HOUSE_BY_ADDRESS_ID = "House.get_house_by_address_id";
+    public static final String QUERY_GET_HOUSE_BY_ADDRESS_ID = "select ho from House ho where ho.address = :addressId";
+
 
     @Id
     @NotNull
