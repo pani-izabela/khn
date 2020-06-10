@@ -48,11 +48,6 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-    @Override
-    public Address findAddressById(int addressId) {
-        return addressDAO.findAddressById(addressId);
-    }
-
     //-------------------metody prywatne
 
     private List<Address> findAddressByCityAndStreetAndHouseNo(String city, String street, String houseNo){
