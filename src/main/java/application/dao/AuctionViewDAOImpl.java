@@ -83,12 +83,12 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
     @Override
     @Transactional(readOnly = true)
     public List<AuctionView> findPropertiesByType(String assetType) {
-        List<AuctionView> xxx = new ArrayList<>();
+        List<AuctionView> list = new ArrayList<>();
         try{
-            xxx = em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE, AuctionView.class)
+            list = em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_TYPE, AuctionView.class)
                     .setParameter("assetType", assetType)
                     .getResultList();
-            return xxx;
+            return list;
         }
         catch (NoResultException e){
             return null;

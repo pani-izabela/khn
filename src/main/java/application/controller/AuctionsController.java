@@ -42,7 +42,7 @@ public class AuctionsController {
 
     @ApiOperation(value = "Change appUser in flat, change amount in finance, add row to userrealassets")
     @PostMapping(value = "/buyFlat")
-    public @ResponseBody ResponseEntity<String> buyProperty(int appuserid, int assetsId, String assetsType) {
+    public @ResponseBody ResponseEntity<String> buyFlat(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyFlat(appuserid, assetsId, assetsType) != null) {
             return new ResponseEntity<>("Kupiles nieruchomosc", HttpStatus.OK);
         } else {
