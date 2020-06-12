@@ -88,4 +88,16 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
         return userrealassetsDAO.addUserrealassets(userRealAssets);
     }
 
+    @Override
+    public UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot) {
+        UserRealAssets userRealAssetsFromDB = userrealassetsDAO.findUserRealAssetsByHouseId(house);
+        return userrealassetsDAO.updateUserrealassetsPlot(userRealAssetsFromDB, plot);
+    }
+
+    @Override
+    public UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house) {
+        UserRealAssets userRealAssetsFromDB = userrealassetsDAO.findUserRealAssetsByPlotId(plot);
+        return userrealassetsDAO.updateUserrealassetsHouse(userRealAssetsFromDB, house);
+    }
+
 }

@@ -1,9 +1,6 @@
 package application.facade;
 
-import application.model.Address;
-import application.model.Flat;
-import application.model.House;
-import application.model.Plot;
+import application.model.*;
 import application.service.AddressService;
 import org.springframework.stereotype.Service;
 
@@ -19,57 +16,47 @@ public class AddPropertyFacade {
         this.propertyFacade = propertyFacade;
     }
 
-    public Flat addFlat(Address address, Flat flat){
-        Address flatAddress = addressService.addPropertyAddress(address);
-        flat.setAddress(flatAddress);
-        Flat addedFlat = propertyFacade.addFlat(flat);
-        propertyFacade.addUserRealAssetsForFlat(addedFlat.getAppUser().getId(), addedFlat.getId());
-        return addedFlat;
-    }
 
     public House addHouse(Address address, House house){
-        List<Address> houseAddressList = addressService.addHouseAddress(address);
+        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
         House addedHouse = new House();
-        if(houseAddressList.size()==1){
-            house.setAddress(houseAddressList.get(0));
+        if(addressesList.size()==0){
+            house.setAddress(address);
             addedHouse = propertyFacade.addHouse(house);
             propertyFacade.addUserRealAssetsForHouse(addedHouse.getAppUser().getId(), addedHouse.getId());
         }
-        else if(houseAddressList.size()==2){
-            house.setAddress(houseAddressList.get(0));
+        else if(addressesList.size()==2 || addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==2){
+            addedHouse = null;
+        }
+        else if(addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==3){
+            house.setAddress(address);
             addedHouse = propertyFacade.addHouse(house);
-            Address plotAddress = houseAddressList.get(1);
-            Plot updatedPlot = propertyFacade.updatePlot(plotAddress, addedHouse.getId());
-            propertyFacade.addUserRealAssetsForHouseAndPlot(addedHouse.getAppUser(), addedHouse, updatedPlot);
+            Plot plot = propertyFacade.getPlotByAddressId(addressesList.get(0));
+            plot.setAppUser(addedHouse.getAppUser());
+            plot.setHouse(addedHouse);
+            propertyFacade.updateUserRealAssetsWithPlot(plot, addedHouse);
         }
         return addedHouse;
     }
 
     public Plot addPlot(Address address, Plot plot){
-        Address plotAddress = addressService.addPropertyAddress(address);
-        plot.setAddress(plotAddress);
-        Plot addedPlot = propertyFacade.addPlot(plot);
-        propertyFacade.addUserRealAssetsForPlot(addedPlot.getAppUser().getId(), addedPlot.getId());
-        return addedPlot;
-    }
-
-    public Plot addPlot2(Address address, Plot plot){
-        List<Address> plotAddressList = addressService.addHouseAddress(address);
+        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
         Plot addedPlot = new Plot();
-        if(plotAddressList.size()==1){
-            plot.setAddress(plotAddressList.get(0));
+        if(addressesList.size()==0){
+            plot.setAddress(address);
             addedPlot = propertyFacade.addPlot(plot);
             propertyFacade.addUserRealAssetsForPlot(addedPlot.getAppUser().getId(), addedPlot.getId());
         }
-        else if(plotAddressList.size()==2){
-            Address plotAddress = plotAddressList.get(0);
-            plot.setAddress(plotAddress);
-            Plot plotFromDb = propertyFacade.addPlot(plot);
-            Address houseAddress = plotAddressList.get(1);
-            House houseFromDB = propertyFacade.getHouseByAddressId(houseAddress);
-            //tu coś nie zagrało, bo zapis plot się zrobił, ale nie uaktualnił się o id domu, dlaczego?
-            addedPlot = propertyFacade.updatePlot(plotFromDb.getAddress(), houseFromDB.getId());
-            propertyFacade.addUserRealAssetsForHouseAndPlot(addedPlot.getAppUser(), houseFromDB, addedPlot);
+        else if(addressesList.size()==2 || addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==3){
+            addedPlot = null;
+        }
+        else if(addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==2){
+            plot.setAddress(address);
+            addedPlot = propertyFacade.addPlot(plot);
+            House house = propertyFacade.getHouseByAddressId(addressesList.get(0));
+            house.setAppUser(addedPlot.getAppUser());
+            addedPlot = propertyFacade.updatePlot(addedPlot, house);
+            propertyFacade.updateUserRealAssetsWithHouse(house, addedPlot);
         }
         return addedPlot;
     }

@@ -19,25 +19,56 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     @Override
     @Transactional(readOnly = true)
     public List<UserRealAssets> findAllUserrealassetsQuery() {
-        try{
+        try {
             return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS, UserRealAssets.class)
                     .getResultList();
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             return null;
         }
     }
 
     @Override
     @Transactional(readOnly = true)
+    public UserRealAssets findUserRealAssetsById(int id) {
+        try {
+            return em.find(UserRealAssets.class, id);
+        } catch (NoResultException e) {
+            return null;
+        }
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public UserRealAssets findUserrealAssetsByUserId(AppUser appUser) {
-        try{
+        try {
             return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_APPUSERID, UserRealAssets.class)
                     .setParameter("appuserId", appUser)
                     .getSingleResult();
 
+        } catch (NoResultException e) {
+            return null;
         }
-        catch (NoResultException e) {
+    }
+
+    @Override
+    public UserRealAssets findUserRealAssetsByHouseId(House house) {
+        try{
+            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_HOUSE, UserRealAssets.class)
+                    .setParameter("houseId", house)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public UserRealAssets findUserRealAssetsByPlotId(Plot plot) {
+        try{
+            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_PLOT, UserRealAssets.class)
+                    .setParameter("plotId", plot)
+                    .getSingleResult();
+        } catch (NoResultException e) {
             return null;
         }
     }
@@ -45,10 +76,9 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     @Override
     @Transactional
     public UserRealAssets addUserrealassets(UserRealAssets userRealAssets) {
-        try{
+        try {
             return em.merge(userRealAssets);
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         }
     }
@@ -56,11 +86,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     @Override
     @Transactional
     public UserRealAssets updateUserrealassetsHouse(UserRealAssets userRealAssets, House house) {
-        try{
+        try {
             userRealAssets.setHouse(house);
             return em.merge(userRealAssets);
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         }
     }
@@ -68,11 +97,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     @Override
     @Transactional
     public UserRealAssets updateUserrealassetsPlot(UserRealAssets userRealAssets, Plot plot) {
-        try{
+        try {
             userRealAssets.setPlot(plot);
             return em.merge(userRealAssets);
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         }
     }
@@ -80,11 +108,10 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     @Override
     @Transactional
     public UserRealAssets updateUserrealassetsFlat(UserRealAssets userRealAssets, Flat flat) {
-        try{
+        try {
             userRealAssets.setFlat(flat);
             return em.merge(userRealAssets);
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e) {
             return null;
         }
     }

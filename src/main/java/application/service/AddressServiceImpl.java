@@ -16,30 +16,10 @@ public class AddressServiceImpl implements AddressService {
 
     AddressDAO addressDAO;
 
-    @Override
-    public List<Address> addHouseAddress(Address address) {
-        List<Address> addresses = new ArrayList<>();
-        List<Address> addressesFromDB = findAddressByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
-        if(addressesFromDB.size() == 0){
-            addresses.add(address);
-        }
-        else if(addressesFromDB.size() == 1){
-            int assetsType = addressesFromDB.get(0).getRealAssetsId();
-            addresses = getAdressesPerType(assetsType, address, addressesFromDB.get(0));
-        }
-        else if(addressesFromDB.size() == 2){
-            addresses = null;
-        }
-        return addresses;
-    }
 
     @Override
     public Address addPropertyAddress(Address address) {
-        Address addressesFromDB = findAddressByCityAndStreetAndHouseNoAndType(
-                address.getCity(),
-                address.getStreet(),
-                address.getHomeNumber(),
-                address.getRealAssetsId());
+        Address addressesFromDB = findAddressByCityAndStreetAndHouseNoAndType(address);
         if(addressesFromDB==null){
             return address;
         }
@@ -48,16 +28,18 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
+    @Override
+    public Address findAddressByCityAndStreetAndHouseNoAndType(Address address){
+        return addressDAO.findByCityAndStreetAndHouseNoAndType(address.getCity(), address.getStreet(), address.getHomeNumber(), address.getRealAssetsId());
+    }
+
+    @Override
+    public List<Address> findAddressByCityAndStreetAndHouseNo(Address address){
+        return addressDAO.findAddressesByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
+    }
+
+
     //-------------------metody prywatne
-
-    private List<Address> findAddressByCityAndStreetAndHouseNo(String city, String street, String houseNo){
-        return addressDAO.findAddressesByCityAndStreetAndHouseNo(city, street, houseNo);
-    }
-
-    private Address findAddressByCityAndStreetAndHouseNoAndType(String city, String street, String houseNo, int type){
-        return addressDAO.findByCityAndStreetAndHouseNoAndType(city, street, houseNo, type);
-    }
-
     private List<Address> getAdressesPerType(int assetsType, Address address, Address addressFromDB){
         List<Address> addresses = new ArrayList<>();
         if(assetsType==2 && address.getRealAssetsId()==2){

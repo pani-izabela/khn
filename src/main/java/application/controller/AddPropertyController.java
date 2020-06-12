@@ -21,9 +21,11 @@ import java.util.List;
 public class AddPropertyController {
 
     private AddPropertyFacade addPropertyFacade;
+    private PropertyFacade propertyFacade;
 
-    public AddPropertyController(AddPropertyFacade addPropertyFacade) {
+    public AddPropertyController(AddPropertyFacade addPropertyFacade, PropertyFacade propertyFacade) {
         this.addPropertyFacade = addPropertyFacade;
+        this.propertyFacade = propertyFacade;
     }
 
     @GetMapping(value = "/seller/addProperty")
@@ -36,7 +38,7 @@ public class AddPropertyController {
     @ApiOperation(value = "Add new flat")
     @PostMapping(value = "/seller/addFlat")
     public @ResponseBody ResponseEntity<Flat> addFlat(@RequestBody FlatWrapper flatWrapper) {
-        Flat flat = addPropertyFacade.addFlat(flatWrapper.getAddress(), flatWrapper.getFlat());
+        Flat flat = propertyFacade.addFlat(flatWrapper.getAddress(), flatWrapper.getFlat());
         if (flat != null) {
             return new ResponseEntity<Flat>(flat, HttpStatus.OK);
         } else {

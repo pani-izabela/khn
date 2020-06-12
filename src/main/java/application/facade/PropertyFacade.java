@@ -1,11 +1,10 @@
 package application.facade;
 
 import application.model.*;
-import application.service.FlatService;
-import application.service.HouseService;
-import application.service.PlotService;
-import application.service.UserrealassetsService;
+import application.service.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PropertyFacade {
@@ -13,12 +12,14 @@ public class PropertyFacade {
     private FlatService flatService;
     private PlotService plotService;
     private UserrealassetsService userrealassetsService;
+    private AddressService addressService;
 
-    public PropertyFacade(HouseService houseService, FlatService flatService, PlotService plotService, UserrealassetsService userrealassetsService) {
+    public PropertyFacade(HouseService houseService, FlatService flatService, PlotService plotService, UserrealassetsService userrealassetsService, AddressService addressService) {
         this.houseService = houseService;
         this.flatService = flatService;
         this.plotService = plotService;
         this.userrealassetsService = userrealassetsService;
+        this.addressService = addressService;
     }
 
     public UserRealAssets buyHouse(int appuserid, int assetsId){
@@ -74,6 +75,10 @@ public class PropertyFacade {
         return plotService.updatePlot(plot, house);
     }
 
+    public Plot updatePlot(Plot plot, House house){
+        return plotService.updatePlot(plot, house);
+    }
+
     public UserRealAssets addUserRealAssetsForFlat(int appUserId, int assetId){
         return userrealassetsService.addFlat(appUserId, assetId);
     }
@@ -89,9 +94,34 @@ public class PropertyFacade {
     public UserRealAssets addUserRealAssetsForHouseAndPlot(AppUser appUserId, House house, Plot plot){
         return userrealassetsService.addHouseAndPlot(appUserId, house, plot);
     }
+    public UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot){
+        return userrealassetsService.updateUserRealAssetsWithHouse(house, plot);
+    }
+
+    public UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house){
+        return userrealassetsService.updateUserRealAssetsWithPlot(plot, house);
+    }
 
     public House getHouseByAddressId(Address addressId){
         return houseService.findHouseByAddressId(addressId);
+    }
+
+    public Plot getPlotByAddressId(Address addressId){
+        return plotService.findPlotByAddressId(addressId);
+    }
+
+    //-----------------z AddProperty
+    public Flat addFlat(Address address, Flat flat){
+        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
+        if(addressesList.isEmpty()){
+            flat.setAddress(address);
+            Flat addedFlat = flatService.addFlat(flat);
+            userrealassetsService.addFlat(addedFlat.getAppUser().getId(), addedFlat.getId());
+            return addedFlat;
+        }
+        else{
+            return null;
+        }
     }
 
 }

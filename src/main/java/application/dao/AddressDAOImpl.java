@@ -19,13 +19,9 @@ public class AddressDAOImpl implements AddressDAO {
     private EntityManager em;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public Address addAddress(Address address) {
-        try {
-            return em.merge(address);
-        } catch (NoResultException e) {
-            return null;
-        }
+        return em.merge(address);
     }
 
     @Override

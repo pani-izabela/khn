@@ -16,4 +16,6 @@ public interface UserrealassetsService {
     UserRealAssets updateFlat(int appuserId, int assetsId);
     UserRealAssets updatePlot(int appuserId, int assetsId);
     UserRealAssets addHouseAndPlot(AppUser appUserId, House houseId, Plot plotId);
+    UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot);
+    UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house);
 }
