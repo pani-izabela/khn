@@ -1,9 +1,9 @@
 package application.controller;
 
-import application.facade.AddPropertyFacade;
 import application.facade.PropertyFacade;
-import application.model.*;
-import application.service.AddressService;
+import application.model.Flat;
+import application.model.House;
+import application.model.Plot;
 import application.wrapper.FlatWrapper;
 import application.wrapper.HouseWrapper;
 import application.wrapper.PlotWrapper;
@@ -12,19 +12,18 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Api(value = "KHN add property API controller")
 @Controller
 public class AddPropertyController {
 
-    private AddPropertyFacade addPropertyFacade;
     private PropertyFacade propertyFacade;
 
-    public AddPropertyController(AddPropertyFacade addPropertyFacade, PropertyFacade propertyFacade) {
-        this.addPropertyFacade = addPropertyFacade;
+    public AddPropertyController(PropertyFacade propertyFacade) {
         this.propertyFacade = propertyFacade;
     }
 
@@ -60,7 +59,7 @@ public class AddPropertyController {
     @ApiOperation(value = "Add new plot")
     @PostMapping(value = "/seller/addPlot")
     public @ResponseBody ResponseEntity<Plot> addPlot(@RequestBody PlotWrapper plotWrapper) {
-        Plot plot = addPropertyFacade.addPlot(plotWrapper.getAddress(), plotWrapper.getPlot());
+        Plot plot = propertyFacade.addPlot(plotWrapper.getAddress(), plotWrapper.getPlot());
         if (plot != null) {
             return new ResponseEntity<Plot>(plot, HttpStatus.OK);
         } else {

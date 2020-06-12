@@ -22,6 +22,8 @@ public class PropertyFacade {
         this.addressService = addressService;
     }
 
+    //---------------------metody do kupowania nieruchomości
+
     public UserRealAssets buyHouse(int appuserid, int assetsId){
         houseService.changeAppuser(assetsId, appuserid);
         return userrealassetsService.addHouse(appuserid, assetsId);
@@ -54,30 +56,8 @@ public class PropertyFacade {
         return userrealassets;
     }
 
-
     //--------------metod do dodawania nieruchomości
 
-    public Plot addPlot(Plot plot){
-        return plotService.addPlot(plot);
-    }
-
-    public Plot updatePlot(Plot plot, House house){
-        return plotService.updatePlot(plot, house);
-    }
-
-    public UserRealAssets addUserRealAssetsForPlot(int appUserId, int assetId){
-        return userrealassetsService.addPlot(appUserId, assetId);
-    }
-
-    public UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot){
-        return userrealassetsService.updateUserRealAssetsWithHouse(house, plot);
-    }
-
-    public House getHouseByAddressId(Address addressId){
-        return houseService.findHouseByAddressId(addressId);
-    }
-
-    //-----------------z AddProperty
     public Flat addFlat(Address address, Flat flat){
         List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
         if(addressesList.isEmpty()){
@@ -113,4 +93,25 @@ public class PropertyFacade {
         return addedHouse;
     }
 
+    public Plot addPlot(Address address, Plot plot){
+        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
+        Plot addedPlot = new Plot();
+        if(addressesList.size()==0){
+            plot.setAddress(address);
+            addedPlot = plotService.addPlot(plot);
+            userrealassetsService.addPlot(addedPlot.getAppUser().getId(), addedPlot.getId());
+        }
+        else if(addressesList.size()==2 || addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==3){
+            addedPlot = null;
+        }
+        else if(addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==2){
+            plot.setAddress(address);
+            addedPlot = plotService.addPlot(plot);
+            House house = houseService.findHouseByAddressId(addressesList.get(0));
+            house.setAppUser(addedPlot.getAppUser());
+            addedPlot = plotService.updatePlot(addedPlot, house);
+            userrealassetsService.updateUserRealAssetsWithHouse(house, addedPlot);
+        }
+        return addedPlot;
+    }
 }
