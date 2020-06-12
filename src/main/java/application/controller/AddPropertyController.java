@@ -49,7 +49,7 @@ public class AddPropertyController {
     @ApiOperation(value = "Add new house")
     @PostMapping(value = "/seller/addHouse")
     public @ResponseBody ResponseEntity<House> addHouse(@RequestBody HouseWrapper houseWrapper) {
-        House house = addPropertyFacade.addHouse(houseWrapper.getAddress(), houseWrapper.getHouse());
+        House house = propertyFacade.addHouse(houseWrapper.getAddress(), houseWrapper.getHouse());
         if (house != null) {
             return new ResponseEntity<House>(house, HttpStatus.OK);
         } else {

@@ -17,28 +17,6 @@ public class AddPropertyFacade {
     }
 
 
-    public House addHouse(Address address, House house){
-        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
-        House addedHouse = new House();
-        if(addressesList.size()==0){
-            house.setAddress(address);
-            addedHouse = propertyFacade.addHouse(house);
-            propertyFacade.addUserRealAssetsForHouse(addedHouse.getAppUser().getId(), addedHouse.getId());
-        }
-        else if(addressesList.size()==2 || addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==2){
-            addedHouse = null;
-        }
-        else if(addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==3){
-            house.setAddress(address);
-            addedHouse = propertyFacade.addHouse(house);
-            Plot plot = propertyFacade.getPlotByAddressId(addressesList.get(0));
-            plot.setAppUser(addedHouse.getAppUser());
-            plot.setHouse(addedHouse);
-            propertyFacade.updateUserRealAssetsWithPlot(plot, addedHouse);
-        }
-        return addedHouse;
-    }
-
     public Plot addPlot(Address address, Plot plot){
         List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
         Plot addedPlot = new Plot();

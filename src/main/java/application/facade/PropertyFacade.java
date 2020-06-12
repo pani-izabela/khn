@@ -57,57 +57,24 @@ public class PropertyFacade {
 
     //--------------metod do dodawania nieruchomości
 
-    public Flat addFlat(Flat flat){
-        return flatService.addFlat(flat);
-    }
-
-    public House addHouse(House house){
-        return houseService.addHouse(house);
-    }
-
     public Plot addPlot(Plot plot){
         return plotService.addPlot(plot);
-    }
-
-    public Plot updatePlot(Address plotAddressId, int houseId){
-        Plot plot = plotService.findPlotByAddressId(plotAddressId);
-        House house = houseService.findHouseById(houseId);
-        return plotService.updatePlot(plot, house);
     }
 
     public Plot updatePlot(Plot plot, House house){
         return plotService.updatePlot(plot, house);
     }
 
-    public UserRealAssets addUserRealAssetsForFlat(int appUserId, int assetId){
-        return userrealassetsService.addFlat(appUserId, assetId);
-    }
-
-    public UserRealAssets addUserRealAssetsForHouse(int appUserId, int assetId){
-        return userrealassetsService.addHouse(appUserId, assetId);
-    }
-
     public UserRealAssets addUserRealAssetsForPlot(int appUserId, int assetId){
         return userrealassetsService.addPlot(appUserId, assetId);
     }
 
-    public UserRealAssets addUserRealAssetsForHouseAndPlot(AppUser appUserId, House house, Plot plot){
-        return userrealassetsService.addHouseAndPlot(appUserId, house, plot);
-    }
     public UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot){
         return userrealassetsService.updateUserRealAssetsWithHouse(house, plot);
     }
 
-    public UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house){
-        return userrealassetsService.updateUserRealAssetsWithPlot(plot, house);
-    }
-
     public House getHouseByAddressId(Address addressId){
         return houseService.findHouseByAddressId(addressId);
-    }
-
-    public Plot getPlotByAddressId(Address addressId){
-        return plotService.findPlotByAddressId(addressId);
     }
 
     //-----------------z AddProperty
@@ -122,6 +89,28 @@ public class PropertyFacade {
         else{
             return null;
         }
+    }
+
+    public House addHouse(Address address, House house){
+        List<Address> addressesList = addressService.findAddressByCityAndStreetAndHouseNo(address);
+        House addedHouse = new House();
+        if(addressesList.size()==0){
+            house.setAddress(address);
+            addedHouse = houseService.addHouse(house);
+            userrealassetsService.addHouse(addedHouse.getAppUser().getId(), addedHouse.getId());
+        }
+        else if(addressesList.size()==2 || addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==2){
+            addedHouse = null;
+        }
+        else if(addressesList.size()==1 && addressesList.get(0).getRealAssetsId()==3){
+            house.setAddress(address);
+            addedHouse = houseService.addHouse(house);
+            Plot plot = plotService.findPlotByAddressId(addressesList.get(0));
+            plot.setAppUser(addedHouse.getAppUser());
+            plot.setHouse(addedHouse);
+            userrealassetsService.updateUserRealAssetsWithPlot(plot, addedHouse);
+        }
+        return addedHouse;
     }
 
 }
