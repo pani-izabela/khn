@@ -66,7 +66,7 @@ public class PlotDAOImpl implements PlotDAO{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Plot findPlotByAddressId(Address addressId) {
         try{
             return em.createNamedQuery(Plot.GET_PLOT_BY_ADDRESS_ID, Plot.class)

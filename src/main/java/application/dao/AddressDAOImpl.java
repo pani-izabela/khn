@@ -19,27 +19,7 @@ public class AddressDAOImpl implements AddressDAO {
     private EntityManager em;
 
     @Override
-    @Transactional(readOnly = false)
-    public Address addAddress(Address address) {
-        return em.merge(address);
-    }
-
-    @Override
-    @Transactional
-    public Address findByCityAndStreetAndHouseNo(String city, String street, String houseNo) {
-        try {
-            return em.createNamedQuery(Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO, Address.class)
-                    .setParameter("city", city)
-                    .setParameter("street", street)
-                    .setParameter("houseNo", houseNo)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Address> findAddressesByCityAndStreetAndHouseNo(String city, String street, String houseNo) {
         try {
             return em.createNamedQuery(Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO, Address.class)
@@ -53,20 +33,7 @@ public class AddressDAOImpl implements AddressDAO {
     }
 
     @Override
-    @Transactional
-    public Address findAddressById(int id) {
-        try {
-            return em.createNamedQuery(Address.GET_ADDRESS_BY_ID, Address.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
-        }
-        catch (NoResultException e){
-            return null;
-        }
-    }
-
-    @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Address findByCityAndStreetAndHouseNoAndType(String city, String street, String houseNo, int type) {
         try {
             return em.createNamedQuery(Address.GET_ADDRESS_BY_CITY_AND_STREET_AND_HOUSE_NO_AND_TYPE, Address.class)

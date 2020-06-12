@@ -17,11 +17,6 @@ public class AddressServiceImpl implements AddressService {
     AddressDAO addressDAO;
 
     @Override
-    public Address findAddressByCityAndStreetAndHouseNoAndType(Address address){
-        return addressDAO.findByCityAndStreetAndHouseNoAndType(address.getCity(), address.getStreet(), address.getHomeNumber(), address.getRealAssetsId());
-    }
-
-    @Override
     public List<Address> findAddressByCityAndStreetAndHouseNo(Address address){
         return addressDAO.findAddressesByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
     }

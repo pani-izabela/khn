@@ -7,6 +7,7 @@ import application.model.*;
 import application.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,10 @@ public class AuctionsController {
     }
 
     @ApiOperation(value = "Change appUser in flat, change amount in finance, add row to userrealassets")
+    @ApiImplicitParams({
+            @ApiImplicitParam (name = "appuserid", value = "AppUser id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsId", value = "Flat id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsType", value = "Address realAssetsId", dataType = "String", required = true)})
     @PostMapping(value = "/buyFlat")
     public @ResponseBody ResponseEntity<String> buyFlat(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyFlat(appuserid, assetsId, assetsType) != null) {
@@ -51,6 +56,10 @@ public class AuctionsController {
     }
 
     @ApiOperation(value = "Change appUser in house, change amount in finance, add row to userrealassets")
+    @ApiImplicitParams({
+            @ApiImplicitParam (name = "appuserid", value = "AppUser id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsId", value = "House id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsType", value = "Address realAssetsId", dataType = "String", required = true)})
     @PostMapping(value = "/buyHouse")
     public @ResponseBody ResponseEntity<String> buyHouse(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyHouse(appuserid, assetsId, assetsType) != null) {
@@ -61,6 +70,10 @@ public class AuctionsController {
     }
 
     @ApiOperation(value = "Change appUser in plot, change amount in finance, add row to userrealassets")
+    @ApiImplicitParams({
+            @ApiImplicitParam (name = "appuserid", value = "AppUser id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsId", value = "Plot id", dataType = "int", required = true),
+            @ApiImplicitParam (name = "assetsType", value = "Address realAssetsId", dataType = "String", required = true)})
     @PostMapping(value = "/buyPlot")
     public @ResponseBody ResponseEntity<String> buyPlot(int appuserid, int assetsId, String assetsType) {
         if (auctionFacade.buyPlot(appuserid, assetsId, assetsType) != null) {
@@ -69,13 +82,5 @@ public class AuctionsController {
             return new ResponseEntity<>("Brak wystarczajacych srodkow na koncie", HttpStatus.NOT_FOUND);
         }
     }
-
-    /*@ApiOperation(value = "Delete auctionView by id")
-    @ApiImplicitParam(name="id", value = "AuctionView id", required = true)
-    @DeleteMapping(value = "/deleteAuctionView")
-    public @ResponseBody void deleteAustionView(@RequestParam int auctionViewId){
-        auctionViewDAO.deleteById(auctionViewId);
-    }*/
-
 
 }

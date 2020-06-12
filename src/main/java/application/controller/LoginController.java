@@ -2,9 +2,11 @@ package application.controller;
 
 import application.dao.AppUserDAO;
 import application.model.AppUser;
+import application.model.Plot;
 import application.model.Role;
 import application.service.AppUserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,11 +39,13 @@ public class LoginController {
         return "seller/login";
     }
 
+    @ApiOperation(value = "Login customer user to application", response = AppUser.class)
     @PostMapping(value = "/customer/loginUser")
     public @ResponseBody AppUser loginCustomerUser(@RequestBody AppUser appUser){
         return appUserService.loginUserFromCustomerPage(appUser);
     }
 
+    @ApiOperation(value = "Login seller user to application", response = AppUser.class)
     @PostMapping(value = "/seller/loginUser")
     public @ResponseBody AppUser loginSellerUser(@RequestBody AppUser appUser){
         return appUserService.loginUserFromSellerPage(appUser);

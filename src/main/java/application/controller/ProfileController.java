@@ -35,14 +35,6 @@ public class ProfileController {
         return new ResponseEntity<>("Nie udało się zmienić danych", HttpStatus.NOT_FOUND);
     }
 
-    /*@ApiOperation(value = "Add customer role for user", response = AppUser.class)
-    @PostMapping(value= "/seller/addCustomerRole")
-    public @ResponseBody ResponseEntity<String> addCustomerRole(@RequestBody AppUser appUser){
-        if(appUserService.addCustomerRole(appUser) != null){
-            return new ResponseEntity<>("Zostałes kupujacym", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Operacja zostania kupujacym nie powiodla sie", HttpStatus.NOT_FOUND);
-    }*/
     @ApiOperation(value = "Add customer role for user", response = AppUser.class)
     @PostMapping(value= "/seller/addCustomerRole")
     public @ResponseBody AppUser addCustomerRole(@RequestBody AppUser appUser){

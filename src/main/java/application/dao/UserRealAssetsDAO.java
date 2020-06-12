@@ -8,7 +8,6 @@ public interface UserRealAssetsDAO {
 
     List<UserRealAssets> findAllUserrealassetsQuery();
     UserRealAssets findUserRealAssetsById(int id);
-    UserRealAssets findUserrealAssetsByUserId(AppUser appUser);
     UserRealAssets findUserRealAssetsByHouseId(House house);
     UserRealAssets findUserRealAssetsByPlotId(Plot plot);
     UserRealAssets findUserRealAssetsByFlatId(Flat flat);

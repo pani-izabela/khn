@@ -34,7 +34,7 @@ public class AddPropertyController {
 
     //----------------Nowe---------------------------------
 
-    @ApiOperation(value = "Add new flat")
+    @ApiOperation(value = "Add new flat", response = Flat.class)
     @PostMapping(value = "/seller/addFlat")
     public @ResponseBody ResponseEntity<Flat> addFlat(@RequestBody FlatWrapper flatWrapper) {
         Flat flat = propertyFacade.addFlat(flatWrapper.getAddress(), flatWrapper.getFlat());
@@ -45,7 +45,7 @@ public class AddPropertyController {
         }
     }
 
-    @ApiOperation(value = "Add new house")
+    @ApiOperation(value = "Add new house", response = House.class)
     @PostMapping(value = "/seller/addHouse")
     public @ResponseBody ResponseEntity<House> addHouse(@RequestBody HouseWrapper houseWrapper) {
         House house = propertyFacade.addHouse(houseWrapper.getAddress(), houseWrapper.getHouse());
@@ -56,7 +56,7 @@ public class AddPropertyController {
         }
     }
 
-    @ApiOperation(value = "Add new plot")
+    @ApiOperation(value = "Add new plot", response = Plot.class)
     @PostMapping(value = "/seller/addPlot")
     public @ResponseBody ResponseEntity<Plot> addPlot(@RequestBody PlotWrapper plotWrapper) {
         Plot plot = propertyFacade.addPlot(plotWrapper.getAddress(), plotWrapper.getPlot());

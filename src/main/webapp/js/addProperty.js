@@ -3,10 +3,9 @@ var loggedAppUser;
 var cityF, streetF, house_numberF, flat_numberF, postcodeF, priceF, areaF, rooms_noF, floorF;
 var cityH, streetH, house_numberH, postcodeH, priceH, areaH, rooms_noH;
 var cityP, streetP, house_numberP, postcodeP, priceP, areaP, typeP;
-var flatAddressId, houseAddressId, plotAddressId;
-var flatId, houseId, plotId;
 let flatData, houseData, plotData;
 let flatAddress, houseAddress, plotAddress;
+
 $(document).ready(function () {
     selectForm();
     getLoggedAppUser();

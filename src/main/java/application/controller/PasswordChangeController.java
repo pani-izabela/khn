@@ -2,6 +2,9 @@ package application.controller;
 
 import application.model.AppUser;
 import application.service.AppUserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,11 @@ public class PasswordChangeController {
         return "passwordChange";
     }
 
+    @ApiOperation(value = "Change data of user")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="emailField", value = "AppUser email", dataType = "String", required = true),
+            @ApiImplicitParam(name="oldPassField", value = "AppUser pass", dataType = "String", required = true),
+            @ApiImplicitParam(name="newPassField", value = "AppUser new pass", dataType = "String", required = true)})
     @PostMapping(value = "/userChangePassword")
     public @ResponseBody ResponseEntity<String> userChangePassword(String emailField, String oldPassField, String newPassField){
         if(appUserService.changePassword(emailField, oldPassField, newPassField)!=null)

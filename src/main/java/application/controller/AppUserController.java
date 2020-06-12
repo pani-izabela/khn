@@ -38,13 +38,17 @@ public class AppUserController {
         return appUserService.findAllQuery();
     }
 
+    @ApiOperation(value = "Get user by id", response = AppUser.class)
+    @ApiImplicitParam(name = "id", value = "AppUser id", dataType = "int", required = true)
     @GetMapping(value = "/getAppUser")
     public @ResponseBody AppUser getAppUser(@RequestBody @RequestParam int id){
         return appUserDAO.findById(id);
     }
 
     @ApiOperation(value = "Delete user by id")
-    @ApiImplicitParam(name="id", value = "User id", required = true)
+    @ApiImplicitParams({
+            @ApiImplicitParam (name ="id", value = "User id", dataType = "int", required = true),
+            @ApiImplicitParam (name ="id", value = "Logged AppUser id", dataType = "int", required = true)})
     @DeleteMapping(value = "/deleteAppUser")
     public @ResponseBody ResponseEntity<String> deleteAppUser(@RequestBody @RequestParam int id, @RequestParam int loggedUserId){
         if(loggedUserId!=id) {

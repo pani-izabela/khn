@@ -40,18 +40,6 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public UserRealAssets findUserrealAssetsByUserId(AppUser appUser) {
-        try {
-            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_APPUSERID, UserRealAssets.class)
-                    .setParameter("appuserId", appUser)
-                    .getSingleResult();
-
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    @Override
     public UserRealAssets findUserRealAssetsByHouseId(House house) {
         try{
             return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_HOUSE, UserRealAssets.class)
@@ -63,6 +51,7 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserRealAssets findUserRealAssetsByPlotId(Plot plot) {
         try{
             return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_PLOT, UserRealAssets.class)
@@ -74,6 +63,7 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserRealAssets findUserRealAssetsByFlatId(Flat flat) {
         try{
             return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_FLAT, UserRealAssets.class)

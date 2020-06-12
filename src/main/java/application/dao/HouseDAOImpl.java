@@ -66,7 +66,7 @@ public class HouseDAOImpl implements HouseDAO{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public House findHouseByAddressId(Address addressId) {
         try{
             return em.createNamedQuery(House.GET_HOUSE_BY_ADDRESS_ID, House.class)
