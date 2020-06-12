@@ -9,4 +9,5 @@ public interface FlatService {
     List<Flat> findAllFlatsQuery();
     Flat changeAppuser(int flatId, int appUserId);
     Flat addFlat(Flat flat);
+    Flat findFlatById(int id);
 }

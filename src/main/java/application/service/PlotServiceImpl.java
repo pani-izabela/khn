@@ -44,13 +44,13 @@ public class PlotServiceImpl implements PlotService {
     }
 
     @Override
-    public Plot findPlotById(int plotId) {
-        return plotDAO.findPlotByIdQuery(plotId);
+    public Plot findPlotByAddressId(Address addressId) {
+        return plotDAO.findPlotByAddressId(addressId);
     }
 
     @Override
-    public Plot findPlotByAddressId(Address addressId) {
-        return plotDAO.findPlotByAddressId(addressId);
+    public Plot findPlotById(int id) {
+        return plotDAO.findPlotByIdQuery(id);
     }
 
 }

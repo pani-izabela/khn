@@ -32,72 +32,59 @@ public class UserrealassetsServiceImpl implements UserrealassetsService{
     }
 
     @Override
-    public UserRealAssets addHouse(int appuserId, int assetsId) {
+    public void addUserRealAssetsForHouse(int appuserId, int assetsId) {
         UserRealAssets userrealassets = new UserRealAssets();
         userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
         userrealassets.setHouse(houseDAO.findHouseByIdQuery(assetsId));
-        return userrealassetsDAO.addUserrealassets(userrealassets);
+        userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
-    public UserRealAssets addFlat(int appuserId, int assetsId) {
+    public void addUserRealAssetsForFlat(int appUserId, int assetsId) {
         UserRealAssets userrealassets = new UserRealAssets();
-        userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
+        userrealassets.setAppUser(appUserService.findByIdQuery(appUserId));
         userrealassets.setFlat(flatDAO.findFlatByIdQuery(assetsId));
-        return userrealassetsDAO.addUserrealassets(userrealassets);
+        userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
-    public UserRealAssets addPlot(int appuserId, int assetsId) {
+    public void addUserRealAssetsForPlot(int appuserId, int assetsId) {
         UserRealAssets userrealassets = new UserRealAssets();
         userrealassets.setAppUser(appUserService.findByIdQuery(appuserId));
         userrealassets.setPlot(plotDAO.findPlotByIdQuery(assetsId));
-        return userrealassetsDAO.addUserrealassets(userrealassets);
+        userrealassetsDAO.addUserrealassets(userrealassets);
     }
 
     @Override
-    public UserRealAssets updateHouse(int appuserId, int assetsId) {
-        AppUser appUser = appUserService.findByIdQuery(appuserId);
-        UserRealAssets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
-        House house = houseDAO.findHouseByIdQuery(assetsId);
-        return userrealassetsDAO.updateUserrealassetsHouse(userrealassets, house);
+    public void updateUserRealAssetsForHouse(House house) {
+        //AppUser appUser = appUserService.findByIdQuery(appuserId);
+        UserRealAssets userrealassets = userrealassetsDAO.findUserRealAssetsByHouseId(house);
+        userrealassetsDAO.updateUserrealassetsHouse(userrealassets, house);
     }
 
     @Override
-    public UserRealAssets updateFlat(int appuserId, int assetsId) {
-        AppUser appUser = appUserService.findByIdQuery(appuserId);
-        UserRealAssets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
-        Flat flat = flatDAO.findFlatByIdQuery(assetsId);
-        return userrealassetsDAO.updateUserrealassetsFlat(userrealassets, flat);
+    public void updateUserRealAssetsForPlot(Plot plot) {
+        UserRealAssets userrealassets = userrealassetsDAO.findUserRealAssetsByPlotId(plot);
+        userrealassetsDAO.updateUserrealassetsPlot(userrealassets, plot);
     }
 
     @Override
-    public UserRealAssets updatePlot(int appuserId, int assetsId) {
-        AppUser appUser = appUserService.findByIdQuery(appuserId);
-        UserRealAssets userrealassets = userrealassetsDAO.findUserrealAssetsByUserId(appUser);
-        Plot plot = plotDAO.findPlotByIdQuery(assetsId);
-        return userrealassetsDAO.updateUserrealassetsPlot(userrealassets, plot);
+    public void updateUserRealAssetsForFlat(Flat flat) {
+        UserRealAssets userRealAssetsFromDB = userrealassetsDAO.findUserRealAssetsByFlatId(flat);
+        userrealassetsDAO.updateUserrealassetsFlat(userRealAssetsFromDB, flat);
     }
 
-    @Override
-    public UserRealAssets addHouseAndPlot(AppUser appUserId, House houseId, Plot plotId) {
-        UserRealAssets userRealAssets = new UserRealAssets();
-        userRealAssets.setAppUser(appUserId);
-        userRealAssets.setHouse(houseId);
-        userRealAssets.setPlot(plotId);
-        return userrealassetsDAO.addUserrealassets(userRealAssets);
-    }
 
     @Override
-    public UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot) {
+    public void updateUserRealAssetsWithHouse(House house, Plot plot) {
         UserRealAssets userRealAssetsFromDB = userrealassetsDAO.findUserRealAssetsByHouseId(house);
-        return userrealassetsDAO.updateUserrealassetsPlot(userRealAssetsFromDB, plot);
+        userrealassetsDAO.updateUserrealassetsPlot(userRealAssetsFromDB, plot);
     }
 
     @Override
-    public UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house) {
+    public void updateUserRealAssetsWithPlot(Plot plot, House house) {
         UserRealAssets userRealAssetsFromDB = userrealassetsDAO.findUserRealAssetsByPlotId(plot);
-        return userrealassetsDAO.updateUserrealassetsHouse(userRealAssetsFromDB, house);
+        userrealassetsDAO.updateUserrealassetsHouse(userRealAssetsFromDB, house);
     }
 
 }

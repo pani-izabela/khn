@@ -12,6 +12,6 @@ public interface PlotService {
     Plot changeAppuser(int plotId, int appUserId);
     Plot addPlot(Plot plot);
     Plot updatePlot(Plot plot, House house);
-    Plot findPlotById(int plotId);
     Plot findPlotByAddressId(Address addressId);
+    Plot findPlotById(int id);
 }

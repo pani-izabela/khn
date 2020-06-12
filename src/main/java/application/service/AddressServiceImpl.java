@@ -16,18 +16,6 @@ public class AddressServiceImpl implements AddressService {
 
     AddressDAO addressDAO;
 
-
-    @Override
-    public Address addPropertyAddress(Address address) {
-        Address addressesFromDB = findAddressByCityAndStreetAndHouseNoAndType(address);
-        if(addressesFromDB==null){
-            return address;
-        }
-        else{
-            return null;
-        }
-    }
-
     @Override
     public Address findAddressByCityAndStreetAndHouseNoAndType(Address address){
         return addressDAO.findByCityAndStreetAndHouseNoAndType(address.getCity(), address.getStreet(), address.getHomeNumber(), address.getRealAssetsId());
@@ -38,24 +26,4 @@ public class AddressServiceImpl implements AddressService {
         return addressDAO.findAddressesByCityAndStreetAndHouseNo(address.getCity(), address.getStreet(), address.getHomeNumber());
     }
 
-
-    //-------------------metody prywatne
-    private List<Address> getAdressesPerType(int assetsType, Address address, Address addressFromDB){
-        List<Address> addresses = new ArrayList<>();
-        if(assetsType==2 && address.getRealAssetsId()==2){
-            addresses = null;
-        }
-        else if(assetsType==3 && address.getRealAssetsId()==3){
-            addresses = null;
-        }
-        else if(assetsType==3 && address.getRealAssetsId()==2){
-            addresses.add(address);
-            addresses.add(addressFromDB);
-        }
-        else if(assetsType==2 && address.getRealAssetsId()==3){
-            addresses.add(address);
-            addresses.add(addressFromDB);
-        }
-        return addresses;
-    }
 }

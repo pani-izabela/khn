@@ -198,39 +198,5 @@ function buyPlot(user_id, property_id, property_type) {
     }
 }
 
-/*function buyProperty(user_id, property_id, property_type, auctionViewId) {
-    if(confirm("Jesteś pewny/a, że chcesz kupić tę nieruchomość?")) {
-        $.ajax({
-            url: "http://localhost:8080/buyProperty?" + $.param({appuserid: user_id}) + "&" + $.param({assetsId: property_id}) + "&" + $.param({assetsType: property_type}),
-            method: "POST",
-
-            success: function (res) {
-                console.log("Udało się kupić");
-                alert(res);
-                //deleteBoughtPropertyFromView(auctionViewId);
-                window.location.href = "myProperties"
-                //location.reload();
-            },
-            error: function () {
-                console.log("Nie udało się kupić");
-            }
-        });
-    }
-}*/
-
-/*function deleteBoughtPropertyFromView(auctionViewId) {
-    $.ajax({
-        type: "DELETE",
-        url: "http://localhost:8080/deleteAuctionView?" + $.param({auctionViewId: auctionViewId}),
-        data: JSON.stringify(auctionViewId),
-        contentType: "application/json",
-        success: function () {
-            console.log("Usunięto kupioną nieruchomość");
-        },
-        error: function () {
-            console.log("Nie udało się usunąć kupionej nieruchomości");
-        }
-    });
-}*/
 
 

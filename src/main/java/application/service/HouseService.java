@@ -11,6 +11,6 @@ public interface HouseService {
     List<House> findAllHousesQuery();
     House changeAppuser(int houseId, int appUserId);
     House addHouse(House house);
-    House findHouseById(int houseId);
     House findHouseByAddressId(Address addressId);
+    House findHouseById(int id);
 }

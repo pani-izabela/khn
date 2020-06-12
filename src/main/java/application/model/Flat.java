@@ -25,6 +25,7 @@ public class Flat {
     public static final String GET_FLATS_BY_ID = "Flat.get_flats_by_id";
     public static final String QUERY_GET_FLATS_BY_ID = "select fl from Flat fl where fl.id = :id";
 
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

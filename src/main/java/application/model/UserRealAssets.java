@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(name = UserRealAssets.GET_USERREALASSETS_BY_APPUSERID, query = UserRealAssets.QUERY_GET_USERREALASSETS_BY_APPUSERID),
         @NamedQuery(name = UserRealAssets.GET_USERREALASSETS_BY_HOUSE, query = UserRealAssets.QUERY_GET_USERREALASSETS_BY_HOUSE),
         @NamedQuery(name = UserRealAssets.GET_USERREALASSETS_BY_PLOT, query = UserRealAssets.QUERY_GET_USERREALASSETS_BY_PLOT),
+        @NamedQuery(name = UserRealAssets.GET_USERREALASSETS_BY_FLAT, query = UserRealAssets.QUERY_GET_USERREALASSETS_BY_FLAT),
 })
 
 @Entity
@@ -32,6 +33,9 @@ public class UserRealAssets {
 
     public static final String GET_USERREALASSETS_BY_PLOT = "Userrealassets.get_userrealassets_by_plot";
     public static final String QUERY_GET_USERREALASSETS_BY_PLOT = "select uas from UserRealAssets uas where uas.plot = :plotId";
+
+    public static final String GET_USERREALASSETS_BY_FLAT = "Userrealassets.get_userrealassets_by_flat";
+    public static final String QUERY_GET_USERREALASSETS_BY_FLAT = "select uas from UserRealAssets uas where uas.flat = :flatId";
 
     @Id
     @NotNull

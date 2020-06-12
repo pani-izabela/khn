@@ -1,21 +1,19 @@
 package application.service;
 
-import application.model.AppUser;
-import application.model.House;
-import application.model.Plot;
-import application.model.UserRealAssets;
+import application.model.*;
 
 import java.util.List;
 
 public interface UserrealassetsService {
     List<UserRealAssets> findAllUserrealassets();
-    UserRealAssets addHouse(int appuserId, int assetsId);
-    UserRealAssets addFlat(int appuserId, int assetsId);
-    UserRealAssets addPlot(int appuserId, int assetsId);
-    UserRealAssets updateHouse(int appuserId, int assetsId);
-    UserRealAssets updateFlat(int appuserId, int assetsId);
-    UserRealAssets updatePlot(int appuserId, int assetsId);
-    UserRealAssets addHouseAndPlot(AppUser appUserId, House houseId, Plot plotId);
-    UserRealAssets updateUserRealAssetsWithHouse(House house, Plot plot);
-    UserRealAssets updateUserRealAssetsWithPlot(Plot plot, House house);
+    void addUserRealAssetsForHouse(int appuserId, int assetsId);
+    void addUserRealAssetsForFlat(int appUserId, int assetsId);
+    void addUserRealAssetsForPlot(int appuserId, int assetsId);
+
+    void updateUserRealAssetsForHouse(House house);
+    void updateUserRealAssetsForPlot(Plot plot);
+    void updateUserRealAssetsForFlat(Flat flat);
+
+    void updateUserRealAssetsWithHouse(House house, Plot plot);
+    void updateUserRealAssetsWithPlot(Plot plot, House house);
 }

@@ -11,6 +11,7 @@ public interface UserRealAssetsDAO {
     UserRealAssets findUserrealAssetsByUserId(AppUser appUser);
     UserRealAssets findUserRealAssetsByHouseId(House house);
     UserRealAssets findUserRealAssetsByPlotId(Plot plot);
+    UserRealAssets findUserRealAssetsByFlatId(Flat flat);
     UserRealAssets addUserrealassets(UserRealAssets userRealAssets);
     UserRealAssets updateUserrealassetsHouse(UserRealAssets userRealAssets, House house);
     UserRealAssets updateUserrealassetsPlot(UserRealAssets userRealAssets, Plot plot);

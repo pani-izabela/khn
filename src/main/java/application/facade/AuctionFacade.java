@@ -1,7 +1,6 @@
 package application.facade;
 
-import application.model.AuctionView;
-import application.model.UserRealAssets;
+import application.model.*;
 import application.service.AuctionViewService;
 import application.service.FinanceService;
 import org.springframework.stereotype.Service;
@@ -21,39 +20,39 @@ public class AuctionFacade {
 
     //--------operacje kupowania
 
-    public UserRealAssets buyHouse(int appuserid, int assetsId, String assetsType){
-        financialOperations(appuserid, assetsId, assetsType);
+    public House buyHouse(int appUserId, int assetsId, String assetsType){
+        financialOperations(appUserId, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
-            return propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType);
+            return propertyFacade.buyHousePlusPlot(appUserId, assetsId, secondProperty.getAsset_id());
         }
         else {
-            return propertyFacade.buyHouse(appuserid, assetsId);
+            return propertyFacade.buyHouse(appUserId, assetsId);
         }
     }
 
-    public UserRealAssets buyFlat(int appuserid, int assetsId, String assetsType){
-        financialOperations(appuserid, assetsId, assetsType);
-        return propertyFacade.buyFlat(appuserid, assetsId);
+    public Flat buyFlat(int appUserId, int assetsId, String assetsType){
+        financialOperations(appUserId, assetsId, assetsType);
+        return propertyFacade.buyFlat(appUserId, assetsId);
     }
 
-    public UserRealAssets buyPlot(int appuserid, int assetsId, String assetsType){
-        financialOperations(appuserid, assetsId, assetsType);
+    public Plot buyPlot(int appUserId, int assetsId, String assetsType){
+        financialOperations(appUserId, assetsId, assetsType);
         AuctionView secondProperty = auctionViewService.getPropertyWithTheSameAddress(assetsType, assetsId);
         if(secondProperty != null){
-            return propertyFacade.buyPlotPlusHouse(appuserid, assetsId, secondProperty.getAsset_id(), assetsType);
+            return propertyFacade.buyPlotPlusHouse(appUserId, assetsId, secondProperty.getAsset_id());
         }
         else {
-            return propertyFacade.buyPlot(appuserid, assetsId);
+            return propertyFacade.buyPlot(appUserId, assetsId);
         }
     }
 
     //-------operacje finansowe
-    private void financialOperations(int appuserid, int assetsId, String assetsType){
+    private void financialOperations(int appUserId, int assetsId, String assetsType){
         double totalCost = auctionViewService.returnTotalCost(assetsType, assetsId);
-        boolean result = financeService.chcekUserAccountStatus(appuserid, totalCost);
+        boolean result = financeService.chcekUserAccountStatus(appUserId, totalCost);
         if(result){
-            financeService.updateAmount(appuserid);
+            financeService.updateAmount(appUserId);
         }
     }
 

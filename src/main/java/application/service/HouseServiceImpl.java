@@ -38,12 +38,12 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public House findHouseById(int houseId) {
-        return houseDAO.findHouseByIdQuery(houseId);
+    public House findHouseByAddressId(Address addressId) {
+        return houseDAO.findHouseByAddressId(addressId);
     }
 
     @Override
-    public House findHouseByAddressId(Address addressId) {
-        return houseDAO.findHouseByAddressId(addressId);
+    public House findHouseById(int id) {
+        return houseDAO.findHouseByIdQuery(id);
     }
 }

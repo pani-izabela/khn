@@ -74,6 +74,17 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     }
 
     @Override
+    public UserRealAssets findUserRealAssetsByFlatId(Flat flat) {
+        try{
+            return em.createNamedQuery(UserRealAssets.GET_USERREALASSETS_BY_FLAT, UserRealAssets.class)
+                    .setParameter("flatId", flat)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
     @Transactional
     public UserRealAssets addUserrealassets(UserRealAssets userRealAssets) {
         try {
@@ -88,6 +99,7 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     public UserRealAssets updateUserrealassetsHouse(UserRealAssets userRealAssets, House house) {
         try {
             userRealAssets.setHouse(house);
+            userRealAssets.setAppUser(house.getAppUser());
             return em.merge(userRealAssets);
         } catch (NoResultException e) {
             return null;
@@ -99,6 +111,7 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     public UserRealAssets updateUserrealassetsPlot(UserRealAssets userRealAssets, Plot plot) {
         try {
             userRealAssets.setPlot(plot);
+            userRealAssets.setAppUser(plot.getAppUser());
             return em.merge(userRealAssets);
         } catch (NoResultException e) {
             return null;
@@ -110,6 +123,7 @@ public class UserRealAssetsDAOImpl implements UserRealAssetsDAO {
     public UserRealAssets updateUserrealassetsFlat(UserRealAssets userRealAssets, Flat flat) {
         try {
             userRealAssets.setFlat(flat);
+            userRealAssets.setAppUser(flat.getAppUser());
             return em.merge(userRealAssets);
         } catch (NoResultException e) {
             return null;
