@@ -31,12 +31,12 @@ public class LoginController {
 
     @GetMapping(value = "/customer/login")
     public String loginCustomer() {
-        return "customer/login";
+        return "customer/login.html";
     }
 
     @GetMapping(value = "/seller/login")
     public String loginSeller() {
-        return "seller/login";
+        return "seller/login.html";
     }
 
     @ApiOperation(value = "Login customer user to application", response = AppUser.class)

@@ -29,7 +29,7 @@ public class AddPropertyController {
 
     @GetMapping(value = "/seller/addProperty")
     public String getMyProperties() {
-        return "seller/addProperty";
+        return "seller/addProperty.html";
     }
 
     //----------------Nowe---------------------------------

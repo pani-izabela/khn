@@ -8,27 +8,27 @@ public class MainController {
 
     @GetMapping(value = "/index")
     public String index() {
-        return "index";
+        return "index.html";
     }
 
     @GetMapping(value = "*/menu")
     public String adminMenu() {
-        return "menu";
+        return "menu.html";
     }
 
     @GetMapping(value="/footer")
     public String footer(){
-        return "footer";
+        return "footer.html";
     }
 
     @GetMapping(value="/header")
     public String header(){
-        return "header";
+        return "header.html";
     }
 
     @GetMapping(value="/sidebar")
     public String sidebar(){
-        return "sidebar";
+        return "sidebar.html";
     }
 
 

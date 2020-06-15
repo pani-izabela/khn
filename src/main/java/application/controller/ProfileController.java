@@ -23,7 +23,7 @@ public class ProfileController {
 
     @GetMapping(value = "*/profile")
     public String auctionsCustomer() {
-        return "profile";
+        return "profile.html";
     }
 
     @ApiOperation(value = "Change data of user", response = AppUser.class)

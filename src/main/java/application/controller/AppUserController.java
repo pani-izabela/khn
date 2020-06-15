@@ -29,7 +29,7 @@ public class AppUserController {
 
     @GetMapping(value="/admin/users")
     public String adminUsers(){
-        return "admin/users";
+        return "admin/users.html";
     }
 
     @ApiOperation(value = "Get all users")

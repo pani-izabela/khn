@@ -21,13 +21,13 @@ public class RegisterController {
     @ApiOperation(value = "Show registration view for customer")
     @GetMapping(value = "/customer/register")
     public String registerCustomer() {
-        return "customer/register";
+        return "customer/register.html";
     }
 
     @ApiOperation(value = "Show registration view for seller")
     @GetMapping(value = "/seller/register")
     public String registerSeller() {
-        return "seller/register";
+        return "seller/register.html";
     }
 
     @ApiOperation(value = "Add new customer to application", response = AppUser.class)

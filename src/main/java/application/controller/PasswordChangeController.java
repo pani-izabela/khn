@@ -22,7 +22,7 @@ public class PasswordChangeController {
 
     @GetMapping(value = "/passwordChange")
     public String passwordReset() {
-        return "passwordChange";
+        return "passwordChange.html";
     }
 
     @ApiOperation(value = "Change data of user")

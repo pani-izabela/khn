@@ -31,7 +31,7 @@ public class AuctionsController {
 
     @GetMapping(value = "*/auctions")
     public String auctionsCustomer() {
-        return "auctions";
+        return "auctions.html";
     }
 
     @ApiOperation(value = "Get assets by type")
