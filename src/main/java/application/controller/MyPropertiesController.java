@@ -8,7 +8,7 @@ public class MyPropertiesController {
 
     @GetMapping(value = "/customer/myProperties")
     public String getMyProperties() {
-        return "customer/myProperties2.xhtml";
+        return "customer/myProperties3.xhtml";
     }
 
 }
