@@ -13,7 +13,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
-    <title>Moje zakupy</title>
+    <title>Moje sprzedaże</title>
 </h:head>
 <h:body>
     <div class="wrapper">
@@ -27,7 +27,7 @@
             </div>
             <div class="container">
                 <h:form>
-                    <p>Kupione nieruchomości</p>
+                    <p>Nieruchomości na sprzedaż</p>
                     <p:dataTable value="#{myPropertiesBean.list}" var="properties" style="margin-bottom:40px"
                                  rows="10"
                                  paginator="true"
@@ -35,7 +35,7 @@
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                                  rowsPerPageTemplate="5,10,15">
                         <f:facet name="header">
-                            Moje zakupy - nieruchomości
+                            Moje sprzedaże - nieruchomości
                         </f:facet>
                         <p:column headerText="liczba pokoi">
                             #{properties.rooms}

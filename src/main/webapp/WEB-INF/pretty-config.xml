@@ -9,4 +9,9 @@
         <view-id value="/WEB-INF/pages/customer/myProperties3.xhtml" />
     </url-mapping>
 
+    <url-mapping id="propertiesForSale">
+        <pattern value="/seller/propertiesForSale" />
+        <view-id value="/WEB-INF/pages/seller/propertiesForSale.xhtml" />
+    </url-mapping>
+
 </pretty-config>
