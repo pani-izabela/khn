@@ -27,7 +27,8 @@
             </div>
             <div class="container">
                 <h:form>
-                    <p:dataTable var="properties" style="margin-bottom:40px"
+                    <p>UWAGA</p>
+                    <p:dataTable value="#{myPropertiesBean.list}" var="properties" style="margin-bottom:40px"
                                  rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -37,19 +38,19 @@
                             Moje zakupy - nieruchomości
                         </f:facet>
                         <p:column headerText="liczba pokoi">
-
+                            #{properties.rooms}
                         </p:column>
                         <p:column headerText="rodzaj">
-
+                            #{properties.asset_type}
                         </p:column>
                         <p:column headerText="miejscowość">
-
+                            #{properties.city}
                         </p:column>
                         <p:column headerText="ulica">
-
+                            #{properties.street}
                         </p:column>
                         <p:column headerText="kwota">
-
+                            #{properties.price}
                         </p:column>
                     </p:dataTable>
                 </h:form>

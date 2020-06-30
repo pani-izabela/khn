@@ -35,7 +35,6 @@
         <intercept-url pattern="/customer/register" access="permitAll"/>
 
         <!--<intercept-url pattern="/my2.xhtml" access="permitAll()"/>-->
-        <!--<intercept-url pattern="/customerr/myProperties2.xhtml" access="permitAll()"/>-->
 
         <!--poniżej podajemy na której z podstron znajduje się nasz formularz logowania-->
         <form-login login-page="/customer/login"
