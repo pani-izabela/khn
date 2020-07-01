@@ -37,19 +37,19 @@
                         <f:facet name="header">
                             Moje zakupy - nieruchomości
                         </f:facet>
-                        <p:column headerText="liczba pokoi">
+                        <p:column headerText="liczba pokoi" sortBy="#{properties.rooms}">
                             #{properties.rooms}
                         </p:column>
-                        <p:column headerText="rodzaj">
+                        <p:column headerText="rodzaj" sortBy="#{properties.asset_type}">
                             #{properties.asset_type}
                         </p:column>
-                        <p:column headerText="miejscowość">
+                        <p:column headerText="miejscowość" sortBy="#{properties.city}">
                             #{properties.city}
                         </p:column>
-                        <p:column headerText="ulica">
+                        <p:column headerText="ulica" sortBy="#{properties.street}">
                             #{properties.street}
                         </p:column>
-                        <p:column headerText="kwota">
+                        <p:column headerText="kwota" sortBy="#{properties.price}">
                             #{properties.price}
                         </p:column>
                     </p:dataTable>
