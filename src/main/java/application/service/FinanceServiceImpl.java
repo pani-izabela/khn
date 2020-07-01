@@ -10,7 +10,7 @@ import application.model.Flat;
 import application.model.House;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("financeService")
 public class FinanceServiceImpl implements FinanceService {
     private FinanceDAO financeDAO;
     private AppUserService appUserService;
@@ -37,6 +37,12 @@ public class FinanceServiceImpl implements FinanceService {
         AppUser appUser = appUserService.findByIdQuery(appuserId);
         double newAmount = amount - assetPrice;
         return financeDAO.updateAmount(appUser, newAmount);
+    }
+
+    @Override
+    public double getAmountByAppUserId(int appUserId) {
+        Finance finance = financeDAO.findByAppuseridQuery(appUserService.findByIdQuery(appUserId));
+        return finance.getAmount();
     }
 
 }

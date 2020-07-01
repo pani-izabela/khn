@@ -27,7 +27,6 @@
             </div>
             <div class="container">
                 <h:form>
-                    <p>Kupione nieruchomości</p>
                     <p:dataTable value="#{myPropertiesBean.myPropertiesList}" var="properties" style="margin-bottom:40px"
                                  rows="10"
                                  paginator="true"
@@ -53,6 +52,21 @@
                             #{properties.price}
                         </p:column>
                     </p:dataTable>
+                </h:form>
+                <h:form>
+                    <h4>Podsumowanie</h4>
+                    <h:panelGrid columns="2" class="balance" style="background-color: lightgreen">
+                        <h:outputText value="Saldo: " style="font-weight: bold"/>
+                        <h:outputText value="180000"/>
+                        <h:outputText value="€: " style="font-weight: bold"/>
+                        <h:outputText value="14"/>
+                        <h:outputText value="$: " style="font-weight: bold"/>
+                        <h:outputText value="300"/>
+                    </h:panelGrid>
+                    <br/>
+                </h:form>
+                <h:form>
+                    <p></p>
                 </h:form>
             </div>
             <div id="footerOnPage">

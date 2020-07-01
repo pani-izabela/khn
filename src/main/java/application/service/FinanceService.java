@@ -6,4 +6,5 @@ public interface FinanceService {
 
     boolean chcekUserAccountStatus(int id, double totalCost);
     Finance updateAmount(int appuserId);
+    double getAmountByAppUserId(int appUserId);
 }
