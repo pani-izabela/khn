@@ -4,7 +4,6 @@ package application.bean;
 import application.model.AuctionView;
 import application.service.AppUserService;
 import application.service.MyPropertiesService;
-import application.service.MyPropertiesServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @Setter
 @ManagedBean
 @ViewScoped
-public class MyPropertiesBean {
+public class PropertiesForSaleBean {
 
     @ManagedProperty("#{myPropertiesService}")
     private MyPropertiesService myPropertiesService;
@@ -26,12 +25,11 @@ public class MyPropertiesBean {
     @ManagedProperty("#{appUserService}")
     private AppUserService appUserService;
 
-    private List<AuctionView> myPropertiesList;
+    private List<AuctionView> propertiesForSaleList;
 
     @PostConstruct
-    public void getMyProperties(){
-        myPropertiesList = myPropertiesService.getPropertiesForCustomer(appUserService.getLoggedCustomerId());
+    public void getPropertiesForSale(){
+        propertiesForSaleList = myPropertiesService.getPropertiesForSeller(appUserService.getLoggedSellerId());
     }
-
 }
 

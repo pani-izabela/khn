@@ -72,4 +72,32 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<AuctionView> findPropertyByAppUserIdAndCustomerRole(int appUserId) {
+        try{
+            return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE, AuctionView.class)
+                    .setParameter("appUserId", appUserId)
+                    .setParameter("appUserRole", 1)
+                    .getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AuctionView> findPropertyByAppUserIdAndSellerRole(int appUserId) {
+        try{
+            return em.createNamedQuery(AuctionView.GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE, AuctionView.class)
+                    .setParameter("appUserId", appUserId)
+                    .setParameter("appUserRole", 2)
+                    .getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
 }

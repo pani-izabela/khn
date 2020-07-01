@@ -8,6 +8,8 @@ import application.model.Role;
 //import org.slf4j.event.Level;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("appUserService")
 public class AppUserServiceImpl implements AppUserService {
     //final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
     //final static Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class);
     protected final Logger log = Logger.getLogger(getClass().getName());
 
     private AppUserDAO appUserDAO;
+
+    public int loggedCustomerId;
+    public int loggedSellerId;
 
 
     public AppUserServiceImpl(AppUserDAO appUserDAO) {
@@ -66,8 +71,10 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser loginUserFromSellerPage(AppUser appUser) {
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-        if(isSeller(appUserFromDb) || isAdmin(appUser))
+        if(isSeller(appUserFromDb) || isAdmin(appUser)) {
+            loggedSellerId = appUserFromDb.getId();
             return appUserFromDb;
+        }
         else
             return null;
     }
@@ -75,8 +82,10 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser loginUserFromCustomerPage(AppUser appUser) {
         AppUser appUserFromDb = findAppUserByEmailAndPass(appUser.getEmail(), appUser.getPass());
-        if(isCustomer(appUserFromDb) || isAdmin(appUserFromDb))
+        if(isCustomer(appUserFromDb) || isAdmin(appUserFromDb)){
+            loggedCustomerId = appUserFromDb.getId();
             return appUserFromDb;
+        }
         else
             return null;
     }
@@ -124,6 +133,16 @@ public class AppUserServiceImpl implements AppUserService {
     public void deleteAppUser(int id, int loggedUserId){
 
         appUserDAO.deleteById(id);
+    }
+
+    @Override
+    public int getLoggedCustomerId() {
+        return loggedCustomerId;
+    }
+
+    @Override
+    public int getLoggedSellerId() {
+        return loggedSellerId;
     }
 
     //--------------------------------------- metody prywatne ---------------------------------------

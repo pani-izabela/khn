@@ -11,7 +11,8 @@ import javax.persistence.*;
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE),
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_APPUSERROLE),
         @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_TYPE_AND_ASSETID, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_TYPE_AND_ASSETID),
-        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_ADRESS, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_ADRESS)
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_ADRESS, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_ADRESS),
+        @NamedQuery(name = AuctionView.GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE, query = AuctionView.QUERY_GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE)
 })
 
 @Entity
@@ -35,6 +36,9 @@ public class AuctionView {
 
     public static final String GET_ALL_ASSETS_BY_ADRESS = "AuctionView.get_all_assets_by_adress";
     public static final String QUERY_GET_ALL_ASSETS_BY_ADRESS = "select av from AuctionView av where av.city = :city and av.postcode = :postcode and av.homenumber = :homenumber";
+
+    public static final String GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE = "AuctionView.get_all_assets_by_appuser_id_and_appuserrole";
+    public static final String QUERY_GET_ALL_ASSETS_BY_APPUSER_ID_AND_APPUSERROLE = "select av from AuctionView av where av.appuser_id = :appUserId and av.appuser_role = :appUserRole";
 
     //@Id
     //@Column(name = "id")

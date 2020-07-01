@@ -19,4 +19,14 @@ public class MyPropertiesServiceImpl implements MyPropertiesService {
     public List<AuctionView> getAllProperties() {
         return auctionViewDAO.findAllQuery();
     }
+
+    @Override
+    public List<AuctionView> getPropertiesForCustomer(int appUserId) {
+        return auctionViewDAO.findPropertyByAppUserIdAndCustomerRole(appUserId);
+    }
+
+    @Override
+    public List<AuctionView> getPropertiesForSeller(int appUserId) {
+        return auctionViewDAO.findPropertyByAppUserIdAndSellerRole(appUserId);
+    }
 }

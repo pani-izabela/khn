@@ -16,4 +16,6 @@ public interface AppUserService {
     AppUser changePassword(String email, String oldPass, String newPass);
     AppUser changeDataOfUser(AppUser newUser);
     AppUser addCustomerRole(AppUser appUser);
+    int getLoggedCustomerId();
+    int getLoggedSellerId();
 }
