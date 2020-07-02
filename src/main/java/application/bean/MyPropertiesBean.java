@@ -37,9 +37,9 @@ public class MyPropertiesBean {
         myPropertiesList = myPropertiesService.getPropertiesForCustomer(appUserService.getLoggedCustomerId());
     }
 
-    /*public double getAmount(){
+    public double getAmount(){
         return financeService.getAmountByAppUserId(appUserService.getLoggedCustomerId());
-    }*/
+    }
 
 }
 
