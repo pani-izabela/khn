@@ -118,6 +118,13 @@ form [disabled]{
     outline-color: transparent;
     box-shadow: none;
 }
+/*moje sprzedaze / moje zakupy*/
+.GREEN{
+    background-color: lightgreen;
+}
+.CORAL{
+    background-color: lightcoral;
+}
 /*stopka*/
 .footer {
     background-color: green;

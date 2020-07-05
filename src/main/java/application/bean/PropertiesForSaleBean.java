@@ -67,5 +67,16 @@ public class PropertiesForSaleBean {
             return usd.doubleValue();
         }
     }
+
+    public String getColorOfFrameSeller(){
+        String color;
+        if(financeService.getAmountByAppUserId(appUserService.getLoggedSellerId())>=0.0){
+            color = "GREEN";
+        }
+        else {
+            color =  "CORAL";
+        }
+        return color;
+    }
 }
 
