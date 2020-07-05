@@ -18,11 +18,13 @@
         <intercept-url pattern="/customer/auctions" access="hasAnyAuthority('customer', 'seller')"/>
         <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer', 'seller')"/>
         <intercept-url pattern="/customer/profile" access="hasAnyAuthority('customer')"/>
+        <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer')"/>
 
         <intercept-url pattern="/seller/menu" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/auctions" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/profile" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/addProperty" access="hasAnyAuthority('seller')"/>
+        <intercept-url pattern="/seller/propertiesForSale" access="hasAnyAuthority('seller')"/>
 
         <!--<intercept-url pattern="/*/myProperties" access="isAuthenticated()"/>
         <intercept-url pattern="/*/auctions" access="isAuthenticated()"/>-->
@@ -34,7 +36,6 @@
         <intercept-url pattern="/seller/register" access="permitAll"/>
         <intercept-url pattern="/customer/register" access="permitAll"/>
 
-        <!--<intercept-url pattern="/my2.xhtml" access="permitAll()"/>-->
 
         <!--poniżej podajemy na której z podstron znajduje się nasz formularz logowania-->
         <form-login login-page="/customer/login"
