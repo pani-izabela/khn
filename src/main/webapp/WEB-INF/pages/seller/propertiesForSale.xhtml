@@ -59,11 +59,11 @@
                     <h4>Podsumowanie</h4>
                     <h:panelGrid columns="2">
                         <h:outputText value="Saldo: " style="font-weight: bold"/>
-                        <h:outputText value="#{propertiesForSaleBean.amountPLNSeller}"/>
+                        <h:outputText value="#{propertiesForSaleBean.amountSeller}"/>
                         <h:outputText value="€: " style="font-weight: bold"/>
-                        <h:outputText value="200"/>
+                        <h:outputText value="#{propertiesForSaleBean.amountEuro}"/>
                         <h:outputText value="$: " style="font-weight: bold"/>
-                        <h:outputText value="300"/>
+                        <h:outputText value="#{propertiesForSaleBean.amountDollar}"/>
                     </h:panelGrid>
                     <br/>
                 </h:form>

@@ -47,15 +47,25 @@ public class PropertiesForSaleBean {
     }
 
     public double getAmountEuro(){
-        BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
-        BigDecimal eur = pln.divide(euro,2, RoundingMode.HALF_UP);
-        return eur.doubleValue();
+        if(amountPLNSeller==0){
+            return 0;
+        }
+        else{
+            BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
+            BigDecimal eur = pln.divide(euro, 2, RoundingMode.HALF_UP);
+            return eur.doubleValue();
+        }
     }
 
     public double getAmountDollar(){
-        BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
-        BigDecimal usd = pln.divide(dollar,2, RoundingMode.HALF_UP);
-        return usd.doubleValue();
+        if(amountPLNSeller==0){
+            return 0;
+        }
+        else{
+            BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
+            BigDecimal usd = pln.divide(dollar, 2, RoundingMode.HALF_UP);
+            return usd.doubleValue();
+        }
     }
 }
 
