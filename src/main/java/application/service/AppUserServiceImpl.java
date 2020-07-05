@@ -50,15 +50,10 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser registerCustomerUser(AppUser appUser) {
         log.log(Level.INFO, "Zarejestrował sie uzytkownik o emailu: " + appUser.getEmail());
         AppUser appUserToReturn;
-        Finance finance = new Finance();
         if (!checkAppUserByEmail(appUser.getEmail())) {
             appUser.setRoles(addRoleForUser(1, Enums.CUSTOMER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
-            finance.setAmount(1000000.00);
-            finance.setCurrency("PLN");
-            finance.setAppUser(appUserDAO.findByIdQuery(appUserToReturn.getId()));
-            financeDAO.addFinance(finance);
-
+            addFinance(appUserToReturn);
         } else {
             return null;
         }
@@ -131,7 +126,10 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser addCustomerRole(AppUser appUser) {
         AppUser appUserFromDb = findByIdQuery(appUser.getId());
         if(appUserFromDb != null){
-            return appUserDAO.updateUserRole(appUserFromDb, addAdditionalRole(1, Enums.CUSTOMER, appUser));
+            addFinance(appUserFromDb);
+            AppUser appUserToReturn = appUserDAO.updateUserRole(appUserFromDb, addAdditionalRole(1, Enums.CUSTOMER, appUser));
+            loggedCustomerId = appUserToReturn.getId();
+            return appUserToReturn;
         }
         else
             return null;
@@ -141,7 +139,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public void deleteAppUser(int id, int loggedUserId){
-
         appUserDAO.deleteById(id);
     }
 
@@ -234,6 +231,14 @@ public class AppUserServiceImpl implements AppUserService {
                 return true;
         }
         return false;
+    }
+
+    private void addFinance(AppUser appUser){
+        Finance finance = new Finance();
+        finance.setAmount(1000000.00);
+        finance.setCurrency("PLN");
+        finance.setAppUser(appUserDAO.findByIdQuery(appUser.getId()));
+        financeDAO.addFinance(finance);
     }
 
 }
