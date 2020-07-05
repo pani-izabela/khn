@@ -46,7 +46,7 @@ public class PropertiesForSaleBean {
         return amountPLNSeller;
     }
 
-    /*public double getAmountEuro(){
+    public double getAmountEuro(){
         BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
         BigDecimal eur = pln.divide(euro,2, RoundingMode.HALF_UP);
         return eur.doubleValue();
@@ -56,6 +56,6 @@ public class PropertiesForSaleBean {
         BigDecimal pln = BigDecimal.valueOf(amountPLNSeller);
         BigDecimal usd = pln.divide(dollar,2, RoundingMode.HALF_UP);
         return usd.doubleValue();
-    }*/
+    }
 }
 

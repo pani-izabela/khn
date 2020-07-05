@@ -11,9 +11,6 @@ import application.model.Role;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,7 +50,7 @@ public class AppUserServiceImpl implements AppUserService {
         if (!checkAppUserByEmail(appUser.getEmail())) {
             appUser.setRoles(addRoleForUser(1, Enums.CUSTOMER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
-            addFinance(appUserToReturn);
+            addFinanceCustomer(appUserToReturn);
         } else {
             return null;
         }
@@ -66,6 +63,7 @@ public class AppUserServiceImpl implements AppUserService {
         if (!checkAppUserByEmail(appUser.getEmail())) {
             appUser.setRoles(addRoleForUser(2, Enums.SELLER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
+            addFinanceSeller(appUserToReturn);
         } else {//sprawdza, czy nie ma już roli customer, bo customer nie może być seller
             if(isCustomer(appUser)) return null;
         }
@@ -126,7 +124,7 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser addCustomerRole(AppUser appUser) {
         AppUser appUserFromDb = findByIdQuery(appUser.getId());
         if(appUserFromDb != null){
-            addFinance(appUserFromDb);
+            updateFinance(appUserFromDb);
             AppUser appUserToReturn = appUserDAO.updateUserRole(appUserFromDb, addAdditionalRole(1, Enums.CUSTOMER, appUser));
             loggedCustomerId = appUserToReturn.getId();
             return appUserToReturn;
@@ -233,12 +231,24 @@ public class AppUserServiceImpl implements AppUserService {
         return false;
     }
 
-    private void addFinance(AppUser appUser){
+    private void addFinanceCustomer(AppUser appUser){
         Finance finance = new Finance();
         finance.setAmount(1000000.00);
         finance.setCurrency("PLN");
         finance.setAppUser(appUserDAO.findByIdQuery(appUser.getId()));
         financeDAO.addFinance(finance);
+    }
+
+    private void addFinanceSeller(AppUser appUser){
+        Finance finance = new Finance();
+        finance.setAmount(0.00);
+        finance.setCurrency("PLN");
+        finance.setAppUser(appUserDAO.findByIdQuery(appUser.getId()));
+        financeDAO.addFinance(finance);
+    }
+
+    private void updateFinance(AppUser appUser){
+        financeDAO.updateAmount(appUser, 500000.00);
     }
 
 }
