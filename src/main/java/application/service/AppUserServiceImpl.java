@@ -2,7 +2,9 @@ package application.service;
 
 import application.components.Enums;
 import application.dao.AppUserDAO;
+import application.dao.FinanceDAO;
 import application.model.AppUser;
+import application.model.Finance;
 import application.model.Role;
 //import org.apache.log4j.Logger;
 //import org.slf4j.event.Level;
@@ -24,13 +26,15 @@ public class AppUserServiceImpl implements AppUserService {
     protected final Logger log = Logger.getLogger(getClass().getName());
 
     private AppUserDAO appUserDAO;
+    private FinanceDAO financeDAO;
 
     public int loggedCustomerId;
     public int loggedSellerId;
 
 
-    public AppUserServiceImpl(AppUserDAO appUserDAO) {
+    public AppUserServiceImpl(AppUserDAO appUserDAO, FinanceDAO financeDAO) {
         this.appUserDAO = appUserDAO;
+        this.financeDAO = financeDAO;
     }
 
     @Override
@@ -46,9 +50,15 @@ public class AppUserServiceImpl implements AppUserService {
     public AppUser registerCustomerUser(AppUser appUser) {
         log.log(Level.INFO, "Zarejestrował sie uzytkownik o emailu: " + appUser.getEmail());
         AppUser appUserToReturn;
+        Finance finance = new Finance();
         if (!checkAppUserByEmail(appUser.getEmail())) {
             appUser.setRoles(addRoleForUser(1, Enums.CUSTOMER));
             appUserToReturn = appUserDAO.addAppUser(appUser);
+            finance.setAmount(1000000.00);
+            finance.setCurrency("PLN");
+            finance.setAppUser(appUserDAO.findByIdQuery(appUserToReturn.getId()));
+            financeDAO.addFinance(finance);
+
         } else {
             return null;
         }

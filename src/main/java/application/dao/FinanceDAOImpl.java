@@ -54,4 +54,14 @@ public class FinanceDAOImpl implements FinanceDAO {
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public Finance addFinance(Finance finance) {
+        try{
+            return em.merge(finance);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
