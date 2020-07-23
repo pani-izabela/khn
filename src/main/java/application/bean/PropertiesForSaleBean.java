@@ -68,7 +68,7 @@ public class PropertiesForSaleBean {
         }
     }
 
-    public String getColorOfFrameSeller(){
+    /*public String getColorOfFrameSeller(){
         String color;
         if(financeService.getAmountByAppUserId(appUserService.getLoggedSellerId())>=0.0){
             color = "GREEN";
@@ -77,6 +77,6 @@ public class PropertiesForSaleBean {
             color =  "CORAL";
         }
         return color;
-    }
+    }*/
 }
 

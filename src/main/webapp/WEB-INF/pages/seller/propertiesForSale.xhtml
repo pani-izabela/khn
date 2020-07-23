@@ -13,6 +13,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/properties.js"></script>
+
     <title>Moje sprzedaże</title>
 </h:head>
 <h:body>
@@ -57,9 +59,9 @@
                 </h:form>
                 <h:form>
                     <h4>Podsumowanie</h4>
-                    <h:panelGrid columns="2" styleClass="#{propertiesForSaleBean.colorOfFrameSeller}">
+                    <h:panelGrid class="frame" columns="2">
                         <h:outputText value="Saldo: " style="font-weight: bold"/>
-                        <h:outputText value="#{propertiesForSaleBean.amountSeller}"/>
+                        <h:outputText class="amount" value="#{propertiesForSaleBean.amountSeller}"/>
                         <h:outputText value="€: " style="font-weight: bold"/>
                         <h:outputText value="#{propertiesForSaleBean.amountEuro}"/>
                         <h:outputText value="$: " style="font-weight: bold"/>

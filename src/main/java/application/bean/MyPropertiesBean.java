@@ -58,7 +58,7 @@ public class MyPropertiesBean {
         return usd.doubleValue();
     }
 
-    public String getColorOfFrameCustomer(){
+    /*public String getColorOfFrameCustomer(){
         String color;
         if(financeService.getAmountByAppUserId(appUserService.getLoggedCustomerId())>=0.0){
             color = "GREEN";
@@ -67,7 +67,7 @@ public class MyPropertiesBean {
             color =  "CORAL";
         }
         return color;
-    }
+    }*/
 
 }
 
