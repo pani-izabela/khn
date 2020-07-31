@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/credit.js"></script>
+
+    <title>Kredyty</title>
+</head>
+<body>
+<div class="wrapper">
+    <!--Sidebar-->
+    <div id="sidebarOnEveryPage">
+    </div>
+
+    <!--Page Content-->
+    <div id="content">
+        <div id="headerOnEveryPage">
+        </div>
+        <div class="container">
+            <h:form>
+                <br/>
+                <br/>
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="first" value="First no:" style="font-weight:bold" />
+                    <p:inputText id="first" value="#{basicView.firstNumber}" />
+
+                    <h:outputLabel for="second" value="Second no:" style="font-weight:bold" />
+                    <p:inputText id="second" value="#{basicView.secondNumber}" />
+                </h:panelGrid>
+
+                <br/>
+
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Kalkulacja" update="display" icon="pi pi-check" />
+                </h:panelGrid>
+
+                <br/>
+
+                <h:panelGrid columns="2" class="scorePanel" >
+                    <h:outputText id="display" class="score" value="#{basicView.add()}" />
+                </h:panelGrid>
+                <br/>
+                <h:panelGrid columns="2" class="scorePanel" >
+                    <p:linkButton outcome="creditForm" value="Złóż wniosek"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+        <div id="footerOnPage">
+        </div>
+    </div>
+</div>
+</body>
+</html>

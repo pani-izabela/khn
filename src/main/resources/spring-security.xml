@@ -19,6 +19,8 @@
         <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer', 'seller')"/>
         <intercept-url pattern="/customer/profile" access="hasAnyAuthority('customer')"/>
         <intercept-url pattern="/customer/myProperties" access="hasAnyAuthority('customer')"/>
+        <intercept-url pattern="/customer/credit" access="hasAnyAuthority('customer')"/>
+        <intercept-url pattern="/customer/creditForm" access="hasAnyAuthority('customer')"/>
 
         <intercept-url pattern="/seller/menu" access="hasAnyAuthority('seller')"/>
         <intercept-url pattern="/seller/auctions" access="hasAnyAuthority('seller')"/>

@@ -125,6 +125,11 @@ form [disabled]{
 .CORAL{
     background-color: lightcoral;
 }
+
+/*kredyty*/
+.scorePanel{
+    display: none;
+}
 /*stopka*/
 .footer {
     background-color: green;

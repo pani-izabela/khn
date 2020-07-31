@@ -14,4 +14,14 @@
         <view-id value="/WEB-INF/pages/seller/propertiesForSale.xhtml" />
     </url-mapping>
 
+    <url-mapping id="credit">
+        <pattern value="/customer/credit" />
+        <view-id value="/WEB-INF/pages/customer/credit.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="creditForm">
+        <pattern value="/customer/creditForm" />
+        <view-id value="/WEB-INF/pages/customer/creditForm.xhtml" />
+    </url-mapping>
+
 </pretty-config>
