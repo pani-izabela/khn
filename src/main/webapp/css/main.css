@@ -130,6 +130,9 @@ form [disabled]{
 .scorePanel{
     display: none;
 }
+.scorePanelNoPossibility{
+    display: none;
+}
 /*stopka*/
 .footer {
     background-color: green;

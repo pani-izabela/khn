@@ -30,14 +30,40 @@
             <h:form>
                 <br/>
                 <br/>
+                <h:panelGrid columns="1">
+                    <h:outputText id="loanApplication" value="Wniosek kredytowy" style="font-weight:bold"/>
+                    <br/>
+                </h:panelGrid>
 
                 <h:panelGrid columns="2" cellpadding="5">
+
                     <h:outputLabel for="firstField" value="Pole pierwsze:" style="font-weight:bold" />
                     <p:inputText id="firstField" value="#{basicView.firstNumber}" />
 
                     <h:outputLabel for="secondField" value="Pole drugie:" style="font-weight:bold" />
                     <p:inputText id="secondField" value="#{basicView.secondNumber}" />
+
+                    <h:outputLabel for="nameBorrower" value="Imię: " style="font-weight:bold" />
+                    <p:inputText id="nameBorrower" value="#{creditFormBean.name}" />
+
+                    <h:outputLabel for="surnameBorrower" value="Nazwisko: " style="font-weight:bold" />
+                    <p:inputText id="surnameBorrower" value="#{creditFormBean.surname}" />
+
+                    <h:outputLabel for="possibleLoanAmount" value="Kwota pożyczki: " style="font-weight:bold" />
+                    <p:inputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
+
+                    <h:outputLabel for="numberOfLoanInstallment" value="Liczba rat: " style="font-weight:bold" />
+                    <p:inputText id="numberOfLoanInstallment" value="#{creditBean.numberOfLoanInstallment}" />
+
+                    <h:outputLabel for="monthlyIncome" value="Miesięczne przychody: " style="font-weight:bold" />
+                    <p:inputText id="monthlyIncome" value="#{creditBean.monthlyIncome}" />
+
+                    <h:outputLabel for="monthlyExpenses" value="Miesięczne wydatki: " style="font-weight:bold" />
+                    <p:inputText id="monthlyExpenses" value="#{creditBean.monthlyExpenses}" />
+
+                    <p:commandButton value="Złóż wniosek" icon="pi pi-check" />
                 </h:panelGrid>
+
             </h:form>
         </div>
         <div id="footerOnPage">

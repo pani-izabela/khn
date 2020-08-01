@@ -33,11 +33,26 @@
                 <br/>
 
                 <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="interestRate" value="Oprocentowanie %: " style="font-weight:bold" />
+                    <p:inputText id="interestRate" value="3,5" style="font-weight:bold" disabled="true"/>
+
                     <h:outputLabel for="first" value="First no:" style="font-weight:bold" />
                     <p:inputText id="first" value="#{basicView.firstNumber}" />
 
                     <h:outputLabel for="second" value="Second no:" style="font-weight:bold" />
                     <p:inputText id="second" value="#{basicView.secondNumber}" />
+
+                    <h:outputLabel for="numberOfLoanInstallment" value="Liczba rat: " style="font-weight:bold" />
+                    <p:inputText id="numberOfLoanInstallment" value="#{creditBean.numberOfLoanInstallment}" />
+
+                    <h:outputLabel for="amountOfCredit" value="Kwota kredytu: " style="font-weight:bold" />
+                    <p:inputText id="amountOfCredit" value="#{creditBean.amountOfCredit}" />
+
+                    <h:outputLabel for="monthlyIncome" value="Miesięczne przychody: " style="font-weight:bold" />
+                    <p:inputText id="monthlyIncome" value="#{creditBean.monthlyIncome}" />
+
+                    <h:outputLabel for="monthlyExpenses" value="Miesięczne wydatki: " style="font-weight:bold" />
+                    <p:inputText id="monthlyExpenses" value="#{creditBean.monthlyExpenses}" />
                 </h:panelGrid>
 
                 <br/>
@@ -48,11 +63,31 @@
 
                 <br/>
 
-                <h:panelGrid columns="2" class="scorePanel" >
+                <h:panelGrid columns="1" class="scorePanel" >
                     <h:outputText id="display" class="score" value="#{basicView.add()}" />
                 </h:panelGrid>
                 <br/>
-                <h:panelGrid columns="2" class="scorePanel" >
+                <h:panelGrid columns="1" class="scorePanelNoPossibility" >
+                    <h:outputText id="noPossibilityCredit" value="Brak możliwości udzielenia pożyczki" />
+                </h:panelGrid>
+                <br/>
+                <h:panelGrid columns="1" class="scorePanel">
+                    <h:outputText id="calculationResult" value="Wynik kalkulacji: " style="font-weight:bold"/>
+                    <br/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="4" class="scorePanel" >
+                    <h:outputLabel for="possibleLoanAmount" value="Możliwa kwota pożyczki to: " style="font-weight:bold" />
+                    <h:outputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
+
+                    <h:outputLabel for="fullRepayment" value="Do spłaty całkowitej: " style="font-weight:bold" />
+                    <h:outputText id="fullRepayment" value="1234" />
+
+                    <h:outputLabel for="calculatedInstallment" value="Rata miesięczna (PLN): " style="font-weight:bold" />
+                    <h:outputText id="calculatedInstallment" value="3000" />
+
+                    <h:outputLabel for="loanTerm" value="Do kiedy kredyt: " style="font-weight:bold" />
+                    <h:outputText id="loanTerm" value="2054" />
+
                     <p:linkButton outcome="creditForm" value="Złóż wniosek"/>
                 </h:panelGrid>
             </h:form>
