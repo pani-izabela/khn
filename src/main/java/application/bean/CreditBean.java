@@ -7,6 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static java.lang.Math.pow;
 
 @Named
@@ -48,6 +53,13 @@ public class CreditBean {
 
     public double calculateRepaymentAmount(){
         return repaymentAmount = installment * numberOfLoanInstallment;
+    }
+
+    public String calculateDateLoanTerm(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, numberOfLoanInstallment);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        return format1.format(calendar.getTime());
     }
 
 //metody prywatne

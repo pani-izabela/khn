@@ -80,7 +80,7 @@
                     <h:outputText id="calculatedInstallment" value="#{creditBean.calculateInstallment()}" />
 
                     <h:outputLabel for="loanTerm" value="Do kiedy kredyt: " style="font-weight:bold" />
-                    <h:outputText id="loanTerm" value="2054" />
+                    <h:outputText id="loanTerm" value="#{creditBean.calculateDateLoanTerm()}" />
 
                     <p:linkButton outcome="creditForm" value="Złóż wniosek"/>
                 </h:panelGrid>
