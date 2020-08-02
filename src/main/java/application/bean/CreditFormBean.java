@@ -1,5 +1,7 @@
 package application.bean;
 
+import application.model.AppUser;
+import application.service.AppUserService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,21 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class CreditFormBean {
 
-    private String name = "Iza";
-    private String surname = "Łach";
+    @ManagedProperty("#{appUserService}")
+    private AppUserService appUserService;
+
+    private String name;
+    private String surname;
+
+    public String getAppUserName(){
+        int appUserId = appUserService.getLoggedCustomerId();
+        AppUser appUser = appUserService.findByIdQuery(appUserId);
+        return name = appUser.getFirstname();
+    }
+
+    public String getAppUserSurname(){
+        int appUserId = appUserService.getLoggedCustomerId();
+        AppUser appUser = appUserService.findByIdQuery(appUserId);
+        return surname = appUser.getLastname();
+    }
 }

@@ -37,17 +37,11 @@
 
                 <h:panelGrid columns="2" cellpadding="5">
 
-                    <h:outputLabel for="firstField" value="Pole pierwsze:" style="font-weight:bold" />
-                    <p:inputText id="firstField" value="#{basicView.firstNumber}" />
-
-                    <h:outputLabel for="secondField" value="Pole drugie:" style="font-weight:bold" />
-                    <p:inputText id="secondField" value="#{basicView.secondNumber}" />
-
                     <h:outputLabel for="nameBorrower" value="Imię: " style="font-weight:bold" />
-                    <p:inputText id="nameBorrower" value="#{creditFormBean.name}" />
+                    <p:inputText id="nameBorrower" value="#{creditFormBean.getAppUserName()}" />
 
                     <h:outputLabel for="surnameBorrower" value="Nazwisko: " style="font-weight:bold" />
-                    <p:inputText id="surnameBorrower" value="#{creditFormBean.surname}" />
+                    <p:inputText id="surnameBorrower" value="#{creditFormBean.getAppUserSurname()}" />
 
                     <h:outputLabel for="possibleLoanAmount" value="Kwota pożyczki: " style="font-weight:bold" />
                     <p:inputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
