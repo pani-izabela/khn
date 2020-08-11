@@ -46,13 +46,14 @@ public class CreditBean {
     }
 
     public double calculateInstallment(){
-        double power = pow(numberOfLoanInstallment, getY());
-        installment = amountOfCredit * power * ((y-1)/(power-1));
+        double power = Math.pow(getY(), numberOfLoanInstallment);
+        installment = Math.round(amountOfCredit * power * ((y-1)/(power-1)));
         return installment;
     }
 
     public double calculateRepaymentAmount(){
-        return repaymentAmount = installment * numberOfLoanInstallment;
+        repaymentAmount = installment * numberOfLoanInstallment;
+        return repaymentAmount;
     }
 
     public String calculateDateLoanTerm(){
@@ -64,7 +65,7 @@ public class CreditBean {
 
 //metody prywatne
     private double getY(){
-        return y = 1 + (PERCENT/12);
+        return y = 1 + (PERCENT/100/12);
     }
 
 }

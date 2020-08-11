@@ -33,6 +33,7 @@
                 <br/>
 
                 <h:panelGrid columns="2" cellpadding="5">
+
                     <h:outputLabel for="interestRate" value="Oprocentowanie %: " style="font-weight:bold" />
                     <p:inputText id="interestRate" value="3,5" style="font-weight:bold" disabled="true"/>
 
@@ -73,11 +74,11 @@
                     <h:outputLabel for="possibleLoanAmount" value="Możliwa kwota pożyczki to: " style="font-weight:bold" />
                     <h:outputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
 
-                    <h:outputLabel for="fullRepayment" value="Do spłaty całkowitej: " style="font-weight:bold" />
-                    <h:outputText id="fullRepayment" value="#{creditBean.calculateRepaymentAmount()}" />
-
                     <h:outputLabel for="calculatedInstallment" value="Rata miesięczna (PLN): " style="font-weight:bold" />
                     <h:outputText id="calculatedInstallment" value="#{creditBean.calculateInstallment()}" />
+
+                    <h:outputLabel for="fullRepayment" value="Do spłaty całkowitej: " style="font-weight:bold" />
+                    <h:outputText id="fullRepayment" value="#{creditBean.calculateRepaymentAmount()}" />
 
                     <h:outputLabel for="loanTerm" value="Do kiedy kredyt: " style="font-weight:bold" />
                     <h:outputText id="loanTerm" value="#{creditBean.calculateDateLoanTerm()}" />
