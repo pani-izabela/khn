@@ -133,6 +133,11 @@ form [disabled]{
 .scorePanelNoPossibility{
     display: none;
 }
+.ui-g div {
+    background-color: #ededed;
+    text-align: center;
+    border: 1px solid #fafafa;
+}
 /*stopka*/
 .footer {
     background-color: green;

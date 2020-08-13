@@ -1,3 +1,4 @@
+/*
 package application.bean;
 
 import lombok.Getter;
@@ -22,30 +23,36 @@ import static java.lang.Math.pow;
 public class CreditBean {
 
     private final double PERCENT= 3.5;
-    private int numberOfLoanInstallment;
-    private double amountOfCredit;
-    private double monthlyIncome;
-    private double monthlyExpenses;
+    private String numberOfLoanInstallment = "0";
+    private String amountOfCredit = "0,0";
+    private String monthlyIncome = "0.0";
+    private String monthlyExpenses = "0.0";
     private double y;
 
-    private int creditworthiness;
+    */
+/*private int creditworthiness;
     private double installment;
     private double repaymentAmount;
 
     public int checkCreditworthiness(){
-        if(monthlyIncome>monthlyExpenses){
+        double monthlyIncomeDou = Double.parseDouble(monthlyIncome);
+        double monthlyExpensesDou = Double.parseDouble(monthlyIncome);
+
+        if(monthlyIncomeDou>monthlyExpensesDou){
             creditworthiness = 1;
         }
-        else if(monthlyIncome<=monthlyExpenses && monthlyIncome>0.0 && monthlyExpenses>0.0){
+        else if(monthlyIncomeDou<=monthlyExpensesDou && monthlyIncomeDou>0.0 && monthlyExpensesDou>0.0){
             creditworthiness = 0;
         }
-        else if(monthlyIncome==0.0 || monthlyExpenses==0.0){
+        else if(monthlyIncomeDou==0.0 || monthlyExpensesDou==0.0){
             creditworthiness = 2;
         }
         return creditworthiness;
-    }
+    }*//*
 
-    public double calculateInstallment(){
+
+    */
+/*public double calculateInstallment(){
         double power = Math.pow(getY(), numberOfLoanInstallment);
         installment = Math.round(amountOfCredit * power * ((y-1)/(power-1)));
         return installment;
@@ -61,7 +68,8 @@ public class CreditBean {
         calendar.add(Calendar.MONTH, numberOfLoanInstallment);
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         return format1.format(calendar.getTime());
-    }
+    }*//*
+
 
 //metody prywatne
     private double getY(){
@@ -69,3 +77,4 @@ public class CreditBean {
     }
 
 }
+*/

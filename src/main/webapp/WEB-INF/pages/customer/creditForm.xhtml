@@ -27,13 +27,14 @@
         <div id="headerOnEveryPage">
         </div>
         <div class="container">
-            <h:form>
+            <h:form id="creditApplication">
                 <br/>
                 <br/>
-                <h:panelGrid columns="1">
+                <h3>Wniosek kredytowy</h3>
+                <!--<h:panelGrid columns="1">
                     <h:outputText id="loanApplication" value="Wniosek kredytowy" style="font-weight:bold"/>
                     <br/>
-                </h:panelGrid>
+                </h:panelGrid>-->
 
                 <h:panelGrid columns="2" cellpadding="5">
 
@@ -44,16 +45,16 @@
                     <p:inputText id="surnameBorrower" value="#{creditFormBean.getAppUserSurname()}" />
 
                     <h:outputLabel for="possibleLoanAmount" value="Kwota pożyczki: " style="font-weight:bold" />
-                    <p:inputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
+                    <p:inputText id="possibleLoanAmount" value="#{xxxBean.possibleLoanAmount}" />
 
                     <h:outputLabel for="numberOfLoanInstallment" value="Liczba rat: " style="font-weight:bold" />
-                    <p:inputText id="numberOfLoanInstallment" value="#{creditBean.numberOfLoanInstallment}" />
+                    <p:inputText id="numberOfLoanInstallment" value="#{xxxBean.numberOfLoanInstallment}" />
 
                     <h:outputLabel for="monthlyIncome" value="Miesięczne przychody: " style="font-weight:bold" />
-                    <p:inputText id="monthlyIncome" value="#{creditBean.monthlyIncome}" />
+                    <p:inputText id="monthlyIncome" value="#{xxxBean.monthlyIncome}" />
 
                     <h:outputLabel for="monthlyExpenses" value="Miesięczne wydatki: " style="font-weight:bold" />
-                    <p:inputText id="monthlyExpenses" value="#{creditBean.monthlyExpenses}" />
+                    <p:inputText id="monthlyExpenses" value="#{xxxBean.monthlyExpenses}" />
 
                     <p:commandButton value="Złóż wniosek" icon="pi pi-check" />
                 </h:panelGrid>

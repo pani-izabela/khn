@@ -28,64 +28,53 @@
         <div id="headerOnEveryPage">
         </div>
         <div class="container">
-            <h:form>
-                <br/>
-                <br/>
+                <h:form id="creditCalculator" class="calculator">
+                    <h3>Kalkulator kredytowy</h3>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="interestRate" value="Oprocentowanie %: " style="font-weight:bold" />
+                        <p:inputText id="interestRate" value="3,5" style="font-weight:bold" disabled="true"/>
 
-                <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="numberOfLoanInstallment" value="Liczba rat: " style="font-weight:bold" />
+                        <p:inputText id="numberOfLoanInstallment" value="#{xxxBean.numberOfLoanInstallment}" />
 
-                    <h:outputLabel for="interestRate" value="Oprocentowanie %: " style="font-weight:bold" />
-                    <p:inputText id="interestRate" value="3,5" style="font-weight:bold" disabled="true"/>
+                        <h:outputLabel for="amountOfCredit" value="Kwota kredytu: " style="font-weight:bold" />
+                        <p:inputText id="amountOfCredit" value="#{xxxBean.amountOfCredit}" />
 
-                    <h:outputLabel for="numberOfLoanInstallment" value="Liczba rat: " style="font-weight:bold" />
-                    <p:inputText id="numberOfLoanInstallment" value="#{creditBean.numberOfLoanInstallment}" />
+                        <h:outputLabel for="monthlyIncome" value="Miesięczne przychody: " style="font-weight:bold" />
+                        <p:inputText id="monthlyIncome" value="#{xxxBean.monthlyIncome}" />
 
-                    <h:outputLabel for="amountOfCredit" value="Kwota kredytu: " style="font-weight:bold" />
-                    <p:inputText id="amountOfCredit" value="#{creditBean.amountOfCredit}" />
+                        <h:outputLabel for="monthlyExpenses" value="Miesięczne wydatki: " style="font-weight:bold" />
+                        <p:inputText id="monthlyExpenses" value="#{xxxBean.monthlyExpenses}" />
+                    </h:panelGrid>
+                    <p:commandButton value="Kalkulacja" action="#{xxxBean.checkCreditworthiness2}" update="creditCalculator" icon="pi pi-check" />
+                </h:form>
 
-                    <h:outputLabel for="monthlyIncome" value="Miesięczne przychody: " style="font-weight:bold" />
-                    <p:inputText id="monthlyIncome" value="#{creditBean.monthlyIncome}" />
 
-                    <h:outputLabel for="monthlyExpenses" value="Miesięczne wydatki: " style="font-weight:bold" />
-                    <p:inputText id="monthlyExpenses" value="#{creditBean.monthlyExpenses}" />
-                </h:panelGrid>
-
-                <br/>
-
-                <h:panelGrid columns="2">
-                    <p:commandButton value="Kalkulacja" update="display" icon="pi pi-check" />
-                </h:panelGrid>
-
-                <br/>
-
-                <h:panelGrid columns="1" style="display: none" >
-                    <h:outputText id="display" class="score" value="#{creditBean.checkCreditworthiness()}" />
-                </h:panelGrid>
-                <br/>
-                <h:panelGrid columns="1" class="scorePanelNoPossibility" >
-                    <h:outputText id="noPossibilityCredit" value="Brak możliwości udzielenia pożyczki" />
-                </h:panelGrid>
-                <br/>
-                <h:panelGrid columns="1" class="scorePanel">
-                    <h:outputText id="calculationResult" value="Wynik kalkulacji: " style="font-weight:bold"/>
+                <h:form id="results">
+                    <h:panelGrid columns="1" class="scorePanelNoPossibility" >
+                        <h:outputText id="noPossibilityCredit" value="Brak możliwości udzielenia pożyczki" />
+                    </h:panelGrid>
                     <br/>
-                </h:panelGrid>
-                <h:panelGrid columns="2" cellpadding="4" class="scorePanel" >
-                    <h:outputLabel for="possibleLoanAmount" value="Możliwa kwota pożyczki to: " style="font-weight:bold" />
-                    <h:outputText id="possibleLoanAmount" value="#{creditBean.amountOfCredit}" />
+                    <h3 class="scorePanel">Wynik kalkulacji: </h3>
+                    <h:panelGrid columns="2" cellpadding="4" class="scorePanel" >
+                        <h:outputLabel for="possibleLoanAmount" value="Możliwa kwota pożyczki to: " style="font-weight:bold" />
+                        <h:outputText id="possibleLoanAmount" value="#{xxxBean.possibleLoanAmount}" />
 
-                    <h:outputLabel for="calculatedInstallment" value="Rata miesięczna (PLN): " style="font-weight:bold" />
-                    <h:outputText id="calculatedInstallment" value="#{creditBean.calculateInstallment()}" />
+                        <h:outputLabel for="calculatedInstallment" value="Rata miesięczna (PLN): " style="font-weight:bold" />
+                        <h:outputText id="calculatedInstallment" value="#{xxxBean.installment}" />
 
-                    <h:outputLabel for="fullRepayment" value="Do spłaty całkowitej: " style="font-weight:bold" />
-                    <h:outputText id="fullRepayment" value="#{creditBean.calculateRepaymentAmount()}" />
+                        <h:outputLabel for="fullRepayment" value="Do spłaty całkowitej: " style="font-weight:bold" />
+                        <h:outputText id="fullRepayment" value="#{xxxBean.repaymentAmount}" />
 
-                    <h:outputLabel for="loanTerm" value="Do kiedy kredyt: " style="font-weight:bold" />
-                    <h:outputText id="loanTerm" value="#{creditBean.calculateDateLoanTerm()}" />
+                        <h:outputLabel for="loanTerm" value="Do kiedy kredyt: " style="font-weight:bold" />
+                        <h:outputText id="loanTerm" value="#{xxxBean.date}" />
 
-                    <p:linkButton outcome="creditForm" value="Złóż wniosek"/>
-                </h:panelGrid>
-            </h:form>
+                        <p:linkButton outcome="creditForm" value="Złóż wniosek"/>
+                    </h:panelGrid>
+                </h:form>
+
+
+
         </div>
         <div id="footerOnPage">
         </div>
