@@ -22,29 +22,29 @@ public class xxxBean {
     private double amountOfCredit;
     private double monthlyIncome;
     private double monthlyExpenses;
-    private Integer text = null;
     //pozostałę
     private double y;
 
     //wyswietlane w formularzu o id=results
-    private boolean creditworthiness;
+    private boolean creditworthiness = false;
+    private boolean noCreditworthiness = false;
     private double possibleLoanAmount;
     private double installment;
     private double repaymentAmount;
     private String date;
 
-    public void checkCreditworthiness2(){
+    public void checkCreditworthiness(){
         if(monthlyIncome>monthlyExpenses){
             possibleLoanAmount = amountOfCredit;
             calculateInstallment();
             calculateRepaymentAmount();
             calculateDateLoanTerm();
+            creditworthiness = true;
+            noCreditworthiness = false;
         }
-        else{
-            installment = 0;
-            possibleLoanAmount = -1.0;
-            repaymentAmount = 0.0;
-            date = "0";
+        else if(monthlyIncome<monthlyExpenses){
+            noCreditworthiness = true;
+            creditworthiness = false;
         }
     }
 
