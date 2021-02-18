@@ -13,7 +13,7 @@
         <java.version>1.8</java.version>
         <org.springframework.version>5.2.3.RELEASE</org.springframework.version>
         <jstl.version>4.0.1</jstl.version>
-        <jaction.xml.version>2.10.2</jaction.xml.version>
+        <jaction.xml.version>2.12.1</jaction.xml.version>
     </properties>
 
     <repositories>
